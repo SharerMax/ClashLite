@@ -1,0 +1,53 @@
+{
+  "name": "electron-vue-vite",
+  "version": "1.0.0",
+  "main": "dist/main/index.cjs",
+  "author": "草鞋没号 <308487730@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node scripts/watch.mjs",
+    "prebuild": "vue-tsc --noEmit --p packages/renderer/tsconfig.json && node scripts/build.mjs",
+    "build": "electron-builder",
+    "init": "git config core.hooksPath .git/hooks/ && rm -rf .git/hooks && npx simple-git-hooks",
+    "test:e2e": "npx playwright test",
+    "test:e2e:headless": "npx playwright test --headed"
+  },
+  "engines": {
+    "node": ">=14.17.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.21.1",
+    "@typescript-eslint/eslint-plugin": "^5.26.0",
+    "@typescript-eslint/parser": "^5.26.0",
+    "@vicons/carbon": "^0.12.0",
+    "@vitejs/plugin-vue": "^2.3.2",
+    "electron": "18.2.0",
+    "electron-builder": "^23.0.3",
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-vue": "^9.0.1",
+    "naive-ui": "^2.29.0",
+    "nano-staged": "^0.8.0",
+    "simple-git-hooks": "^2.7.0",
+    "typescript": "^4.6.4",
+    "unocss": "^0.34.1",
+    "vite": "^2.9.8",
+    "vite-plugin-electron": "^0.4.4",
+    "vite-plugin-resolve": "^2.1.1",
+    "vue": "^3.2.33",
+    "vue-router": "4",
+    "vue-tsc": "^0.34.11"
+  },
+  "env": {
+    "VITE_DEV_SERVER_HOST": "127.0.0.1",
+    "VITE_DEV_SERVER_PORT": 3344
+  },
+  "keywords": [
+    "electron",
+    "rollup",
+    "vite",
+    "vue3",
+    "vue"
+  ]
+}
