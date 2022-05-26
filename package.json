@@ -25,6 +25,7 @@
     "electron-builder": "^23.0.3",
     "eslint": "^8.16.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-vue": "^9.0.1",
     "naive-ui": "^2.29.0",

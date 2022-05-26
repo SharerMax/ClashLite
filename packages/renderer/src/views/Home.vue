@@ -1,11 +1,19 @@
 <template>
     <div class="page-wrapper">
-        <silde-nav-vue/>
+       <side-nav/>
     </div>
 </template>
 
 <script setup lang="ts">
-import SildeNavVue from '../components/SildeNav.vue'
+import { defineComponent } from 'vue'
+import SideNav from '../components/SideNav.vue'
+
+</script>
+<script>
+
+export default defineComponent({
+  name: 'AppHome',
+})
 </script>
 
 <style scoped>

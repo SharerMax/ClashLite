@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center ">
+    <div class="flex justify-center">
         <n-button>1</n-button>
         <n-button>2</n-button>
         <n-button>3</n-button>

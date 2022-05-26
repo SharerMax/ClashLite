@@ -3,13 +3,15 @@ module.exports = {
     browser: true,
     es2021: true,
     node: true,
-    commonjs: true,
+    // commonjs: true,
   },
   extends: [
-    'eslint-config-airbnb-base',
-    'plugin:vue/essential',
+    'plugin:vue/vue3-essential',
+    // 'eslint-config-airbnb-base',
+    // 'eslint-config-airbnb-typescript/base',
     'plugin:@typescript-eslint/recommended',
   ],
+  parser: 'vue-eslint-parser',
   parserOptions: {
     ecmaVersion: 'latest',
     parser: '@typescript-eslint/parser',
