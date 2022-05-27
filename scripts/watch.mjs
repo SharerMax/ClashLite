@@ -47,7 +47,7 @@ function watchMain(server) {
       // https://github.com/electron-vite/electron-vite-vue/pull/129
       electronProcess.stdout.on('data', (data) => {
         const str = data.toString().trim()
-        str && console.log(str)
+        str && console.error(str)
       })
       electronProcess.stderr.on('data', (data) => {
         const str = data.toString().trim()
