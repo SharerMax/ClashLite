@@ -9,8 +9,7 @@ import { defineComponent } from 'vue'
 import SideNav from '../components/SideNav.vue'
 
 </script>
-<script>
-
+<script lang="ts">
 export default defineComponent({
   name: 'AppHome',
 })

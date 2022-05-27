@@ -41,7 +41,6 @@ module.exports = {
     'no-continue': 'off',
     'prefer-template': 'error',
     'import/no-extraneous-dependencies': 'off',
-
     'no-unused-expressions': 'off',
     '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
   },

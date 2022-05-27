@@ -12,7 +12,8 @@ if (!app.requestSingleInstanceLock()) {
   app.quit()
   process.exit(0)
 }
-process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
+// eslint-disable-next-line @typescript-eslint/dot-notation
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 let win: BrowserWindow | null = null
 
@@ -25,15 +26,15 @@ async function createWindow() {
       contextIsolation: false,
     },
   })
-
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../renderer/index.html'))
   } else {
+    // 🚧 Use ['ENV_NAME'] avoid vite:define plugin 对比
+    console.dir(process.env.VITE_DEV_SERVER_HOST)
     // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
-    const url = `http://${process.env.VITE_DEV_SERVER_HOST}:${process.env.VITE_DEV_SERVER_PORT}`
-
+    // eslint-disable-next-line @typescript-eslint/dot-notation
+    const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`
     win.loadURL(url)
-    // win.webContents.openDevTools()
   }
 
   // Test active push message to Renderer-process

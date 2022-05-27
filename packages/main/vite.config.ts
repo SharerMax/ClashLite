@@ -2,6 +2,7 @@ import { builtinModules } from 'module'
 import { defineConfig } from 'vite'
 import pkg from '../../package.json'
 
+console.log(JSON.stringify(process.env))
 export default defineConfig({
   root: __dirname,
   build: {
