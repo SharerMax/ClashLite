@@ -36,7 +36,7 @@
     "unocss": "^0.34.1",
     "vite": "^2.9.8",
     "vite-plugin-electron": "^0.4.4",
-    "vite-plugin-resolve": "^2.1.1",
+    "vite-plugin-resolve": "^2.1.2",
     "vue": "^3.2.33",
     "vue-router": "4",
     "vue-tsc": "^0.34.11"
