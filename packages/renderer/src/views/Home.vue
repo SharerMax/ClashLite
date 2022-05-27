@@ -1,7 +1,7 @@
 <template>
-    <div class="page-wrapper">
-       <side-nav/>
-    </div>
+  <div class="page-wrapper">
+    <side-nav />
+  </div>
 </template>
 
 <script setup lang="ts">

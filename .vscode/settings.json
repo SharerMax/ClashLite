@@ -7,5 +7,9 @@
   "eslint.alwaysShowStatus": false,
   "editor.codeActionsOnSave": {
   "source.fixAll": true
-  }
+  },
+  "cSpell.words": [
+    "unocss",
+    "vite"
+  ]
 }

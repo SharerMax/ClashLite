@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["**/*.ts", "**/*.js", "**/*.vue", "**/*.mjs", "**/*.cjs", ".eslintrc.js", ".simple-git-hooks.cjs"],
+  "include": ["**/*.ts", "**/*.js", "**/*.vue", "**/*.mjs", "**/*.cjs", ".eslintrc.cjs", ".simple-git-hooks.cjs"],
   "exclude": [
         "node_modules",
         "dist",

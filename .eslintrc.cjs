@@ -6,10 +6,11 @@ module.exports = {
     // commonjs: true,
   },
   extends: [
-    'plugin:vue/vue3-essential',
     'eslint-config-airbnb-base',
     'eslint-config-airbnb-typescript/base',
     'plugin:@typescript-eslint/recommended',
+    'plugin:vue/vue3-strongly-recommended',
+
   ],
   parser: 'vue-eslint-parser',
   parserOptions: {
@@ -19,12 +20,6 @@ module.exports = {
     project: './tsconfig.eslint.json',
     extraFileExtensions: ['.vue', '*.cjs', '*.mjs'],
   },
-  overrides: [
-    {
-      files: '*.vue',
-      parser: 'vue-eslint-parser',
-    },
-  ],
   plugins: [
     'vue',
     '@typescript-eslint',
@@ -41,7 +36,9 @@ module.exports = {
     'no-continue': 'off',
     'prefer-template': 'error',
     'import/no-extraneous-dependencies': 'off',
+    'import/no-unresolved': 'off',
     'no-unused-expressions': 'off',
     '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
+    // 'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
   },
 }
