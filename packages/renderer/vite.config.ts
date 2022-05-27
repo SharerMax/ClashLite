@@ -53,6 +53,12 @@ export default defineConfig({
     outDir: '../../dist/renderer',
     emptyOutDir: true,
     sourcemap: true,
+    // https://github.com/electron-vite/electron-vite-vue/issues/103#issuecomment-1097540635
+    rollupOptions: {
+      output: {
+        format: 'es',
+      },
+    },
   },
   server: {
     host: pkg.env.VITE_DEV_SERVER_HOST,

@@ -4,6 +4,7 @@
   "main": "dist/main/index.cjs",
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
+  "productName": "ClashLite",
   "scripts": {
     "dev": "node scripts/watch.mjs",
     "prebuild": "vue-tsc --noEmit --p packages/renderer/tsconfig.json && node scripts/build.mjs",

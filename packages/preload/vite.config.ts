@@ -24,6 +24,7 @@ export default defineConfig({
       external: [
         'electron',
         ...builtinModules,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         ...Object.keys(pkg.dependencies || {}),
       ],

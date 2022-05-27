@@ -2,6 +2,8 @@ import { app, BrowserWindow, shell } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 
+const APP_USER_MODEL_ID = 'com.saeratom.clashlite'
+
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
 
@@ -13,7 +15,9 @@ if (!app.requestSingleInstanceLock()) {
   process.exit(0)
 }
 // eslint-disable-next-line @typescript-eslint/dot-notation
-process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+// process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
+
+app.setAppUserModelId(APP_USER_MODEL_ID)
 
 let win: BrowserWindow | null = null
 
@@ -22,15 +26,16 @@ async function createWindow() {
     title: 'Main window',
     webPreferences: {
       preload: join(__dirname, '../preload/index.cjs'),
-      nodeIntegration: true,
-      contextIsolation: false,
+      // https://www.electronjs.org/zh/docs/latest/tutorial/security#%E9%9A%94%E7%A6%BB%E4%B8%8D%E5%8F%97%E4%BF%A1%E4%BB%BB%E7%9A%84%E5%86%85%E5%AE%B9
+      nodeIntegration: false,
+      contextIsolation: true,
     },
   })
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../renderer/index.html'))
   } else {
     // 🚧 Use ['ENV_NAME'] avoid vite:define plugin 对比
-    console.dir(process.env.VITE_DEV_SERVER_HOST)
+    // console.dir(process.env.VITE_DEV_SERVER_HOST)
     // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
     // eslint-disable-next-line @typescript-eslint/dot-notation
     const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`

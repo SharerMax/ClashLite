@@ -5,7 +5,7 @@
  * https://matejkustec.github.io/SpinThatShit
  */
 export function useLoading() {
-  const className = `loaders-css__square-spin`
+  const className = 'loaders-css__square-spin'
   const styleContent = `
 @keyframes square-spin {
   25% { transform: perspective(100px) rotateX(180deg) rotateY(0); }
@@ -33,6 +33,22 @@ export function useLoading() {
   z-index: 9;
 }
     `
+
+  const safe = {
+    append(parent: HTMLElement, child: HTMLElement) {
+      if (!Array.from(parent.children).find((e) => e === child)) {
+        return parent.appendChild(child)
+      }
+      return child
+    },
+    remove(parent: HTMLElement, child: HTMLElement) {
+      if (Array.from(parent.children).find((e) => e === child)) {
+        return parent.removeChild(child)
+      }
+      return child
+    },
+  }
+
   const oStyle = document.createElement('style')
   const oDiv = document.createElement('div')
 
@@ -53,15 +69,4 @@ export function useLoading() {
   }
 }
 
-const safe = {
-  append(parent: HTMLElement, child: HTMLElement) {
-    if (!Array.from(parent.children).find(e => e === child)) {
-      return parent.appendChild(child)
-    }
-  },
-  remove(parent: HTMLElement, child: HTMLElement) {
-    if (Array.from(parent.children).find(e => e === child)) {
-      return parent.removeChild(child)
-    }
-  },
-}
+export default { useLoading }
