@@ -1,8 +1,10 @@
-import { app, BrowserWindow, shell } from 'electron'
+import {
+  app, BrowserWindow, shell, nativeTheme,
+} from 'electron'
 import { release } from 'os'
 import { join } from 'path'
 
-const APP_USER_MODEL_ID = 'com.saeratom.clashlite'
+// const APP_USER_MODEL_ID = 'com.saeratom.clashlite'
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
@@ -17,7 +19,7 @@ if (!app.requestSingleInstanceLock()) {
 // eslint-disable-next-line @typescript-eslint/dot-notation
 // process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
-app.setAppUserModelId(APP_USER_MODEL_ID)
+// app.setAppUserModelId(APP_USER_MODEL_ID)
 
 let win: BrowserWindow | null = null
 
@@ -30,7 +32,18 @@ async function createWindow() {
       nodeIntegration: false,
       contextIsolation: true,
     },
+    minWidth: 800,
+    minHeight: 600,
+    backgroundColor: '#101014',
+    // transparent: true,
+    // titleBarStyle: 'hidden',
+    // titleBarOverlay: {
+    //   color: 'red',
+    //   symbolColor: 'white',
+    // },
   })
+  // nativeTheme.themeSource = 'light'
+  win.setMenuBarVisibility(false)
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../renderer/index.html'))
   } else {
