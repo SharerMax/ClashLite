@@ -2,7 +2,7 @@
   "extends": ["config:base", ""],
   "enabledManagers": ["npm"],
   "labels": ["dependencies"],
-  "timezone": "Asia/Shanghai"
+  "timezone": "Asia/Shanghai",
   "schedule": [
     "before 6pm on Friday"
   ]
