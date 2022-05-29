@@ -1,5 +1,9 @@
 {
-  "extends": ["config:base"],
+  "extends": ["config:base", ""],
   "enabledManagers": ["npm"],
   "labels": ["dependencies"],
+  "timezone": "Asia/Shanghai"
+  "schedule": [
+    "before 6pm on Friday"
+  ]
 }
