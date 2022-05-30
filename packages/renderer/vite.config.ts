@@ -10,7 +10,9 @@ export default defineConfig({
   mode: process.env.NODE_ENV,
   root: __dirname,
   plugins: [
-    Unocss(),
+    Unocss({
+      rules: [['font-fira-code', { 'font-family': 'v-mono' }]],
+    }),
     vue(),
     electron(),
     resolve(
