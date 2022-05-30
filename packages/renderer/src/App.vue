@@ -2,7 +2,7 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import {
-  NConfigProvider, useOsTheme, darkTheme, NGlobalStyle,
+  NConfigProvider, useOsTheme, darkTheme, NGlobalStyle, NMessageProvider,
 } from 'naive-ui'
 import { computed } from 'vue'
 
@@ -15,7 +15,9 @@ const theme = computed(() => {
 
 <template>
   <n-config-provider :theme="theme">
-    <router-view />
+    <n-message-provider>
+      <router-view />
+    </n-message-provider>
     <n-global-style />
   </n-config-provider>
 </template>
