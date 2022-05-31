@@ -1,8 +1,8 @@
 import {
-  app, BrowserWindow, shell, nativeTheme,
+  app, BrowserWindow, shell, session,
 } from 'electron'
-import { release } from 'os'
-import { join } from 'path'
+import { release, homedir } from 'os'
+import path, { join } from 'path'
 
 // const APP_USER_MODEL_ID = 'com.saeratom.clashlite'
 

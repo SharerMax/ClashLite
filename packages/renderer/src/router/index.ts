@@ -1,10 +1,18 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 
-const home = () => import('../views/Home.vue')
+const Home = () => import('../views/Home.vue')
+const HomeOverView = () => import('../views/Home/OverView.vue')
 const routeRouteRecords: RouteRecordRaw[] = [{
   path: '/',
-  component: home,
+  component: Home,
+  redirect: 'overview',
+  children: [
+    {
+      path: 'overview',
+      component: HomeOverView,
+    },
+  ],
 }]
 const router = createRouter({
   // https://nklayman.github.io/vue-cli-plugin-electron-builder/guide/commonIssues.html
