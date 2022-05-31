@@ -4,6 +4,12 @@
     class="h-screen"
   >
     <n-layout-sider width="180">
+      <div class="text-center my-4">
+        <img
+          src="../../src/assets/electron.png"
+          class="w-20 h-20"
+        >
+      </div>
       <n-menu
         :options="menuOptions"
         :value="activatedMenu"
