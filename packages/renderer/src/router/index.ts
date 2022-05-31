@@ -3,14 +3,40 @@ import type { RouteRecordRaw } from 'vue-router'
 
 const Home = () => import('../views/Home.vue')
 const HomeOverView = () => import('../views/Home/OverView.vue')
+const HomeProxy = () => import('../views/Home/HomeProxy.vue')
+const HomeRule = () => import('../views/Home/HomeRule.vue')
+const HomeLog = () => import('../views/Home/HomeLog.vue')
+const HomeSetting = () => import('../views/Home/HomeSetting.vue')
+
 const routeRouteRecords: RouteRecordRaw[] = [{
   path: '/',
   component: Home,
   redirect: 'overview',
   children: [
     {
+      name: 'HomeOverview',
       path: 'overview',
       component: HomeOverView,
+    },
+    {
+      name: 'HomeProxy',
+      path: 'proxy',
+      component: HomeProxy,
+    },
+    {
+      name: 'HomeRule',
+      path: 'rule',
+      component: HomeRule,
+    },
+    {
+      name: 'HomeLog',
+      path: 'log',
+      component: HomeLog,
+    },
+    {
+      name: 'HomeSetting',
+      path: 'setting',
+      component: HomeSetting,
     },
   ],
 }]
