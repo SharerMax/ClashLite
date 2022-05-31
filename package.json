@@ -11,7 +11,8 @@
     "build": "electron-builder",
     "init": "git config core.hooksPath .git/hooks/ && rm -rf .git/hooks && npx simple-git-hooks",
     "test:e2e": "npx playwright test",
-    "test:e2e:headless": "npx playwright test --headed"
+    "test:e2e:headless": "npx playwright test --headed",
+    "build:dir": "electron-builder --dir"
   },
   "engines": {
     "node": ">=14.17.0"
