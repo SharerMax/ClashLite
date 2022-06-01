@@ -6,7 +6,7 @@ specifiers:
   '@typescript-eslint/parser': 5.26.0
   '@vicons/carbon': 0.12.0
   '@vitejs/plugin-vue': 2.3.3
-  chart.js: ^3.8.0
+  chart.js: 3.8.0
   electron: 19.0.1
   electron-builder: 23.0.3
   eslint: 8.16.0
@@ -19,12 +19,12 @@ specifiers:
   simple-git-hooks: 2.8.0
   typescript: 4.7.2
   unocss: 0.35.4
-  vfonts: ^0.0.3
+  vfonts: 0.0.3
   vite: 2.9.9
   vite-plugin-electron: 0.4.5
   vite-plugin-resolve: 2.1.2
   vue: 3.2.36
-  vue-chartjs: ^4.1.1
+  vue-chartjs: 4.1.1
   vue-router: 4.0.15
   vue-tsc: 0.35.0
 
@@ -4278,7 +4278,7 @@ packages:
     optional: true
 
   /xmlbuilder/9.0.7:
-    resolution: {integrity: sha512-7YXTQc3P2l9+0rjaUbLwMKRhtmwg1M1eDf6nag7urC7pIPYLD9W/jmzQ4ptRSUbodw5S0jfoGTflLemQibSpeQ==}
+    resolution: {integrity: sha1-Ey7mPS7FVlxVfiD0wi35rKaGsQ0=}
     engines: {node: '>=4.0'}
     requiresBuild: true
     dev: true
