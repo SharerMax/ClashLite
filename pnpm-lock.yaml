@@ -6,6 +6,7 @@ specifiers:
   '@typescript-eslint/parser': 5.26.0
   '@vicons/carbon': 0.12.0
   '@vitejs/plugin-vue': 2.3.3
+  chart.js: ^3.8.0
   electron: 19.0.1
   electron-builder: 23.0.3
   eslint: 8.16.0
@@ -23,6 +24,7 @@ specifiers:
   vite-plugin-electron: 0.4.5
   vite-plugin-resolve: 2.1.2
   vue: 3.2.36
+  vue-chartjs: ^4.1.1
   vue-router: 4.0.15
   vue-tsc: 0.35.0
 
@@ -32,6 +34,7 @@ devDependencies:
   '@typescript-eslint/parser': 5.26.0_xztl6dhthcahlo6akmb2bmjmle
   '@vicons/carbon': 0.12.0
   '@vitejs/plugin-vue': 2.3.3_vite@2.9.9+vue@3.2.36
+  chart.js: 3.8.0
   electron: 19.0.1
   electron-builder: 23.0.3
   eslint: 8.16.0
@@ -49,6 +52,7 @@ devDependencies:
   vite-plugin-electron: 0.4.5
   vite-plugin-resolve: 2.1.2
   vue: 3.2.36
+  vue-chartjs: 4.1.1_chart.js@3.8.0+vue@3.2.36
   vue-router: 4.0.15_vue@3.2.36
   vue-tsc: 0.35.0_typescript@4.7.2
 
@@ -1140,6 +1144,10 @@ packages:
     dependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
+    dev: true
+
+  /chart.js/3.8.0:
+    resolution: {integrity: sha512-cr8xhrXjLIXVLOBZPkBZVF6NDeiVIrPLHcMhnON7UufudL+CNeRrD+wpYanswlm8NpudMdrt3CHoLMQMxJhHRg==}
     dev: true
 
   /chokidar/3.5.3:
@@ -4125,6 +4133,16 @@ packages:
       vue: ^3.0.0
     dependencies:
       evtd: 0.2.3
+      vue: 3.2.36
+    dev: true
+
+  /vue-chartjs/4.1.1_chart.js@3.8.0+vue@3.2.36:
+    resolution: {integrity: sha512-rKIQ3jPrjhwxjKdNJppnYxRuBSrx4QeM3nNHsfIxEqjX6QS4Jq6e6vnZBxh2MDpURDC2uvuI2N0eIt1cWXbBVA==}
+    peerDependencies:
+      chart.js: ^3.7.0
+      vue: ^3.0.0-0 || ^2.6.0
+    dependencies:
+      chart.js: 3.8.0
       vue: 3.2.36
     dev: true
 
