@@ -16,19 +16,25 @@
         @update:value="key => activatedMenu = key"
       />
     </n-layout-sider>
-    <n-layout class="p-4">
-      <router-view />
-    </n-layout>
+    <n-scrollbar
+      style="min-height: 100%;"
+      trigger="hover"
+    >
+      <n-layout class="p-4 h-full">
+        <router-view />
+      </n-layout>
+    </n-scrollbar>
   </n-layout>
 </template>
 
 <script setup lang="ts">
 import {
+  NIcon, NLayout, NLayoutSider, NMenu, NScrollbar,
+} from 'naive-ui'
+import {
   Component, defineComponent, h, ref,
 } from 'vue'
-import {
-  NIcon, NLayout, NLayoutSider, NMenu,
-} from 'naive-ui'
+
 import type { MenuOption } from 'naive-ui'
 import {
   Dashboard, ServerProxy, Document, Settings, Rule,
@@ -105,6 +111,9 @@ const menuOptions: MenuOption[] = [
 export default defineComponent({
   name: 'AppHome',
 })
+// export default {
+//   name: 'AppHome',
+// }
 </script>
 
 <style scoped>
