@@ -21,7 +21,7 @@ specifiers:
   unocss: 0.37.4
   vfonts: 0.0.3
   vite: 2.9.9
-  vite-plugin-electron: 0.4.5
+  vite-plugin-electron: 0.4.6
   vite-plugin-resolve: 2.1.2
   vue: 3.2.36
   vue-chartjs: 4.1.1
@@ -49,7 +49,7 @@ devDependencies:
   unocss: 0.37.4_vite@2.9.9
   vfonts: 0.0.3
   vite: 2.9.9
-  vite-plugin-electron: 0.4.5
+  vite-plugin-electron: 0.4.6
   vite-plugin-resolve: 2.1.2
   vue: 3.2.36
   vue-chartjs: 4.1.1_chart.js@3.8.0+vue@3.2.36
@@ -4100,8 +4100,8 @@ packages:
     resolution: {integrity: sha512-nguyw8L6Un8eelg1vQ31vIU2ESxqid7EYmy8V+MDeMaHBqaRSkg3dTBToC1PR00D89UzS/SLkfYPnx0Wf23IQQ==}
     dev: true
 
-  /vite-plugin-electron/0.4.5:
-    resolution: {integrity: sha512-DGZKLN1mUrMkp5mp862poMhufWeEZnY2G+RyDzSO0UG7mJCnDacU5a6txmiqWEDDuK1dFeIsxOWFPGnudXVv3g==}
+  /vite-plugin-electron/0.4.6:
+    resolution: {integrity: sha512-sTSmETJSy0yitJJFyc3BsF4yt0//HR2QguDtODHlA9KFxSlIHSiTF7ogKNovRDgsS0Ck6ttjLoU7kOMi9Gccfg==}
     dependencies:
       vite-plugin-optimizer: 1.3.3
     dev: true
