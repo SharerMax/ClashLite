@@ -13,7 +13,6 @@ import {
   Chart, LineElement, CategoryScale, LinearScale, PointElement,
 } from 'chart.js'
 import type { TChartData, TChartOptions } from 'vue-chartjs/dist/types'
-import { defineProps } from 'vue'
 import { useThemeVars } from 'naive-ui'
 
 Chart.register(LineElement, CategoryScale, LinearScale, PointElement)
