@@ -43,7 +43,7 @@
     "vue": "3.2.37",
     "vue-chartjs": "4.1.1",
     "vue-router": "4.0.15",
-    "vue-tsc": "0.36.1"
+    "vue-tsc": "0.37.2"
   },
   "env": {
     "VITE_DEV_SERVER_HOST": "127.0.0.1",
