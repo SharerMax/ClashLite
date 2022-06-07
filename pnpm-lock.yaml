@@ -14,7 +14,7 @@ specifiers:
   eslint-config-airbnb-typescript: 17.0.0
   eslint-plugin-import: 2.26.0
   eslint-plugin-vue: 9.1.0
-  naive-ui: 2.30.0
+  naive-ui: 2.30.2
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.3
@@ -42,7 +42,7 @@ devDependencies:
   eslint-config-airbnb-typescript: 17.0.0_djfgxmtdd6rkndiwqn3wl77pxm
   eslint-plugin-import: 2.26.0_er3f6f6cekbq4lwnvn7afiwhn4
   eslint-plugin-vue: 9.1.0_eslint@8.17.0
-  naive-ui: 2.30.0_vue@3.2.37
+  naive-ui: 2.30.2_vue@3.2.37
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.3
@@ -3131,8 +3131,8 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /naive-ui/2.30.0_vue@3.2.37:
-    resolution: {integrity: sha512-joceH/EH2Mt7Enzpx0oZXu5qVTied5zYshZqJEcEvySkokmmIPtxtlHagRBnBjlgdTMrraaF6jTiD9TZ6Pecbw==}
+  /naive-ui/2.30.2_vue@3.2.37:
+    resolution: {integrity: sha512-NS6bCrZlmQUDVLFLwFGcafTT2KteVV+HGuYRqemybZCGI8QnvHmGWWtEXhikZvu6lzInvPZHu41RrdlUGsWz3g==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
