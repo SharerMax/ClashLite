@@ -20,7 +20,7 @@ specifiers:
   typescript: 4.7.3
   unocss: 0.37.4
   vfonts: 0.0.3
-  vite: 2.9.9
+  vite: 2.9.10
   vite-plugin-electron: 0.4.7
   vite-plugin-resolve: 2.1.2
   vue: 3.2.37
@@ -33,7 +33,7 @@ devDependencies:
   '@typescript-eslint/eslint-plugin': 5.27.0_kor2e3kwnnzugzo3aovmfcq2la
   '@typescript-eslint/parser': 5.27.0_ud6rd4xtew5bv4yhvkvu24pzm4
   '@vicons/carbon': 0.12.0
-  '@vitejs/plugin-vue': 2.3.3_vite@2.9.9+vue@3.2.37
+  '@vitejs/plugin-vue': 2.3.3_vite@2.9.10+vue@3.2.37
   chart.js: 3.8.0
   electron: 19.0.3
   electron-builder: 23.0.3
@@ -46,9 +46,9 @@ devDependencies:
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.3
-  unocss: 0.37.4_vite@2.9.9
+  unocss: 0.37.4_vite@2.9.10
   vfonts: 0.0.3
-  vite: 2.9.9
+  vite: 2.9.10
   vite-plugin-electron: 0.4.7
   vite-plugin-resolve: 2.1.2
   vue: 3.2.37
@@ -631,7 +631,7 @@ packages:
       '@unocss/core': 0.37.4
     dev: true
 
-  /@unocss/vite/0.37.4_vite@2.9.9:
+  /@unocss/vite/0.37.4_vite@2.9.10:
     resolution: {integrity: sha512-2irA+2DonCHq0HW9XBq+DCZ3nWLhL2QTKCmbtrGyJNpKWYkHb7m2bfRtKxGmdx7LeN1ThTLHuEi74q5I9IS2Ww==}
     peerDependencies:
       vite: ^2.9.0
@@ -643,21 +643,21 @@ packages:
       '@unocss/scope': 0.37.4
       '@unocss/transformer-directives': 0.37.4
       magic-string: 0.26.2
-      vite: 2.9.9
+      vite: 2.9.10
     dev: true
 
   /@vicons/carbon/0.12.0:
     resolution: {integrity: sha512-kCOgr/ZOhZzoiFLJ8pwxMa2TMxrkCUOA22qExPabus35F4+USqzcsxaPoYtqRd9ROOYiHrSqwapak/ywF0D9bg==}
     dev: true
 
-  /@vitejs/plugin-vue/2.3.3_vite@2.9.9+vue@3.2.37:
+  /@vitejs/plugin-vue/2.3.3_vite@2.9.10+vue@3.2.37:
     resolution: {integrity: sha512-SmQLDyhz+6lGJhPELsBdzXGc+AcaT8stgkbiTFGpXPe8Tl1tJaBw1A6pxDqDuRsVkD8uscrkx3hA7QDOoKYtyw==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       vite: ^2.5.10
       vue: ^3.2.25
     dependencies:
-      vite: 2.9.9
+      vite: 2.9.10
       vue: 3.2.37
     dev: true
 
@@ -4045,7 +4045,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unocss/0.37.4_vite@2.9.9:
+  /unocss/0.37.4_vite@2.9.10:
     resolution: {integrity: sha512-vuso4hhbG4Jj7+ozwPl/MJXOKoi3OlbEUDD9PdINIgIqC9m2oLpWxvtFXdUow78OW/9k+kifWJkQTxCl3FMBWw==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -4068,7 +4068,7 @@ packages:
       '@unocss/transformer-compile-class': 0.37.4
       '@unocss/transformer-directives': 0.37.4
       '@unocss/transformer-variant-group': 0.37.4
-      '@unocss/vite': 0.37.4_vite@2.9.9
+      '@unocss/vite': 0.37.4_vite@2.9.10
     transitivePeerDependencies:
       - supports-color
       - vite
@@ -4157,8 +4157,8 @@ packages:
     resolution: {integrity: sha512-u1qAHClpMS6v/UM6yBiLOXEeceeK+zvZYRjYC0ReOy1Y2Anxcbf9oKHqN29MOMPxif5ZFLqy2dSsSdXv3rz9eQ==}
     dev: true
 
-  /vite/2.9.9:
-    resolution: {integrity: sha512-ffaam+NgHfbEmfw/Vuh6BHKKlI/XIAhxE5QSS7gFLIngxg171mg1P3a4LSRME0z2ZU1ScxoKzphkipcYwSD5Ew==}
+  /vite/2.9.10:
+    resolution: {integrity: sha512-TwZRuSMYjpTurLqXspct+HZE7ONiW9d+wSWgvADGxhDPPyoIcNywY+RX4ng+QpK30DCa1l/oZgi2PLZDibhzbQ==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
