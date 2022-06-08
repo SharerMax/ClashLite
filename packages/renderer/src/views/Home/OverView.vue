@@ -127,7 +127,6 @@ import {
   ref, onMounted, onUnmounted, computed,
 } from 'vue'
 import type { TChartData } from 'vue-chartjs/dist/types'
-import { on } from 'events'
 import TrafficChart from '../../components/TrafficChart.vue'
 
 const message = useMessage()

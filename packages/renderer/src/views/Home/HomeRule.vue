@@ -9,6 +9,7 @@
           quaternary
           size="small"
           type="primary"
+          @click="handleRuleAddButtonClick"
         >
           <template #icon>
             <n-icon :component="Add" />
@@ -80,13 +81,97 @@
       </n-list>
     </div>
   </n-layout>
+  <n-modal
+    v-model:show="showEditModal"
+    preset="card"
+    :closable="true"
+    class="w-100"
+    title="新增规则集"
+  >
+    <n-form
+      label-placement="left"
+      label-width="auto"
+      :model="editRules"
+      :rules="editRuleFormRules"
+    >
+      <n-form-item
+        label="名称"
+        path="name"
+      >
+        <n-input
+          v-model:value="editRules.name"
+          placeholder="规则集名称"
+        />
+      </n-form-item>
+      <n-form-item
+        label="订阅"
+        path="url"
+      >
+        <n-input
+          v-model:value="editRules.url"
+          placeholder="订阅地址 URL"
+        />
+      </n-form-item>
+      <n-form-item
+        label="路由"
+        path="type"
+      >
+        <n-radio-group
+          v-model:value="editRules.type"
+          size="small"
+        >
+          <n-radio-button
+            label="直连"
+            value="DIRECT"
+          />
+          <n-radio-button
+            label="代理"
+            value="PROXY"
+          />
+        </n-radio-group>
+      </n-form-item>
+    </n-form>
+  </n-modal>
 </template>
 
 <script setup lang="ts">
 import {
-  NLayout, NH2, NTag, NList, NText, NListItem, NButton, NIcon, NEllipsis,
+  NLayout, NH2, NTag, NList, NText, NListItem, NButton, NIcon,
+  NEllipsis, NModal, NInput, NForm, NFormItem, NRadioGroup, NRadioButton,
+  FormRules,
 } from 'naive-ui'
 import { Add } from '@vicons/carbon'
+import { ref } from 'vue'
+
+const showEditModal = ref(false)
+const editRules = ref({
+  name: null,
+  url: null,
+  type: 'DIRECT',
+})
+function handleRuleAddButtonClick() {
+  showEditModal.value = true
+}
+const editRuleFormRules: FormRules = {
+  name: [{
+    required: true,
+    message: '请输入规则集名称',
+    trigger: 'blur',
+  }],
+  url: [
+    {
+      required: true,
+      message: '请输入正确的 URL',
+      trigger: 'blur',
+      type: 'url',
+    },
+  ],
+  type: [
+    {
+      required: true,
+    },
+  ],
+}
 </script>
 
 <style scoped>
