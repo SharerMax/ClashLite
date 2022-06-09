@@ -14,7 +14,7 @@ specifiers:
   eslint-config-airbnb-typescript: 17.0.0
   eslint-plugin-import: 2.26.0
   eslint-plugin-vue: 9.1.0
-  naive-ui: 2.30.2
+  naive-ui: 2.30.3
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.3
@@ -42,7 +42,7 @@ devDependencies:
   eslint-config-airbnb-typescript: 17.0.0_tp6b2m7mjearuulyvjl6n6zeka
   eslint-plugin-import: 2.26.0_pv5w3e62ssxduf5aiwxbc3knra
   eslint-plugin-vue: 9.1.0_eslint@8.17.0
-  naive-ui: 2.30.2_vue@3.2.37
+  naive-ui: 2.30.3_vue@3.2.37
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.3
@@ -1218,12 +1218,14 @@ packages:
   /color-convert/2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
+    requiresBuild: true
     dependencies:
       color-name: 1.1.4
     dev: true
 
   /color-name/1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+    requiresBuild: true
     dev: true
 
   /colorette/2.0.16:
@@ -3160,8 +3162,8 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /naive-ui/2.30.2_vue@3.2.37:
-    resolution: {integrity: sha512-NS6bCrZlmQUDVLFLwFGcafTT2KteVV+HGuYRqemybZCGI8QnvHmGWWtEXhikZvu6lzInvPZHu41RrdlUGsWz3g==}
+  /naive-ui/2.30.3_vue@3.2.37:
+    resolution: {integrity: sha512-s6iphodOfLklhgAGtzhzoE0oPi6eY72UufUDRySBbfV+r+64vw9omYUOqk3Z1M/t/Mh8KwqW6z+ex8bYftFKPA==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
@@ -3177,7 +3179,7 @@ packages:
       highlight.js: 11.5.1
       lodash: 4.17.21
       lodash-es: 4.17.21
-      seemly: 0.3.3
+      seemly: 0.3.4
       treemate: 0.3.11
       vdirs: 0.1.8_vue@3.2.37
       vooks: 0.2.12_vue@3.2.37
@@ -3668,8 +3670,8 @@ packages:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
     dev: true
 
-  /seemly/0.3.3:
-    resolution: {integrity: sha512-mAyqemz41e9HiZPMXAn7NtTExJgztwco5cdZjrt/iViU/oFeav+Q8K1c93M/tIZZ00QkT65JMr4xXQk7Vv5hWQ==}
+  /seemly/0.3.4:
+    resolution: {integrity: sha512-/crL+UfbtYd6NdLdnf58xaABfeSRt5uKE4N1SFQAW7nIznOrJQchAaslJHxV8/iAfV0LWInrmxJBFdDb0c2/sw==}
     dependencies:
       '@types/jest': 27.5.2
     dev: true
@@ -4256,7 +4258,7 @@ packages:
       '@juggle/resize-observer': 3.3.1
       css-render: 0.15.10
       evtd: 0.2.3
-      seemly: 0.3.3
+      seemly: 0.3.4
       vdirs: 0.1.8_vue@3.2.37
       vooks: 0.2.12_vue@3.2.37
       vue: 3.2.37
