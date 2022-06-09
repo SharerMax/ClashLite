@@ -32,7 +32,7 @@ import {
   NIcon, NLayout, NLayoutSider, NMenu, NScrollbar,
 } from 'naive-ui'
 import {
-  Component, defineComponent, h, ref,
+  Component, defineComponent, h, ref, watch, watchEffect,
 } from 'vue'
 
 import type { MenuOption } from 'naive-ui'
@@ -40,7 +40,7 @@ import {
   Dashboard, ServerProxy, Document, Settings, Rule,
 } from '@vicons/carbon'
 
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 
 function renderIcon(icon: Component) {
   return () => h(NIcon, null, {
@@ -106,6 +106,29 @@ const menuOptions: MenuOption[] = [
     icon: renderIcon(Settings),
   },
 ]
+
+const router = useRoute()
+watchEffect(() => {
+  switch (router.name) {
+    case 'HomeOverview':
+      activatedMenu.value = 'overView'
+      break
+    case 'HomeProxy':
+      activatedMenu.value = 'proxy'
+      break
+    case 'HomeRule':
+      activatedMenu.value = 'rule'
+      break
+    case 'HomeLog':
+      activatedMenu.value = 'log'
+      break
+    case 'HomeSetting':
+      activatedMenu.value = 'setting'
+      break
+    default:
+      break
+  }
+})
 </script>
 <script lang="ts">
 export default defineComponent({
