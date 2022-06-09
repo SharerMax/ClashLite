@@ -93,6 +93,7 @@
       label-width="auto"
       :model="editRules"
       :rules="editRuleFormRules"
+      size="small"
     >
       <n-form-item
         label="名称"
@@ -113,6 +114,28 @@
         />
       </n-form-item>
       <n-form-item
+        label="行为"
+        path="behavior"
+      >
+        <n-radio-group
+          v-model:value="editRules.behavior"
+          size="small"
+        >
+          <n-radio-button
+            label="域名"
+            value="domain"
+          />
+          <n-radio-button
+            label="IPCIDR"
+            value="ipcidr"
+          />
+          <n-radio-button
+            label="CLASSICAL"
+            value="classical"
+          />
+        </n-radio-group>
+      </n-form-item>
+      <n-form-item
         label="路由"
         path="type"
       >
@@ -131,6 +154,23 @@
         </n-radio-group>
       </n-form-item>
     </n-form>
+    <template #action>
+      <div class="flex">
+        <n-button
+          class="mla"
+          @click="()=> showEditModal = false"
+        >
+          取消
+        </n-button>
+        <n-button
+          class="ml-4"
+          type="primary"
+          @click="handleRuleSaveButtonClick"
+        >
+          保存
+        </n-button>
+      </div>
+    </template>
   </n-modal>
 </template>
 
@@ -148,9 +188,13 @@ const editRules = ref({
   name: null,
   url: null,
   type: 'DIRECT',
+  behavior: 'domain',
 })
 function handleRuleAddButtonClick() {
   showEditModal.value = true
+}
+function handleRuleSaveButtonClick() {
+  showEditModal.value = false
 }
 const editRuleFormRules: FormRules = {
   name: [{
@@ -170,6 +214,9 @@ const editRuleFormRules: FormRules = {
     {
       required: true,
     },
+  ],
+  behavior: [
+    { required: true },
   ],
 }
 </script>
