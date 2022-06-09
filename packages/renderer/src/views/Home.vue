@@ -32,7 +32,7 @@ import {
   NIcon, NLayout, NLayoutSider, NMenu, NScrollbar,
 } from 'naive-ui'
 import {
-  Component, defineComponent, h, ref, watch, watchEffect,
+  Component, defineComponent, h, ref, watchEffect,
 } from 'vue'
 
 import type { MenuOption } from 'naive-ui'
