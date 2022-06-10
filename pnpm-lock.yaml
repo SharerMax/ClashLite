@@ -7,7 +7,7 @@ specifiers:
   '@vicons/carbon': 0.12.0
   '@vitejs/plugin-vue': 2.3.3
   chart.js: 3.8.0
-  electron: 19.0.3
+  electron: 19.0.4
   electron-builder: 23.0.3
   eslint: 8.17.0
   eslint-config-airbnb-base: 15.0.0
@@ -35,7 +35,7 @@ devDependencies:
   '@vicons/carbon': 0.12.0
   '@vitejs/plugin-vue': 2.3.3_vite@2.9.10+vue@3.2.37
   chart.js: 3.8.0
-  electron: 19.0.3
+  electron: 19.0.4
   electron-builder: 23.0.3
   eslint: 8.17.0
   eslint-config-airbnb-base: 15.0.0_3yxiwxzsqipdmy4jwrlv6vgfmy
@@ -1608,8 +1608,8 @@ packages:
       - supports-color
     dev: true
 
-  /electron/19.0.3:
-    resolution: {integrity: sha512-V/8pFkXUOsoHcBzuTYVSbIQKLIwI/FAxfpvbkMazdaO/weZoIf9AN3Qc4Wuo9+489mhelDYc8lSX5N7c6A5n6A==}
+  /electron/19.0.4:
+    resolution: {integrity: sha512-roRYr1VNAWIhjD9n8qZdmhROtrzsFpuZEXrjWAw+GqPbZlrUInmvFCviRDC2Lt+VBsTNRpTfPpfzXSlLL4reEw==}
     engines: {node: '>= 8.6'}
     hasBin: true
     requiresBuild: true
@@ -3606,7 +3606,7 @@ packages:
     dev: true
 
   /responselike/1.0.2:
-    resolution: {integrity: sha1-kYcg7ztjHFZCvgaPFa3lpG9Loec=}
+    resolution: {integrity: sha512-/Fpe5guzJk1gPqdJLJR5u7eG/gNY4nImjbRDaVWVMRhne55TCmj2i9Q+54PBRfatRC8v/rIiv9BN0pMd9OV5EQ==}
     dependencies:
       lowercase-keys: 1.0.1
     dev: true
@@ -3675,7 +3675,7 @@ packages:
     dev: true
 
   /semver-compare/1.0.0:
-    resolution: {integrity: sha1-De4hahyUGrN+nvsXiPavxf9VN/w=}
+    resolution: {integrity: sha512-YM3/ITh2MJ5MtzaM429anh+x2jiLVjqILF4m4oyQB18W7Ggea7BfqdH/wGMK7dDiMghv/6WG7znWMwUDzJiXow==}
     dev: true
     optional: true
 
