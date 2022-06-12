@@ -35,6 +35,7 @@
           <n-button
             quaternary
             size="small"
+            disabled
           >
             <template #icon>
               <n-icon
