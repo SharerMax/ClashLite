@@ -62,38 +62,59 @@
     preset="card"
     closable
     title="新增订阅"
-    v-model:show="showEditRuleSub"
+    v-model:show="showEditProxySub"
     size="small"
   >
     <n-form
       label-placement="left"
       size="small"
+      :rules="proxySubFormRules"
+      ref="proxySubForm"
+      :model="subProxyData"
     >
-      <n-form-item label="订阅">
-        <n-input placeholder="订阅地址" />
+      <n-form-item
+        label="订阅"
+        path="url"
+      >
+        <n-input
+          placeholder="订阅地址"
+          v-model:value="subProxyData.url"
+        />
       </n-form-item>
-      <n-form-item label="类型">
-        <n-radio-group>
+      <n-form-item
+        label="类型"
+        path="type"
+      >
+        <n-radio-group v-model:value="subProxyData.type">
           <n-radio-button
-            label="PLAIN"
             value="plain"
-          />
+          >
+            PLAIN
+          </n-radio-button>
           <n-radio-button
             label="BASE64"
             value="base64"
-          />
+          >
+            BASE64
+          </n-radio-button>
           <n-radio-button
-            label="SIP008"
             value="sip008"
-          />
+          >
+            SIP008
+          </n-radio-button>
           <n-radio-button
-            label="CLASH"
             value="clash"
-          />
+          >
+            CLASH
+          </n-radio-button>
         </n-radio-group>
       </n-form-item>
-      <n-form-item label="更新">
+      <n-form-item
+        label="更新"
+        path="period"
+      >
         <n-input-number
+          v-model:value="subProxyData.period"
           placeholder="更新周期；[10, 10000]"
           :min="10"
           :max="10000"
@@ -127,23 +148,54 @@
 <script setup lang="ts">
 import {
   NH2, NList, NListItem, NTag, NIcon, NButton, NModal, NForm, NFormItem, NInput,
-  NRadioGroup, NRadioButton, NInputNumber,
+  NRadioGroup, NRadioButton, NInputNumber, FormRules, FormInst,
 } from 'naive-ui'
 import { Edit, View, Add } from '@vicons/carbon'
 import { ref } from 'vue'
 
-const showEditRuleSub = ref(false)
+const showEditProxySub = ref(false)
 function handleAddProxySubButtonClick() {
-  showEditRuleSub.value = true
+  showEditProxySub.value = true
 }
 
+const proxySubForm = ref<null | FormInst>(null)
 function handleProxySubSaveButtonClick() {
-  showEditRuleSub.value = false
+  proxySubForm.value?.validate((errors) => {
+    if (!errors) {
+      showEditProxySub.value = false
+    }
+  })
 }
 
 function handleProxySubCancelButtonClick() {
-  showEditRuleSub.value = false
+  showEditProxySub.value = false
 }
+
+const subProxyData = ref({
+  url: null,
+  type: 'plain',
+  period: 10,
+})
+
+const proxySubFormRules: FormRules = {
+  url: {
+    required: true,
+    type: 'url',
+    message: '请输入正确的订阅地址',
+    trigger: 'input',
+  },
+  type: {
+    required: true,
+    type: 'string',
+  },
+  period: {
+    required: true,
+    type: 'integer',
+    message: '请输入正确的更新周期',
+    trigger: 'input',
+  },
+}
+
 </script>
 
 <style scoped>
