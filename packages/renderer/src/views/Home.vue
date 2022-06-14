@@ -16,20 +16,15 @@
         @update:value="key => activatedMenu = key"
       />
     </n-layout-sider>
-    <n-scrollbar
-      style="min-height: 100%;"
-      trigger="hover"
-    >
-      <n-layout class="p-4 h-full">
-        <router-view />
-      </n-layout>
-    </n-scrollbar>
+    <n-layout class="h-full">
+      <router-view />
+    </n-layout>
   </n-layout>
 </template>
 
 <script setup lang="ts">
 import {
-  NIcon, NLayout, NLayoutSider, NMenu, NScrollbar,
+  NIcon, NLayout, NLayoutSider, NMenu,
 } from 'naive-ui'
 import {
   Component, defineComponent, h, ref, watchEffect,

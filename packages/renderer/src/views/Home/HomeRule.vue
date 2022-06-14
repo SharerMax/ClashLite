@@ -1,5 +1,7 @@
 <template>
-  <n-layout>
+  <!-- TODO 调整布局，头不动 -->
+
+  <n-layout class="p-4">
     <div class="flex items-baseline">
       <n-h2>
         规则配置
