@@ -1,11 +1,12 @@
 export type ProxType = 'ss' | 'vmess' | 'trojan' | 'ssr' | 'http' | 'socks5' | 'snell'
+
 interface BaseProxy {
   name: string,
   type: ProxType,
   port: number
 }
 
-export interface ShadowSocks extends BaseProxy {
+interface BaseShadowSocks extends BaseProxy {
   readonly type: 'ss',
   name: string,
   password: string,
@@ -15,11 +16,22 @@ export interface ShadowSocks extends BaseProxy {
   'aes-128-ctr' | 'aes-192-ctr' | 'aes-256-ctr' |
   'rc4-md5' | 'chacha20-ietf' | 'xchacha20' |
   'chacha20-ietf-poly1305' | 'xchacha20-ietf-poly1305',
-  plugin?: 'obfs' | 'v2ray-plugin',
-  'plugin-opt'?: {
-    mode: 'tls' | 'http' | 'websocket',
+}
+
+interface ShadowSocksWithObfs extends BaseShadowSocks {
+  plugin: 'obfs',
+  'plugin-opt': {
+    mode: 'http' | 'tls'
     host?: string,
+  },
+}
+
+interface ShadowSocksWithV2ray extends BaseShadowSocks {
+  plugin: 'v2ray-plugin',
+  'plugin-opt': {
+    mode: 'websocket'
     tls?: boolean,
+    host?: string,
     'skip-cert-verify'?: boolean,
     path? : string,
     mux?: boolean,
@@ -28,3 +40,5 @@ export interface ShadowSocks extends BaseProxy {
     }
   },
 }
+
+export type ShadowSocks = BaseShadowSocks | ShadowSocksWithObfs | ShadowSocksWithV2ray
