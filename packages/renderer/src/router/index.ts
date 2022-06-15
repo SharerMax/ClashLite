@@ -5,6 +5,7 @@ const Home = () => import('../views/Home.vue')
 const HomeOverView = () => import('../views/Home/OverView.vue')
 const HomeProxy = () => import('../views/Home/HomeProxy.vue')
 const HomeRule = () => import('../views/Home/HomeRule.vue')
+const HomeConnection = () => import('../views/Home/HomeConnection.vue')
 const HomeLog = () => import('../views/Home/HomeLog.vue')
 const HomeSetting = () => import('../views/Home/HomeSetting.vue')
 
@@ -27,6 +28,11 @@ const routeRouteRecords: RouteRecordRaw[] = [{
       name: 'HomeRule',
       path: 'rule',
       component: HomeRule,
+    },
+    {
+      name: 'HomeConnection',
+      path: 'rule',
+      component: HomeConnection,
     },
     {
       name: 'HomeLog',

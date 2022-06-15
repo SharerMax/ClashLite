@@ -32,7 +32,7 @@ import {
 
 import type { MenuOption } from 'naive-ui'
 import {
-  Dashboard, ServerProxy, Document, Settings, Rule,
+  Dashboard, ServerProxy, Document, Settings, Rule, Connect,
 } from '@vicons/carbon'
 
 import { RouterLink, useRoute } from 'vue-router'
@@ -77,6 +77,17 @@ const menuOptions: MenuOption[] = [
     }),
     key: 'rule',
     icon: renderIcon(Rule),
+  },
+  {
+    label: () => h(RouterLink, {
+      to: {
+        name: 'HomeConnection',
+      },
+    }, {
+      default: () => '连接',
+    }),
+    key: 'connection',
+    icon: renderIcon(Connect),
   },
   {
     label: () => h(RouterLink, {
