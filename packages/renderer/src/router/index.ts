@@ -31,7 +31,7 @@ const routeRouteRecords: RouteRecordRaw[] = [{
     },
     {
       name: 'HomeConnection',
-      path: 'rule',
+      path: 'connection',
       component: HomeConnection,
     },
     {

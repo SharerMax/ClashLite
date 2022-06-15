@@ -125,6 +125,9 @@ watchEffect(() => {
     case 'HomeRule':
       activatedMenu.value = 'rule'
       break
+    case 'HomeConnection':
+      activatedMenu.value = 'connection'
+      break
     case 'HomeLog':
       activatedMenu.value = 'log'
       break
