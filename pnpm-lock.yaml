@@ -15,7 +15,7 @@ specifiers:
   eslint-config-airbnb-typescript: 17.0.0
   eslint-plugin-import: 2.26.0
   eslint-plugin-vue: 9.1.1
-  naive-ui: 2.30.3
+  naive-ui: 2.30.4
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.3
@@ -44,7 +44,7 @@ devDependencies:
   eslint-config-airbnb-typescript: 17.0.0_tp6b2m7mjearuulyvjl6n6zeka
   eslint-plugin-import: 2.26.0_pv5w3e62ssxduf5aiwxbc3knra
   eslint-plugin-vue: 9.1.1_eslint@8.17.0
-  naive-ui: 2.30.3_vue@3.2.37
+  naive-ui: 2.30.4_vue@3.2.37
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.3
@@ -3160,8 +3160,8 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /naive-ui/2.30.3_vue@3.2.37:
-    resolution: {integrity: sha512-s6iphodOfLklhgAGtzhzoE0oPi6eY72UufUDRySBbfV+r+64vw9omYUOqk3Z1M/t/Mh8KwqW6z+ex8bYftFKPA==}
+  /naive-ui/2.30.4_vue@3.2.37:
+    resolution: {integrity: sha512-xf9Re46gfy8U/P71ON3hIEgr9ag0ffmthnzU4O7RHRhdzXkfN1KuDQZsBsDY34nl9ycAy1wnem3ob4tqBAChOA==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
@@ -3182,7 +3182,7 @@ packages:
       vdirs: 0.1.8_vue@3.2.37
       vooks: 0.2.12_vue@3.2.37
       vue: 3.2.37
-      vueuc: 0.4.39_vue@3.2.37
+      vueuc: 0.4.44_vue@3.2.37
     dev: true
 
   /nano-staged/0.8.0:
@@ -4263,8 +4263,8 @@ packages:
       '@vue/shared': 3.2.37
     dev: true
 
-  /vueuc/0.4.39_vue@3.2.37:
-    resolution: {integrity: sha512-TAprDQ+NGOO9Y+rX0o6q02biqQVpd5c0LVgAFWFUM3zC1b3Zbponu5PvCXcgNwP82+VbS2f5LkrQFJhVd2SqJQ==}
+  /vueuc/0.4.44_vue@3.2.37:
+    resolution: {integrity: sha512-2sLWo1Ow3DRKTDvGVlaWlf0KL+LOqeO6zlvb6nUxWxqj4VjUpg7sMtH+xtvBK+oOXH4goGt1RyLMaBVgPFpqHw==}
     peerDependencies:
       vue: ^3.0.11
     dependencies:
@@ -4348,7 +4348,7 @@ packages:
     optional: true
 
   /xmlbuilder/9.0.7:
-    resolution: {integrity: sha1-Ey7mPS7FVlxVfiD0wi35rKaGsQ0=}
+    resolution: {integrity: sha512-7YXTQc3P2l9+0rjaUbLwMKRhtmwg1M1eDf6nag7urC7pIPYLD9W/jmzQ4ptRSUbodw5S0jfoGTflLemQibSpeQ==}
     engines: {node: '>=4.0'}
     requiresBuild: true
     dev: true
