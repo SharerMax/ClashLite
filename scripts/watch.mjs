@@ -86,8 +86,10 @@ function watchPreload(server) {
   })
 }
 
-// Block the CTRL + C shortcut on a Windows terminal and exit the application without displaying a query
+// Block the CTRL + C shortcut on a Windows terminal and
+// exit the application without displaying a query
 if (process.platform === 'win32') {
+  // eslint-disable-next-line max-len
   readline.createInterface({ input: process.stdin, output: process.stdout }).on('SIGINT', process.exit)
 }
 

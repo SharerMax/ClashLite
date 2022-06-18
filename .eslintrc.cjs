@@ -18,7 +18,7 @@ module.exports = {
     parser: '@typescript-eslint/parser',
     sourceType: 'module',
     project: './tsconfig.eslint.json',
-    extraFileExtensions: ['.vue', '*.cjs', '*.mjs'],
+    extraFileExtensions: ['.vue'],
   },
   plugins: [
     'vue',
@@ -38,7 +38,9 @@ module.exports = {
     'import/no-extraneous-dependencies': 'off',
     'import/no-unresolved': 'off',
     'no-unused-expressions': 'off',
-    '@typescript-eslint/no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
+    '@typescript-eslint/no-unused-expressions': [
+      'error', { allowShortCircuit: true, allowTernary: true },
+    ],
     // 'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
   },
 }

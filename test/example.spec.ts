@@ -1,7 +1,8 @@
 // example.spec.ts
 import { test, expect } from '@playwright/test'
 import { env } from '../package.json'
-const VITE_SERVER_ADDRESS = `http://127.0.0.1:${env.PORT || 3344}`
+
+const VITE_SERVER_ADDRESS = `http://127.0.0.1:${env.VITE_DEV_SERVER_PORT || 3344}`
 
 test('example test case', async ({ page }) => {
   await page.goto(VITE_SERVER_ADDRESS)
