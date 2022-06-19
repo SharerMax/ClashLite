@@ -12,6 +12,7 @@
     "unocss",
     "vite"
   ],
+  "files.eol": "\n",
   "search.exclude": {
     "**/release": true
   }
