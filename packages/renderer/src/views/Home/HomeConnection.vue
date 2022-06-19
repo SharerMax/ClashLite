@@ -103,6 +103,26 @@ const connections: ConnectionsResponse = {
       rulePayload: 'google.com',
       start: new Date(),
     },
+    {
+      upload: 123,
+      download: 456,
+      chains: ['proxy'],
+      id: '8fa7ca19-0f4e-4b49-87fd-4b432ebafe85',
+      metadata: {
+        network: 'tcp',
+        type: 'Socks5',
+        sourceIP: '127.0.0.1',
+        destinationIP: '140.82.112.4',
+        sourcePort: '2348',
+        destinationPort: '443',
+        host: 'github.com',
+        dnsMode: 'normal',
+        processPath: 'chrome.exe',
+      },
+      rule: 'Proxy',
+      rulePayload: 'google.com',
+      start: new Date(),
+    },
   ],
 }
 </script>

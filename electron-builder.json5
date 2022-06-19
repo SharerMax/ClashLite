@@ -11,7 +11,7 @@
     "dist"
   ],
   "extraResources": [{
-    "from": "extraResources",
+    "from": "extra",
     "to": "./"
   }],
   "mac": {
