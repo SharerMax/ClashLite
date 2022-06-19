@@ -18,9 +18,10 @@ export default defineConfig({
     resolve(
       /**
        * Here you can specify other modules
-       * 🚧 You have to make sure that your module is in `dependencies` and not in the` devDependencies`,
-       *    which will ensure that the electron-builder can package it correctly
-       */
+       * 🚧 You have to make sure that your module is in `dependencies` and
+       *  not in the` devDependencies`, which will ensure that the electron-builder
+       *  can package it correctly
+       * */
       {
         // If you use the following modules, the following configuration will work
         // What they have in common is that they will return - ESM format code snippets

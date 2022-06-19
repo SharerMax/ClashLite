@@ -1,10 +1,18 @@
 {
   "compilerOptions": {
     "composite": true,
+    "outDir": "./dist",
     "module": "ESNext",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "esModuleInterop": true
   },
-  "include": ["**/*.config.ts"]
+  "include": ["**/*.config.ts", "scripts"],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "release"
+  ]
 }
