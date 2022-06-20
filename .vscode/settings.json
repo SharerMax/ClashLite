@@ -6,11 +6,12 @@
   "eslint.format.enable": true,
   "eslint.alwaysShowStatus": false,
   "editor.codeActionsOnSave": {
-  "source.fixAll": true
+    "source.fixAll": false,
+    "source.fixAll.eslint": true
   },
   "cSpell.words": [
     "unocss",
-    "vite"
+    "vite" 
   ],
   "files.eol": "\n",
   "search.exclude": {
