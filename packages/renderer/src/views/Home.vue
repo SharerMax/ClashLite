@@ -3,7 +3,7 @@
     has-sider
     class="h-screen"
   >
-    <n-layout-sider width="180">
+    <n-layout-sider width="140">
       <div class="text-center my-4">
         <img
           src="../../src/assets/electron.png"
