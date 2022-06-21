@@ -4,6 +4,7 @@ import {
 import { release } from 'os'
 import { join } from 'path'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
+import clash from './clash'
 
 // const APP_USER_MODEL_ID = 'com.saeratom.clashlite'
 
@@ -66,6 +67,7 @@ async function createWindow() {
     if (url.startsWith('https:')) shell.openExternal(url)
     return { action: 'deny' }
   })
+  clash.init()
 }
 
 app.whenReady().then(() => {

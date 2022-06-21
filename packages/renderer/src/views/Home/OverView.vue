@@ -20,7 +20,10 @@
             >
               <div>
                 <label class="w-24 inline-block">运行状态：</label>
-                <n-switch size="medium">
+                <n-switch
+                  size="medium"
+                  @update:value="handleClashRunChange"
+                >
                   <template #checked>
                     运行中
                   </template>
@@ -135,6 +138,14 @@ import {
 } from 'vue'
 import type { TChartData } from 'vue-chartjs/dist/types'
 import TrafficChart from '../../components/TrafficChart.vue'
+
+function handleClashRunChange(value: boolean) {
+  if (value) {
+    window.clash.start()
+  } else {
+    window.clash.stop()
+  }
+}
 
 const message = useMessage()
 function handleClipboardCopy(text: string) {
