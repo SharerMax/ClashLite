@@ -9,7 +9,7 @@
     "allowJs": true,
     "esModuleInterop": true
   },
-  "include": ["**/*.config.ts", "scripts"],
+  "include": ["vite.config.ts", "uno.config.ts", "electron/main/**/*.ts"],
   "exclude": [
     "node_modules",
     "dist",

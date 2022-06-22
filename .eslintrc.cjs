@@ -10,7 +10,7 @@ module.exports = {
     'eslint-config-airbnb-typescript/base',
     // 'plugin:@typescript-eslint/recommended',
     'plugin:vue/vue3-strongly-recommended',
-    'plugin:json/recommended',
+    // 'plugin:json/recommended',
 
   ],
   parser: 'vue-eslint-parser',

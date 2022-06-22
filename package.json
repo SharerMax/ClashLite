@@ -1,18 +1,17 @@
 {
   "name": "electron-clash-lite",
   "version": "1.0.0",
-  "main": "dist/main/index.cjs",
+  "main": "dist/electron/main/index.js",
   "author": "草鞋没号 <308487730@qq.com>",
   "license": "MIT",
   "productName": "ClashLite",
   "scripts": {
-    "dev": "node scripts/watch.mjs",
-    "prebuild": "vue-tsc --noEmit --p packages/renderer/tsconfig.json && node scripts/build.mjs",
-    "build": "electron-builder",
     "init": "git config core.hooksPath .git/hooks/ && rm -rf .git/hooks && npx simple-git-hooks",
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build && electron-builder",
+    "build:dir": "vue-tsc --noEmit && vite build && electron-builder --dir",
     "test:e2e": "npx playwright test",
-    "test:e2e:headless": "npx playwright test --headed",
-    "build:dir": "electron-builder --dir"
+    "test:e2e:headless": "npx playwright test --headed"
   },
   "engines": { 
     "node": ">=14.17.0"

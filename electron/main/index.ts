@@ -29,7 +29,7 @@ async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
     webPreferences: {
-      preload: join(__dirname, '../preload/index.cjs'),
+      preload: join(__dirname, '../preload/index.js'),
       // https://www.electronjs.org/zh/docs/latest/tutorial/security#%E9%9A%94%E7%A6%BB%E4%B8%8D%E5%8F%97%E4%BF%A1%E4%BB%BB%E7%9A%84%E5%86%85%E5%AE%B9
       nodeIntegration: false,
       contextIsolation: true,

@@ -125,7 +125,7 @@ import {
 } from 'naive-ui'
 import { Save } from '@vicons/carbon'
 import { ref } from 'vue'
-import type { ClashSettings, AppSetting } from '../../../../share/type/setting'
+import type { ClashSettings, AppSetting } from '../../../packages/share/type'
 
 const clashSettings = ref<ClashSettings>({
   listenProt: 7890,

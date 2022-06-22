@@ -3,5 +3,10 @@
   "compilerOptions": {
     "noEmit": true
   },
-  "include": ["*.*.cjs", "scripts/*.mjs", "packages", "."]
+  "include": [
+    "*.*.cjs", 
+    "*.*.json",
+    "tsconfig.node.json",
+    "tsconfig.json",
+    "./"]
 }
