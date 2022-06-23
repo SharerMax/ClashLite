@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@playwright/test': 1.22.2
-  '@types/js-yaml': ^4.0.5
+  '@types/js-yaml': 4.0.5
   '@typescript-eslint/eslint-plugin': 5.28.0
   '@typescript-eslint/parser': 5.28.0
   '@vicons/carbon': 0.12.0
@@ -15,10 +15,10 @@ specifiers:
   eslint-config-airbnb-base: 15.0.0
   eslint-config-airbnb-typescript: 17.0.0
   eslint-plugin-import: 2.26.0
-  eslint-plugin-json: ^3.1.0
+  eslint-plugin-json: 3.1.0
   eslint-plugin-vue: 9.1.1
-  get-port: ^6.1.2
-  js-yaml: ^4.1.0
+  get-port: 6.1.2
+  js-yaml: 4.1.0
   naive-ui: 2.30.4
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
@@ -2230,6 +2230,7 @@ packages:
 
   /fast-json-stable-stringify/2.1.0:
     resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==}
+    requiresBuild: true
     dev: true
 
   /fast-levenshtein/2.0.6:
@@ -2923,6 +2924,7 @@ packages:
 
   /json-schema-traverse/0.4.1:
     resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
+    requiresBuild: true
     dev: true
 
   /json-stable-stringify-without-jsonify/1.0.1:
@@ -3527,6 +3529,7 @@ packages:
   /punycode/2.1.1:
     resolution: {integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==}
     engines: {node: '>=6'}
+    requiresBuild: true
     dev: true
 
   /pupa/2.1.1:
@@ -4134,6 +4137,7 @@ packages:
 
   /uri-js/4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
+    requiresBuild: true
     dependencies:
       punycode: 2.1.1
     dev: true
