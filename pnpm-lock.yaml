@@ -16,6 +16,8 @@ specifiers:
   eslint-plugin-import: 2.26.0
   eslint-plugin-json: ^3.1.0
   eslint-plugin-vue: 9.1.1
+  get-port: ^6.1.2
+  js-yaml: ^4.1.0
   naive-ui: 2.30.4
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
@@ -46,6 +48,8 @@ devDependencies:
   eslint-plugin-import: 2.26.0_6lykrgsjl6r2vncmjcievjkgyy
   eslint-plugin-json: 3.1.0
   eslint-plugin-vue: 9.1.1_eslint@8.18.0
+  get-port: 6.1.2
+  js-yaml: 4.1.0
   naive-ui: 2.30.4_vue@3.2.37
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
@@ -2367,6 +2371,11 @@ packages:
       function-bind: 1.1.1
       has: 1.0.3
       has-symbols: 1.0.3
+    dev: true
+
+  /get-port/6.1.2:
+    resolution: {integrity: sha512-BrGGraKm2uPqurfGVj/z97/zv8dPleC6x9JBNRTrDNtCkkRF4rPwrQXFgL7+I+q8QSdU4ntLQX2D7KIxSy8nGw==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
   /get-stream/4.1.0:
