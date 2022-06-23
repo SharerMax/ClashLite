@@ -3,6 +3,9 @@ import process from 'process'
 import { ipcMain, app, IpcMainEvent } from 'electron'
 import path from 'path'
 import { ChildProcess, spawn } from 'child_process'
+import { existsSync, writeFileSync } from 'fs'
+import yaml from 'js-yaml'
+import type { BaseClashConfig } from '../../packages/share/type/clash'
 
 let clashProcess: ChildProcess | null = null
 
@@ -10,24 +13,34 @@ function on(api: string, listener: (event: IpcMainEvent, ...arg:any[]) => void) 
   ipcMain.on(`clash:${api}`, listener)
 }
 
-function getBinPath() {
+function getBinDirPath() {
   if (app.isPackaged) {
     return path.join(process.resourcesPath, 'bin')
   }
   return path.join(process.cwd(), 'extra/bin')
 }
 
-function getClashPath() {
-  return path.join(getBinPath(), 'clash.exe')
+function getClashConfigDirPath() {
+  return path.join(getBinDirPath(), 'config')
 }
+
+function getClashDefaultConfigPath() {
+  return path.join(getClashConfigDirPath(), 'config.yaml')
+}
+
+function getClashExecPath() {
+  return path.join(getBinDirPath(), 'clash.exe')
+}
+// 1. check config
+// 2. generate basic config
 
 export function startClash() {
   // console.log(process.resourcesPath)
   // console.log(app.getAppPath())
   // console.log(process.cwd())
-  const clashPath = getClashPath()
+  const clashPath = getClashExecPath()
   console.log(clashPath)
-  clashProcess = spawn(clashPath, ['-d', getBinPath()], {
+  clashProcess = spawn(clashPath, ['-d', getClashConfigDirPath()], {
     stdio: 'inherit',
   })
   clashProcess.on('error', (error) => {
@@ -47,7 +60,28 @@ export function stopClash() {
     clashProcess.kill()
   }
 }
+
+function generateDefaultClashConfig() {
+  const defaultConfig: BaseClashConfig = {
+    mode: 'direct',
+    'mixed-port': 7890,
+    port: 0,
+    'socks-port': 0,
+    'allow-lan': false,
+    'bind-address': '*',
+    'log-level': 'debug',
+    'redir-port': 0,
+    authentication: [],
+  }
+  const yamlContent = yaml.dump(defaultConfig)
+  // TODO: 异常处理
+  writeFileSync(getClashDefaultConfigPath(), yamlContent, { encoding: 'utf-8' })
+}
+
 export function init() {
+  if (!existsSync(getClashDefaultConfigPath())) {
+    generateDefaultClashConfig()
+  }
   on('start', startClash)
   on('stop', stopClash)
 }

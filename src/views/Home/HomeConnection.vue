@@ -77,9 +77,9 @@ import {
   NH2, NButton, NIcon, NList, NListItem, NScrollbar, NTag,
 } from 'naive-ui'
 import { Close, Information } from '@vicons/carbon'
-import { ConnectionsResponse } from '../../../packages/share/type'
+import { Api } from '../../../packages/share/type'
 
-const connections: ConnectionsResponse = {
+const connections: Api.ConnectionsResponse = {
   upload: 123,
   download: 456,
   connections: [
