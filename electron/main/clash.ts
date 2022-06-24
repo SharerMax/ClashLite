@@ -21,6 +21,9 @@ function getBinDirPath() {
 }
 
 function getClashConfigDirPath() {
+  if (process.platform !== 'win32') {
+    return path.join(app.getPath('userData'), 'config')
+  }
   return path.join(getBinDirPath(), 'config')
 }
 
@@ -29,6 +32,9 @@ function getClashDefaultConfigPath() {
 }
 
 function getClashExecPath() {
+  if (process.platform !== 'win32') {
+    return path.join(getBinDirPath(), 'clash')
+  }
   return path.join(getBinDirPath(), 'clash.exe')
 }
 // 1. check config
