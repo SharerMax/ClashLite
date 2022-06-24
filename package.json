@@ -14,7 +14,7 @@
     "test:e2e:headless": "npx playwright test --headed"
   },
   "engines": {
-    "node": ">=14.17.0"
+    "node": ">=16.14.0"
   },
   "packageManager": "pnpm@7.3.0",
   "devDependencies": {

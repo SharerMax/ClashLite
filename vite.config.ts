@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue'
 import electron from 'vite-plugin-electron'
 // import renderer from 'vite-plugin-electron/renderer'
 import Unocss from 'unocss/vite'
+import { builtinModules } from 'module'
 
 rmSync('dist', { recursive: true, force: true }) // v14.14.0
 
@@ -21,7 +22,15 @@ export default defineConfig({
           build: {
             sourcemap: false,
             outDir: 'dist/electron/main',
+            rollupOptions: {
+              external: [
+                'electron',
+                ...builtinModules,
+                ...builtinModules.map(((module) => `node:${module}`)),
+              ],
+            },
           },
+
         },
       },
       preload: {
@@ -34,6 +43,13 @@ export default defineConfig({
             // For debug
             sourcemap: 'inline',
             outDir: 'dist/electron/preload',
+            rollupOptions: {
+              external: [
+                'electron',
+                ...builtinModules,
+                ...builtinModules.map(((module) => `node:${module}`)),
+              ],
+            },
           },
         },
       },

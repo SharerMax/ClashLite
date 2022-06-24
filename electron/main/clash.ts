@@ -5,6 +5,8 @@ import path from 'path'
 import { ChildProcess, spawn } from 'child_process'
 import { existsSync, writeFileSync } from 'fs'
 import yaml from 'js-yaml'
+import getPort, { portNumbers } from 'get-port'
+
 import type { BaseClashConfig } from '../../packages/share/type/clash'
 
 let clashProcess: ChildProcess | null = null
@@ -46,17 +48,25 @@ export function startClash() {
   // console.log(process.cwd())
   const clashPath = getClashExecPath()
   console.log(clashPath)
-  clashProcess = spawn(clashPath, ['-d', getClashConfigDirPath()], {
-    stdio: 'inherit',
-  })
-  clashProcess.on('error', (error) => {
-    console.error(error)
-  })
-  clashProcess.on('close', (code, signal) => {
-    console.log('close', code, signal)
-  })
-  clashProcess.once('exit', (code, signal) => {
-    console.log('close', code, signal)
+  getPort({
+    port: portNumbers(1080, 65535),
+    exclude: portNumbers(7890, 7890),
+  }).then((portNumber) => {
+    const extCtl = `127.0.0.1:${portNumber}`
+
+    console.log(extCtl)
+    clashProcess = spawn(clashPath, ['-d', getClashConfigDirPath(), '-ext-ctl', extCtl], {
+      stdio: 'inherit',
+    })
+    clashProcess.on('error', (error) => {
+      console.error(error)
+    })
+    clashProcess.on('close', (code, signal) => {
+      console.log('close', code, signal)
+    })
+    clashProcess.once('exit', (code, signal) => {
+      console.log('close', code, signal)
+    })
   })
 }
 
