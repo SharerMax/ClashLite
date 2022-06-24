@@ -2,7 +2,7 @@
   "name": "electron-clash-lite",
   "version": "1.0.0",
   "main": "dist/electron/main/index.js",
-  "author": "草鞋没号 <308487730@qq.com>",
+  "author": "SharerMax",
   "license": "MIT",
   "productName": "ClashLite",
   "scripts": {
@@ -16,6 +16,7 @@
   "engines": {
     "node": ">=14.17.0"
   },
+  "packageManager": "pnpm@7.3.0",
   "devDependencies": {
     "@playwright/test": "1.22.2",
     "@types/js-yaml": "4.0.5",
