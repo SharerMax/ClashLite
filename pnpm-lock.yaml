@@ -8,7 +8,7 @@ specifiers:
   '@vicons/carbon': 0.12.0
   '@vitejs/plugin-vue': 2.3.3
   chart.js: 3.8.0
-  electron: 19.0.4
+  electron: 19.0.6
   electron-builder: 23.1.0
   electron-devtools-installer: 3.2.0
   eslint: 8.18.0
@@ -41,7 +41,7 @@ devDependencies:
   '@vicons/carbon': 0.12.0
   '@vitejs/plugin-vue': 2.3.3_vite@2.9.12+vue@3.2.37
   chart.js: 3.8.0
-  electron: 19.0.4
+  electron: 19.0.6
   electron-builder: 23.1.0
   electron-devtools-installer: 3.2.0
   eslint: 8.18.0
@@ -1630,8 +1630,8 @@ packages:
       - supports-color
     dev: true
 
-  /electron/19.0.4:
-    resolution: {integrity: sha512-roRYr1VNAWIhjD9n8qZdmhROtrzsFpuZEXrjWAw+GqPbZlrUInmvFCviRDC2Lt+VBsTNRpTfPpfzXSlLL4reEw==}
+  /electron/19.0.6:
+    resolution: {integrity: sha512-S9Yud32nKhB0iWC0lGl2JXz4FQnCiLCnP5Vehm1/CqyeICcQGmgQaZl2HYpCJ2pesKIsYL9nsgmku/10cxm/gg==}
     engines: {node: '>= 8.6'}
     hasBin: true
     requiresBuild: true
@@ -4072,7 +4072,7 @@ packages:
     dev: true
 
   /typedarray/0.0.6:
-    resolution: {integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=}
+    resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
     dev: true
 
   /typescript/4.7.4:
@@ -4189,7 +4189,7 @@ packages:
     dev: true
 
   /url-parse-lax/3.0.0:
-    resolution: {integrity: sha1-FrXK/Afb42dsGxmZF3gj1lA6yww=}
+    resolution: {integrity: sha512-NjFKA0DidqPa5ciFcSrXnAltTtzz84ogy+NebPvfEgAck0+TNg4UJ4IN+fB7zRZfbgUf0syOo9MDxFkDSMuFaQ==}
     engines: {node: '>=4'}
     dependencies:
       prepend-http: 2.0.0
@@ -4483,7 +4483,7 @@ packages:
     dev: true
 
   /yauzl/2.10.0:
-    resolution: {integrity: sha1-x+sXyT4RLLEIb6bY5R+wZnt5pfk=}
+    resolution: {integrity: sha512-p4a9I6X6nu6IhoGmBqAcbJy1mlC4j27vEPZX9F4L4/vZT3Lyq1VkFHw/V/PUcB9Buo+DG3iHkT0x3Qya58zc3g==}
     dependencies:
       buffer-crc32: 0.2.13
       fd-slicer: 1.1.0
