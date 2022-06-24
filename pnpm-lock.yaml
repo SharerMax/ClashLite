@@ -19,7 +19,7 @@ specifiers:
   eslint-plugin-vue: 9.1.1
   get-port: 6.1.2
   js-yaml: 4.1.0
-  naive-ui: 2.30.4
+  naive-ui: 2.30.6
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.4
@@ -52,7 +52,7 @@ devDependencies:
   eslint-plugin-vue: 9.1.1_eslint@8.18.0
   get-port: 6.1.2
   js-yaml: 4.1.0
-  naive-ui: 2.30.4_vue@3.2.37
+  naive-ui: 2.30.6_vue@3.2.37
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.4
@@ -3184,8 +3184,8 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /naive-ui/2.30.4_vue@3.2.37:
-    resolution: {integrity: sha512-xf9Re46gfy8U/P71ON3hIEgr9ag0ffmthnzU4O7RHRhdzXkfN1KuDQZsBsDY34nl9ycAy1wnem3ob4tqBAChOA==}
+  /naive-ui/2.30.6_vue@3.2.37:
+    resolution: {integrity: sha512-QawTYvC+V9zc2hCl5dKgTowiAfCh+GBTdOp8Kswd4bx+o2rdtxrH83tZeFoABsxh3nOx4AL3r/DWfIVdoBqi1A==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
@@ -3206,7 +3206,7 @@ packages:
       vdirs: 0.1.8_vue@3.2.37
       vooks: 0.2.12_vue@3.2.37
       vue: 3.2.37
-      vueuc: 0.4.44_vue@3.2.37
+      vueuc: 0.4.45_vue@3.2.37
     dev: true
 
   /nano-staged/0.8.0:
@@ -4315,8 +4315,8 @@ packages:
       '@vue/shared': 3.2.37
     dev: true
 
-  /vueuc/0.4.44_vue@3.2.37:
-    resolution: {integrity: sha512-2sLWo1Ow3DRKTDvGVlaWlf0KL+LOqeO6zlvb6nUxWxqj4VjUpg7sMtH+xtvBK+oOXH4goGt1RyLMaBVgPFpqHw==}
+  /vueuc/0.4.45_vue@3.2.37:
+    resolution: {integrity: sha512-TdiDHn9TkJyStKJYzGGiZlekasdoYTial47UAMwQ5fuVp/5GAeJKvFk4UMtSrDfECsNncfNJ6TNveVBAq+IvrQ==}
     peerDependencies:
       vue: ^3.0.11
     dependencies:
