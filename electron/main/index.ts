@@ -4,8 +4,7 @@ import {
 import { release } from 'os'
 import { join } from 'path'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-import clash from './clash'
-
+import clash from '@/main/clash'
 // const APP_USER_MODEL_ID = 'com.saeratom.clashlite'
 
 // Disable GPU Acceleration for Windows 7

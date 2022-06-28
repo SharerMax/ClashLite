@@ -42,6 +42,16 @@ module.exports = {
     '@typescript-eslint/no-unused-expressions': [
       'error', { allowShortCircuit: true, allowTernary: true },
     ],
+    'import/extensions': [
+      'error', 'never',
+      {
+        ignorePackages: true,
+        pattern: {
+          json: 'always',
+          vue: 'always',
+        },
+      },
+    ],
     // 'no-unused-expressions': ['error', { allowShortCircuit: true, allowTernary: true }],
   },
 }

@@ -6,6 +6,7 @@ import electron from 'vite-plugin-electron'
 // import renderer from 'vite-plugin-electron/renderer'
 import Unocss from 'unocss/vite'
 import { builtinModules } from 'module'
+import { fileURLToPath } from 'url'
 
 rmSync('dist', { recursive: true, force: true }) // v14.14.0
 
@@ -30,7 +31,12 @@ export default defineConfig({
               ],
             },
           },
-
+          resolve: {
+            alias: {
+              '@/main': fileURLToPath(new URL('./electron/main', import.meta.url)),
+              '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
+            },
+          },
         },
       },
       preload: {
@@ -51,12 +57,24 @@ export default defineConfig({
               ],
             },
           },
+          resolve: {
+            alias: {
+              '@/preload': fileURLToPath(new URL('./electron/preload', import.meta.url)),
+              '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
+            },
+          },
         },
       },
     }),
     // Enable use Electron, Node.js API in Renderer-process
     // renderer(),
   ],
+  resolve: {
+    alias: {
+      '@/render': fileURLToPath(new URL('./src', import.meta.url)),
+      '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
+    },
+  },
   build: {
     outDir: 'dist/electron/renderer',
   },
