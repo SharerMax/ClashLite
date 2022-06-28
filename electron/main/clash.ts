@@ -7,7 +7,7 @@ import { existsSync, writeFileSync } from 'fs'
 import yaml from 'js-yaml'
 import getPort, { portNumbers } from 'get-port'
 
-import type { BaseClashConfig } from '../../packages/share/type/clash'
+import type { BaseClashConfig, ClashStartInfo } from '../../packages/share/type/clash'
 
 let clashProcess: ChildProcess | null = null
 
@@ -59,7 +59,7 @@ export async function startClash() {
   return getPort({
     port: portNumbers(3000, 65535),
     exclude: [7890],
-  }).then((portNumber) => new Promise<boolean>((resolve) => {
+  }).then((portNumber) => new Promise<ClashStartInfo>((resolve, reject) => {
     const extCtl = `127.0.0.1:${portNumber}`
 
     console.log(extCtl)
@@ -68,13 +68,16 @@ export async function startClash() {
     })
     clashProcess.on('error', (error) => {
       console.error(error)
-      resolve(false)
+      reject(new Error(error.message))
     })
     clashProcess.once('exit', (code, signal) => {
       console.log('exit', code, signal)
     })
     clashProcess.once('spawn', () => {
-      resolve(true)
+      resolve({
+        controllerUrl: `http://${extCtl}`,
+        apiSecret: '',
+      })
     })
   }))
 }

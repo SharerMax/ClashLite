@@ -14,6 +14,11 @@ export interface BaseClashConfig {
   'log-level': 'info' | 'warning ' | 'error' | 'debug' | 'silent'
 }
 
+export type ClashStartInfo = {
+  controllerUrl: string,
+  apiSecret: string
+}
+
 export namespace Api {
   export interface Connection {
     id: string;
