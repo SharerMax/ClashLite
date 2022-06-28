@@ -22,6 +22,7 @@
                 <label class="w-24 inline-block">运行状态：</label>
                 <n-switch
                   size="medium"
+                  :loading="clashProcessLoading"
                   @update:value="handleClashRunChange"
                 >
                   <template #checked>
@@ -139,9 +140,12 @@ import {
 import type { TChartData } from 'vue-chartjs/dist/types'
 import TrafficChart from '../../components/TrafficChart.vue'
 
-function handleClashRunChange(value: boolean) {
+const clashProcessLoading = ref(false)
+
+async function handleClashRunChange(value: boolean) {
   if (value) {
-    window.clash.start()
+    clashProcessLoading.value = true
+    clashProcessLoading.value = !await window.clash.start()
   } else {
     window.clash.stop()
   }

@@ -9,7 +9,7 @@ const { appendLoading, removeLoading } = useLoading()
 contextBridge.exposeInMainWorld('removeLoading', removeLoading)
 contextBridge.exposeInMainWorld('copyTextToClipboard', copyTextToClipboard)
 contextBridge.exposeInMainWorld('clash', {
-  start: () => ipcRenderer.send('clash:start'),
+  start: () => ipcRenderer.invoke('clash:start') as Promise<boolean>,
   stop: () => ipcRenderer.send('clash:stop'),
 })
 

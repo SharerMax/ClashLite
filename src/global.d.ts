@@ -5,7 +5,7 @@ declare global {
     removeLoading: () => void
     copyTextToClipboard(text: string): void
     clash: {
-      start: ()=>void
+      start: ()=> Promise<boolean>
       stop:() => void
     }
   }

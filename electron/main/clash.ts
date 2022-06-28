@@ -11,8 +11,16 @@ import type { BaseClashConfig } from '../../packages/share/type/clash'
 
 let clashProcess: ChildProcess | null = null
 
-function on(api: string, listener: (event: IpcMainEvent, ...arg:any[]) => void) {
+type EventName = 'start' | 'stop'
+
+export type ClashEventName = `clash:${EventName}`
+
+function on(api: EventName, listener: (event: IpcMainEvent, ...arg:any[]) => void) {
   ipcMain.on(`clash:${api}`, listener)
+}
+
+function handle<T>(api: EventName, listener: (event: IpcMainEvent, ...arg:any[]) => T) {
+  ipcMain.handle(`clash:${api}`, listener)
 }
 
 function getBinDirPath() {
@@ -42,16 +50,16 @@ function getClashExecPath() {
 // 1. check config
 // 2. generate basic config
 
-export function startClash() {
+export async function startClash() {
   // console.log(process.resourcesPath)
   // console.log(app.getAppPath())
   // console.log(process.cwd())
   const clashPath = getClashExecPath()
   console.log(clashPath)
-  getPort({
-    port: portNumbers(1080, 65535),
-    exclude: portNumbers(7890, 7890),
-  }).then((portNumber) => {
+  return getPort({
+    port: portNumbers(3000, 65535),
+    exclude: [7890],
+  }).then((portNumber) => new Promise<boolean>((resolve) => {
     const extCtl = `127.0.0.1:${portNumber}`
 
     console.log(extCtl)
@@ -60,14 +68,15 @@ export function startClash() {
     })
     clashProcess.on('error', (error) => {
       console.error(error)
-    })
-    clashProcess.on('close', (code, signal) => {
-      console.log('close', code, signal)
+      resolve(false)
     })
     clashProcess.once('exit', (code, signal) => {
-      console.log('close', code, signal)
+      console.log('exit', code, signal)
     })
-  })
+    clashProcess.once('spawn', () => {
+      resolve(true)
+    })
+  }))
 }
 
 export function stopClash() {
@@ -98,7 +107,7 @@ export function init() {
   if (!existsSync(getClashDefaultConfigPath())) {
     generateDefaultClashConfig()
   }
-  on('start', startClash)
+  handle('start', startClash)
   on('stop', stopClash)
 }
 
