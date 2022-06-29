@@ -61,18 +61,18 @@
     </n-list>
   </div>
   <n-modal
+    v-model:show="showEditProxySub"
     class="w-100"
     preset="card"
     closable
     title="新增订阅"
-    v-model:show="showEditProxySub"
     size="small"
   >
     <n-form
+      ref="proxySubForm"
       label-placement="left"
       size="small"
       :rules="proxySubFormRules"
-      ref="proxySubForm"
       :model="subProxyData"
     >
       <n-form-item
@@ -80,8 +80,8 @@
         path="url"
       >
         <n-input
-          placeholder="订阅地址"
           v-model:value="subProxyData.url"
+          placeholder="订阅地址"
         />
       </n-form-item>
       <n-form-item
@@ -149,11 +149,12 @@
 </template>
 
 <script setup lang="ts">
+import type { FormInst, FormRules } from 'naive-ui'
 import {
-  NH2, NList, NListItem, NTag, NIcon, NButton, NModal, NForm, NFormItem, NInput,
-  NRadioGroup, NRadioButton, NInputNumber, FormRules, FormInst,
+  NButton, NForm, NFormItem, NH2, NIcon, NInput, NInputNumber, NList, NListItem, NModal,
+  NRadioButton, NRadioGroup, NTag,
 } from 'naive-ui'
-import { Edit, View, Add } from '@vicons/carbon'
+import { Add, Edit, View } from '@vicons/carbon'
 import { ref } from 'vue'
 
 const showEditProxySub = ref(false)
@@ -164,9 +165,8 @@ function handleAddProxySubButtonClick() {
 const proxySubForm = ref<null | FormInst>(null)
 function handleProxySubSaveButtonClick() {
   proxySubForm.value?.validate((errors) => {
-    if (!errors) {
+    if (!errors)
       showEditProxySub.value = false
-    }
   })
 }
 
@@ -198,7 +198,6 @@ const proxySubFormRules: FormRules = {
     trigger: 'input',
   },
 }
-
 </script>
 
 <style scoped>

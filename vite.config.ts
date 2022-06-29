@@ -1,12 +1,12 @@
 import { rmSync } from 'fs'
 import { join } from 'path'
+import { builtinModules } from 'module'
+import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import electron from 'vite-plugin-electron'
 // import renderer from 'vite-plugin-electron/renderer'
 import Unocss from 'unocss/vite'
-import { builtinModules } from 'module'
-import { fileURLToPath } from 'url'
 
 rmSync('dist', { recursive: true, force: true }) // v14.14.0
 
@@ -27,7 +27,7 @@ export default defineConfig({
               external: [
                 'electron',
                 ...builtinModules,
-                ...builtinModules.map(((module) => `node:${module}`)),
+                ...builtinModules.map(module => `node:${module}`),
               ],
             },
           },
@@ -53,7 +53,7 @@ export default defineConfig({
               external: [
                 'electron',
                 ...builtinModules,
-                ...builtinModules.map(((module) => `node:${module}`)),
+                ...builtinModules.map(module => `node:${module}`),
               ],
             },
           },

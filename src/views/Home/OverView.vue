@@ -38,8 +38,8 @@
                 <n-radio-group
                   default-value="direct"
                   :value="activatedRunMode"
-                  @update:value="handleRunModeChange"
                   size="small"
+                  @update:value="handleRunModeChange"
                 >
                   <n-radio-button
                     v-for="(model, index) in runModels"
@@ -130,12 +130,12 @@
 
 <script setup lang="ts">
 import {
-  NIcon, NCard, NSwitch, NText, NSpace, NButton, NGrid, NGridItem,
-  useMessage, NEmpty, NRadioGroup, NRadioButton, NScrollbar,
+  NButton, NCard, NEmpty, NGrid, NGridItem, NIcon, NRadioButton, NRadioGroup,
+  NScrollbar, NSpace, NSwitch, NText, useMessage,
 } from 'naive-ui'
 import { Copy } from '@vicons/carbon'
 import {
-  ref, onMounted, onUnmounted, computed,
+  computed, onMounted, onUnmounted, ref,
 } from 'vue'
 import type { TChartData } from 'vue-chartjs/dist/types'
 import TrafficChart from '../../components/TrafficChart.vue'
@@ -146,7 +146,8 @@ async function handleClashRunChange(value: boolean) {
   if (value) {
     clashProcessLoading.value = true
     clashProcessLoading.value = !await window.clash.start()
-  } else {
+  }
+  else {
     window.clash.stop()
   }
 }
@@ -157,8 +158,8 @@ function handleClipboardCopy(text: string) {
   message.success('Copy Success')
 }
 
-type RunMode = {
-  label: string,
+interface RunMode {
+  label: string
   value: 'direct' | 'rule' | 'global'
 }
 
@@ -182,9 +183,9 @@ function handleRunModeChange(mode: RunMode['value']) {
 
 const generateLabels = () => {
   const labels = Array(60).fill('0')
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 60; i++)
     labels[i] = (i + 1).toString()
-  }
+
   return labels
 }
 
@@ -228,7 +229,6 @@ const chartData = computed <TChartData<'line'>>(() => ({
 //   }],
 //   labels: generateLabels(),
 // }
-
 </script>
 
 <style scoped>

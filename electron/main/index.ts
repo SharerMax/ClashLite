@@ -1,23 +1,25 @@
-import {
-  app, BrowserWindow, shell, session,
-} from 'electron'
 import { release } from 'os'
 import { join } from 'path'
+import {
+  BrowserWindow, app, session, shell,
+} from 'electron'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import clash from '@/main/clash'
 // const APP_USER_MODEL_ID = 'com.saeratom.clashlite'
 
 // Disable GPU Acceleration for Windows 7
-if (release().startsWith('6.1')) app.disableHardwareAcceleration()
+if (release().startsWith('6.1'))
+  app.disableHardwareAcceleration()
 
 // Set application name for Windows 10+ notifications
-if (process.platform === 'win32') app.setAppUserModelId(app.getName())
+if (process.platform === 'win32')
+  app.setAppUserModelId(app.getName())
 
 if (!app.requestSingleInstanceLock()) {
   app.quit()
   process.exit(0)
 }
-// eslint-disable-next-line @typescript-eslint/dot-notation
+
 // process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true'
 
 // app.setAppUserModelId(APP_USER_MODEL_ID)
@@ -49,12 +51,13 @@ async function createWindow() {
   // Menu.setApplicationMenu(null)
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../renderer/index.html'))
-  } else {
+  }
+  else {
     // 🚧 Use ['ENV_NAME'] avoid vite:define plugin 对比
     // console.dir(process.env.VITE_DEV_SERVER_HOST)
     // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
-    // eslint-disable-next-line @typescript-eslint/dot-notation
-    const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`
+
+    const url = `http://${process.env.VITE_DEV_SERVER_HOST}:${process.env.VITE_DEV_SERVER_PORT}`
     win.loadURL(url)
   }
 
@@ -65,7 +68,8 @@ async function createWindow() {
 
   // Make all links open with the browser, not with the application
   win.webContents.setWindowOpenHandler(({ url }) => {
-    if (url.startsWith('https:')) shell.openExternal(url)
+    if (url.startsWith('https:'))
+      shell.openExternal(url)
     return { action: 'deny' }
   })
   clash.init()
@@ -79,29 +83,31 @@ app.whenReady().then(() => {
       proxyRules: 'socks5://127.0.0.1:7890',
     })
     installExtension(VUEJS_DEVTOOLS.id)
-      .then((name) => console.log(`Added Extension:  ${name}`))
-      .catch((err) => console.log('An error occurred: ', err))
+      .then(name => console.log(`Added Extension:  ${name}`))
+      .catch(err => console.log('An error occurred: ', err))
   }
 })
 
 app.on('window-all-closed', () => {
   win = null
-  if (process.platform !== 'darwin') app.quit()
+  if (process.platform !== 'darwin')
+    app.quit()
 })
 
 app.on('second-instance', () => {
   if (win) {
     // Focus on the main window if the user tried to open another
-    if (win.isMinimized()) win.restore()
+    if (win.isMinimized())
+      win.restore()
     win.focus()
   }
 })
 
 app.on('activate', () => {
   const allWindows = BrowserWindow.getAllWindows()
-  if (allWindows.length) {
+  if (allWindows.length)
     allWindows[0].focus()
-  } else {
+
+  else
     createWindow()
-  }
 })

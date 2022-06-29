@@ -5,7 +5,8 @@ const baseUrl = 'http://127.0.0.1:3001'
 const instance = axios.create({
   baseURL: baseUrl,
   headers: {
-    Authorization: `Bearer ${secret}`,
+    'Authorization': `Bearer ${secret}`,
+    'Content-Type': 'application/json',
   },
 })
 export default instance
