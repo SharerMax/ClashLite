@@ -1,3 +1,7 @@
+/**
+ * Only for RenderProcess. Expose Api to render process
+ * Note: must use this preload
+ */
 import { Expose } from '.'
 
 export {}

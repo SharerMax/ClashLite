@@ -1,6 +1,11 @@
 import axios from 'axios'
 
+const secret = '123456789'
+const baseUrl = 'http://127.0.0.1:3001'
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:3001',
+  baseURL: baseUrl,
+  headers: {
+    Authorization: `Bearer ${secret}`,
+  },
 })
 export default instance

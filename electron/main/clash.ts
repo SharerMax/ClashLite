@@ -3,7 +3,7 @@ import process from 'process'
 import { ipcMain, app, IpcMainEvent } from 'electron'
 import path from 'path'
 import { ChildProcess, spawn } from 'child_process'
-import { existsSync, writeFileSync } from 'fs'
+import { existsSync, writeFileSync, mkdirSync } from 'fs'
 import yaml from 'js-yaml'
 import getPort, { portNumbers } from 'get-port'
 
@@ -102,11 +102,17 @@ function generateDefaultClashConfig() {
     authentication: [],
   }
   const yamlContent = yaml.dump(defaultConfig)
+  const configDirPath = getClashConfigDirPath()
+  if (!existsSync(configDirPath)) {
+    console.log('--', configDirPath)
+    mkdirSync(configDirPath)
+  }
   // TODO: 异常处理
   writeFileSync(getClashDefaultConfigPath(), yamlContent, { encoding: 'utf-8' })
 }
 
 export function init() {
+  console.log('config dir: ', getClashDefaultConfigPath())
   if (!existsSync(getClashDefaultConfigPath())) {
     generateDefaultClashConfig()
   }

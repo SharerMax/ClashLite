@@ -45,6 +45,8 @@ async function createWindow() {
   })
   // nativeTheme.themeSource = 'light'
   win.setMenuBarVisibility(false)
+  win.setMenu(null)
+  // Menu.setApplicationMenu(null)
   if (app.isPackaged) {
     win.loadFile(join(__dirname, '../renderer/index.html'))
   } else {
