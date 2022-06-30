@@ -10,20 +10,19 @@
 <script setup lang="ts">
 import { Line } from 'vue-chartjs'
 import {
-  Chart, LineElement, CategoryScale, LinearScale, PointElement,
+  CategoryScale, Chart, LineElement, LinearScale, PointElement,
 } from 'chart.js'
 import type { TChartData, TChartOptions } from 'vue-chartjs/dist/types'
 import { useThemeVars } from 'naive-ui'
 
+defineProps<Prop>()
 Chart.register(LineElement, CategoryScale, LinearScale, PointElement)
 interface Prop {
   chartData: TChartData<'line'>
 }
-defineProps<Prop>()
-
 const themeVars = useThemeVars()
 console.log(themeVars.value)
-const chartOptions:TChartOptions<'line'> = {
+const chartOptions: TChartOptions<'line'> = {
   responsive: true,
   maintainAspectRatio: false,
   backgroundColor: 'blue',
@@ -48,7 +47,6 @@ const chartOptions:TChartOptions<'line'> = {
   },
 
 }
-
 </script>
 
 <style scoped>

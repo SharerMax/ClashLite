@@ -1,9 +1,11 @@
 // import { spawn } from 'node:child_process'
 import process from 'process'
-import { ipcMain, app, IpcMainEvent } from 'electron'
 import path from 'path'
-import { ChildProcess, spawn } from 'child_process'
-import { existsSync, writeFileSync, mkdirSync } from 'fs'
+import type { ChildProcess } from 'child_process'
+import { spawn } from 'child_process'
+import { existsSync, mkdirSync, writeFileSync } from 'fs'
+import { app, ipcMain } from 'electron'
+import type { IpcMainEvent } from 'electron'
 import yaml from 'js-yaml'
 import getPort, { portNumbers } from 'get-port'
 
@@ -15,25 +17,25 @@ type EventName = 'start' | 'stop'
 
 export type ClashEventName = `clash:${EventName}`
 
-function on(api: EventName, listener: (event: IpcMainEvent, ...arg:any[]) => void) {
+function on(api: EventName, listener: (event: IpcMainEvent, ...arg: any[]) => void) {
   ipcMain.on(`clash:${api}`, listener)
 }
 
-function handle<T>(api: EventName, listener: (event: IpcMainEvent, ...arg:any[]) => T) {
+function handle<T>(api: EventName, listener: (event: IpcMainEvent, ...arg: any[]) => T) {
   ipcMain.handle(`clash:${api}`, listener)
 }
 
 function getBinDirPath() {
-  if (app.isPackaged) {
+  if (app.isPackaged)
     return path.join(process.resourcesPath, 'bin')
-  }
+
   return path.join(process.cwd(), 'extra/bin')
 }
 
 function getClashConfigDirPath() {
-  if (process.platform !== 'win32') {
+  if (process.platform !== 'win32')
     return path.join(app.getPath('userData'), 'config')
-  }
+
   return path.join(getBinDirPath(), 'config')
 }
 
@@ -42,9 +44,9 @@ function getClashDefaultConfigPath() {
 }
 
 function getClashExecPath() {
-  if (process.platform !== 'win32') {
+  if (process.platform !== 'win32')
     return path.join(getBinDirPath(), 'clash')
-  }
+
   return path.join(getBinDirPath(), 'clash.exe')
 }
 // 1. check config
@@ -59,7 +61,7 @@ export async function startClash() {
   return getPort({
     port: portNumbers(3000, 65535),
     exclude: [7890],
-  }).then((portNumber) => new Promise<ClashStartInfo>((resolve, reject) => {
+  }).then(portNumber => new Promise<ClashStartInfo>((resolve, reject) => {
     const extCtl = `127.0.0.1:${portNumber}`
 
     console.log(extCtl)
@@ -84,22 +86,21 @@ export async function startClash() {
 
 export function stopClash() {
   console.log('stop clash')
-  if (clashProcess) {
+  if (clashProcess)
     clashProcess.kill()
-  }
 }
 
 function generateDefaultClashConfig() {
   const defaultConfig: BaseClashConfig = {
-    mode: 'direct',
+    'mode': 'direct',
     'mixed-port': 7890,
-    port: 0,
+    'port': 0,
     'socks-port': 0,
     'allow-lan': false,
     'bind-address': '*',
     'log-level': 'debug',
     'redir-port': 0,
-    authentication: [],
+    'authentication': [],
   }
   const yamlContent = yaml.dump(defaultConfig)
   const configDirPath = getClashConfigDirPath()
@@ -113,9 +114,9 @@ function generateDefaultClashConfig() {
 
 export function init() {
   console.log('config dir: ', getClashDefaultConfigPath())
-  if (!existsSync(getClashDefaultConfigPath())) {
+  if (!existsSync(getClashDefaultConfigPath()))
     generateDefaultClashConfig()
-  }
+
   handle('start', startClash)
   on('stop', stopClash)
 }

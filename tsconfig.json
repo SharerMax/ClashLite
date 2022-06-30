@@ -1,24 +1,24 @@
 {
- "extends": "./tsconfig.base.json",
- "compilerOptions": {
-  "baseUrl": "./",
-  "paths": {
-    "@/main/*": ["electron/main/*"],
-    "@/share/*": ["packages/share/*"],
-    "@/preload/*": ["electron/preload/*"],
-    "@/render/*": ["src/*"]
-  }
- },
- "include": [
-  "src/**/*.ts", 
-  "src/**/*.d.ts", 
-  "src/**/*.tsx", 
-  "src/**/*.vue",
-  "packages/**/*.ts",
-  "packages/**/*.d.ts",
-  "packages/**/*.tsx"
-],
- "references": [{
-  "path": "./tsconfig.node.json"
- }]
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/main/*": ["electron/main/*"],
+      "@/share/*": ["packages/share/*"],
+      "@/preload/*": ["electron/preload/*"],
+      "@/render/*": ["src/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "packages/**/*.ts",
+    "packages/**/*.d.ts",
+    "packages/**/*.tsx"
+  ],
+  "references": [{
+    "path": "./tsconfig.node.json"
+  }]
 }

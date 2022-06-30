@@ -57,11 +57,11 @@
 </template>
 
 <script setup lang="ts">
-import { NButton, NSpace, NIcon } from 'naive-ui'
+import { NButton, NIcon, NSpace } from 'naive-ui'
 import {
-  Dashboard, ServerProxy, Document, Settings,
+  Dashboard, Document, ServerProxy, Settings,
 } from '@vicons/carbon'
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 
 type NavItemType = 'overView' | 'proxy' | 'log' | 'setting'
 

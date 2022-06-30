@@ -11,7 +11,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "sourceMap": true, 
+    "sourceMap": true,
     "strict": true,
     "target": "ESNext",
     "useDefineForClassFields": true

@@ -74,10 +74,10 @@
 
 <script setup lang="ts">
 import {
-  NH2, NButton, NIcon, NList, NListItem, NScrollbar, NTag,
+  NButton, NH2, NIcon, NList, NListItem, NScrollbar, NTag,
 } from 'naive-ui'
 import { Close, Information } from '@vicons/carbon'
-import { Api } from '../../../packages/share/type'
+import type { Api } from '../../../packages/share/type'
 
 const connections: Api.ConnectionsResponse = {
   upload: 123,

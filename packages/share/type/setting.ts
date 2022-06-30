@@ -1,11 +1,11 @@
-export type AppSetting = {
-  autoStartClash: boolean,
-  autoStartApp: boolean,
+export interface AppSetting {
+  autoStartClash: boolean
+  autoStartApp: boolean
   themeStyle: 'dark' | 'light' | 'system'
 }
-export type ClashSettings = {
-  listenProt: number,
-  listenType: 'http' | 'socks5' | 'mixed',
-  allowLan: boolean,
+export interface ClashSettings {
+  listenProt: number
+  listenType: 'http' | 'socks5' | 'mixed'
+  allowLan: boolean
   autoStart: boolean
 }

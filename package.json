@@ -1,10 +1,21 @@
 {
   "name": "electron-clash-lite",
   "version": "1.0.0",
-  "main": "dist/electron/main/index.js",
+  "packageManager": "pnpm@7.4.0",
   "author": "SharerMax",
   "license": "MIT",
+  "keywords": [
+    "electron",
+    "rollup",
+    "vite",
+    "vue3",
+    "vue"
+  ],
+  "main": "dist/electron/main/index.js",
   "productName": "ClashLite",
+  "engines": {
+    "node": ">=16.14.0"
+  },
   "scripts": {
     "init": "git config core.hooksPath .git/hooks/ && rm -rf .git/hooks && npx simple-git-hooks",
     "dev": "vite",
@@ -13,10 +24,6 @@
     "test:e2e": "npx playwright test",
     "test:e2e:headless": "npx playwright test --headed"
   },
-  "engines": {
-    "node": ">=16.14.0"
-  },
-  "packageManager": "pnpm@7.4.0",
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
     "@playwright/test": "1.23.0",
@@ -51,12 +58,5 @@
   "env": {
     "VITE_DEV_SERVER_HOST": "127.0.0.1",
     "VITE_DEV_SERVER_PORT": 3344
-  },
-  "keywords": [
-    "electron",
-    "rollup",
-    "vite",
-    "vue3",
-    "vue"
-  ]
+  }
 }

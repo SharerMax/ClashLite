@@ -32,18 +32,18 @@
 
 <script setup lang="ts">
 import {
-  NH2, NButton, NIcon, NLog, NCard, NScrollbar,
+  NButton, NCard, NH2, NIcon, NLog, NScrollbar,
 } from 'naive-ui'
 import { Clean } from '@vicons/carbon'
-import { ref, computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const logRowNum = ref(500)
 
 function generateLog(row: number) {
   const l: string[] = []
-  for (let i = 0; i < row; ++i) {
+  for (let i = 0; i < row; ++i)
     l.push(Math.random().toString(16))
-  }
+
   return `${l.join('\n')}\n`
 }
 const log = computed(() => generateLog(logRowNum.value))

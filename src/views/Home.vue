@@ -26,13 +26,12 @@
 import {
   NIcon, NLayout, NLayoutSider, NMenu,
 } from 'naive-ui'
-import {
-  Component, defineComponent, h, ref, watchEffect,
-} from 'vue'
+import type { Component } from 'vue'
+import { defineComponent, h, ref, watchEffect } from 'vue'
 
 import type { MenuOption } from 'naive-ui'
 import {
-  Dashboard, ServerProxy, Document, Settings, Rule, Connect,
+  Connect, Dashboard, Document, Rule, ServerProxy, Settings,
 } from '@vicons/carbon'
 
 import { RouterLink, useRoute } from 'vue-router'
@@ -139,6 +138,7 @@ watchEffect(() => {
   }
 })
 </script>
+
 <script lang="ts">
 export default defineComponent({
   name: 'AppHome',

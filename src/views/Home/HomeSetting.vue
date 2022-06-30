@@ -119,13 +119,14 @@
 </template>
 
 <script setup lang="ts">
+import type { FormRules } from 'naive-ui'
 import {
-  NH2, NButton, NIcon, NCard, NForm, NFormItem, NInputNumber, NRadioGroup, NRadioButton, FormRules,
-  NSwitch, NScrollbar,
+  NButton, NCard, NForm, NFormItem, NH2, NIcon, NInputNumber, NRadioButton, NRadioGroup,
+  NScrollbar, NSwitch,
 } from 'naive-ui'
 import { Save } from '@vicons/carbon'
 import { ref } from 'vue'
-import type { ClashSettings, AppSetting } from '../../../packages/share/type'
+import type { AppSetting, ClashSettings } from '../../../packages/share/type'
 
 const clashSettings = ref<ClashSettings>({
   listenProt: 7890,
@@ -159,7 +160,6 @@ const appSetting = ref<AppSetting>({
   autoStartClash: true,
   themeStyle: 'dark',
 })
-
 </script>
 
 <style scoped>

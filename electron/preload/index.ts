@@ -1,7 +1,7 @@
-import { contextBridge, clipboard, ipcRenderer } from 'electron'
+import { clipboard, contextBridge, ipcRenderer } from 'electron'
+import type { ClashStartInfo } from '../../packages/share/type'
 import { domReady } from './utils'
 import { useLoading } from './loading'
-import { ClashStartInfo } from '../../packages/share/type'
 
 function copyTextToClipboard(text: string) {
   clipboard.writeText(text)

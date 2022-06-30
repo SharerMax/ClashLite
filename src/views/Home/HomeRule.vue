@@ -160,7 +160,7 @@
       <div class="flex">
         <n-button
           class="mla"
-          @click="()=> showEditModal = false"
+          @click="() => showEditModal = false"
         >
           取消
         </n-button>
@@ -177,10 +177,10 @@
 </template>
 
 <script setup lang="ts">
+import type { FormRules } from 'naive-ui'
 import {
-  NLayout, NH2, NTag, NList, NText, NListItem, NButton, NIcon,
-  NEllipsis, NModal, NInput, NForm, NFormItem, NRadioGroup, NRadioButton,
-  FormRules,
+  NButton, NEllipsis, NForm, NFormItem, NH2, NIcon, NInput, NLayout,
+  NList, NListItem, NModal, NRadioButton, NRadioGroup, NTag, NText,
 } from 'naive-ui'
 import { Add } from '@vicons/carbon'
 import { ref } from 'vue'
@@ -227,5 +227,4 @@ const editRuleFormRules: FormRules = {
 :deep(.n-list-item__main) {
   overflow: hidden;
 }
-
 </style>

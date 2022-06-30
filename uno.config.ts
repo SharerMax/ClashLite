@@ -1,4 +1,5 @@
-import { defineConfig, presetUno, UserConfig } from 'unocss'
+import type { UserConfig } from 'unocss'
+import { defineConfig, presetUno } from 'unocss'
 
 export default defineConfig({
   presets: [presetUno()],
