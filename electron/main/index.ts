@@ -54,10 +54,13 @@ async function createWindow() {
   }
   else {
     // 🚧 Use ['ENV_NAME'] avoid vite:define plugin 对比
-    // console.dir(process.env.VITE_DEV_SERVER_HOST)
+    // console.log(import.meta.env)
     // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
+    // https://github.com/vitejs/vite/issues/3229; will be fix in vite 3.x
 
-    const url = `http://${process.env.VITE_DEV_SERVER_HOST}:${process.env.VITE_DEV_SERVER_PORT}`
+    // eslint-disable-next-line dot-notation
+    const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`
+    console.log(`render server on: ${url}\n`)
     win.loadURL(url)
   }
 
@@ -73,6 +76,7 @@ async function createWindow() {
     return { action: 'deny' }
   })
   clash.init()
+  // win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {

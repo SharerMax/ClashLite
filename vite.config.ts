@@ -1,6 +1,5 @@
 import { rmSync } from 'fs'
 import { join } from 'path'
-import { builtinModules } from 'module'
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -23,13 +22,6 @@ export default defineConfig({
           build: {
             sourcemap: false,
             outDir: 'dist/electron/main',
-            rollupOptions: {
-              external: [
-                'electron',
-                ...builtinModules,
-                ...builtinModules.map(module => `node:${module}`),
-              ],
-            },
           },
           resolve: {
             alias: {
@@ -49,13 +41,6 @@ export default defineConfig({
             // For debug
             sourcemap: 'inline',
             outDir: 'dist/electron/preload',
-            rollupOptions: {
-              external: [
-                'electron',
-                ...builtinModules,
-                ...builtinModules.map(module => `node:${module}`),
-              ],
-            },
           },
           resolve: {
             alias: {
