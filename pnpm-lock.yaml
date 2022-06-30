@@ -17,7 +17,7 @@ specifiers:
   eslint: 8.18.0
   get-port: 6.1.2
   js-yaml: 4.1.0
-  naive-ui: 2.30.6
+  naive-ui: 2.30.8
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.4
@@ -48,7 +48,7 @@ devDependencies:
   eslint: 8.18.0
   get-port: 6.1.2
   js-yaml: 4.1.0
-  naive-ui: 2.30.6_vue@3.2.37
+  naive-ui: 2.30.8_vue@3.2.37
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.4
@@ -452,7 +452,7 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 16.11.41
+      '@types/node': 18.0.0
     dev: true
 
   /@types/lodash-es/4.17.6:
@@ -508,7 +508,7 @@ packages:
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 16.11.41
+      '@types/node': 18.0.0
     dev: true
 
   /@types/unist/2.0.6:
@@ -3772,8 +3772,8 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /naive-ui/2.30.6_vue@3.2.37:
-    resolution: {integrity: sha512-QawTYvC+V9zc2hCl5dKgTowiAfCh+GBTdOp8Kswd4bx+o2rdtxrH83tZeFoABsxh3nOx4AL3r/DWfIVdoBqi1A==}
+  /naive-ui/2.30.8_vue@3.2.37:
+    resolution: {integrity: sha512-KRGq9ZwKt/7XyrmSEhqqTNTEDS/gyogCySWX/RKYDcehEDgkJmYrU2WRCtu/RblT/6u3K4d3Dja2+qP1FnHg8Q==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
