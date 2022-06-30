@@ -61,7 +61,7 @@ export async function selectProxyProvider(providerName: string) {
   return await axiosInstance.put(`/providers/proxies/${providerName}`)
 }
 
-export async function healthcheckProxyProiver(providerName: string) {
+export async function healthcheckProxyProvider(providerName: string) {
   return await axiosInstance.get(`/providers/proxies/${providerName}/healthcheck`)
 }
 
@@ -79,5 +79,5 @@ export default {
   proxiesOfProviders,
   proxiesOfProvider,
   selectProxyProvider,
-  healthcheckProxyProiver,
+  healthcheckProxyProvider,
 }
