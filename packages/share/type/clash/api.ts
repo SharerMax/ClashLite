@@ -22,8 +22,30 @@ export interface Metadata {
   processPath: string
 }
 
-export interface ConnectionsResponse {
+export interface Connections {
   upload: number
   download: number
   connections: Connection[]
 }
+
+export interface version {
+  premium: boolean
+  version: string
+}
+
+export interface ProxyInfo {
+  all?: string[]
+  now?: keyof ProxyInfo['all']
+  history: {
+    time: string
+    delay: number
+  }[]
+  name: string
+  type: string
+  udp: boolean
+}
+
+// type A = string[]
+// export type B = keyof A
+// export const a: A = ['1', '2']
+// export const b: B = '1'

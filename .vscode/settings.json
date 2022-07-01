@@ -1,7 +1,6 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
-  "unocss.root": "packages/renderer",
   "eslint.packageManager": "pnpm",
   "eslint.format.enable": true,
   "eslint.alwaysShowStatus": false,

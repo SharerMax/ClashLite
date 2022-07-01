@@ -79,7 +79,7 @@ import {
 import { Close, Information } from '@vicons/carbon'
 import type { Api } from '../../../packages/share/type'
 
-const connections: Api.ConnectionsResponse = {
+const connections: Api.Connections = {
   upload: 123,
   download: 456,
   connections: [

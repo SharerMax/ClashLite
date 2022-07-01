@@ -34,7 +34,7 @@ export async function rules() {
 }
 
 export async function connections() {
-  return await axiosInstance.get<Api.ConnectionsResponse>('/connections')
+  return await axiosInstance.get<Api.Connections>('/connections')
 }
 
 export async function closeAllConnections() {
