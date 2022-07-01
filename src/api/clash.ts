@@ -1,16 +1,16 @@
 import axiosInstance from '.'
-import type { BaseClashConfig } from '@/share/type/clash'
+import type { Api, BaseClashConfig } from '@/share/type/clash'
 
 export async function baseConfig() {
-  return await axiosInstance.get('/configs')
+  return await axiosInstance.get<BaseClashConfig>('/configs')
 }
 
 export async function putBaseConfig(config: BaseClashConfig) {
-  return await axiosInstance.put('/configs', config)
+  return await axiosInstance.put<void>('/configs', config)
 }
 
 export async function patchBaseConfig(config: Partial<BaseClashConfig>) {
-  return await axiosInstance.patch('/configs', config)
+  return await axiosInstance.patch<void>('/configs', config)
 }
 
 export async function proxies() {
@@ -22,7 +22,7 @@ export async function proxy(name: string) {
 }
 
 export async function selectProxy(name: string) {
-  return await axiosInstance.put(`/proxies/${name}`)
+  return await axiosInstance.put<void>(`/proxies/${name}`)
 }
 
 export async function proxyDelay(name: string) {
@@ -34,15 +34,15 @@ export async function rules() {
 }
 
 export async function connections() {
-  return await axiosInstance.get('/connections')
+  return await axiosInstance.get<Api.ConnectionsResponse>('/connections')
 }
 
 export async function closeAllConnections() {
-  return await axiosInstance.delete('/connections')
+  return await axiosInstance.delete<void>('/connections')
 }
 
 export async function closeConnection(connectionId: string) {
-  return await axiosInstance.delete(`/connections/${connectionId}`)
+  return await axiosInstance.delete<void>(`/connections/${connectionId}`)
 }
 
 export async function version() {
@@ -58,7 +58,7 @@ export async function proxiesOfProvider(providerName: string) {
 }
 
 export async function selectProxyProvider(providerName: string) {
-  return await axiosInstance.put(`/providers/proxies/${providerName}`)
+  return await axiosInstance.put<void>(`/providers/proxies/${providerName}`)
 }
 
 export async function healthcheckProxyProvider(providerName: string) {
