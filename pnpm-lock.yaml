@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@antfu/eslint-config': 0.25.2
-  '@playwright/test': 1.23.0
+  '@playwright/test': 1.23.1
   '@types/js-yaml': 4.0.5
   '@typescript-eslint/eslint-plugin': 5.30.0
   '@typescript-eslint/parser': 5.30.0
@@ -33,7 +33,7 @@ specifiers:
 
 devDependencies:
   '@antfu/eslint-config': 0.25.2_b5e7v2qnwxfo6hmiq56u52mz3e
-  '@playwright/test': 1.23.0
+  '@playwright/test': 1.23.1
   '@types/js-yaml': 4.0.5
   '@typescript-eslint/eslint-plugin': 5.30.0_5mtqsiui4sk53pmkx7i7ue45wm
   '@typescript-eslint/parser': 5.30.0_b5e7v2qnwxfo6hmiq56u52mz3e
@@ -371,13 +371,13 @@ packages:
       fastq: 1.13.0
     dev: true
 
-  /@playwright/test/1.23.0:
-    resolution: {integrity: sha512-RPWI8AHBVBiDyfTuxi1BhOaY3yaVy3S5ZsGKkSGGeWpZtSgN4SerInCYvgh9+EunIAK4RJQo+bzupbAn5pVqHQ==}
+  /@playwright/test/1.23.1:
+    resolution: {integrity: sha512-dKplLPSYPZgnsBk1xxOophhpx3ZVg8DveoNJgLPe096lDCfmaIIreLsYF+4hqzy3PG61IP+aEnG5VAOjC3bhbA==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.0.0
-      playwright-core: 1.23.0
+      playwright-core: 1.23.1
     dev: true
 
   /@polka/url/1.0.0-next.21:
@@ -4113,8 +4113,8 @@ packages:
     dev: true
     optional: true
 
-  /playwright-core/1.23.0:
-    resolution: {integrity: sha512-Zzhyr5RZGoJ1ek2sgfJCt2076kdOg8hnNwFBqAYeLySiutXyxSQk93vZ5gbnFiWV1sHvueCcwla9n35acUTxtA==}
+  /playwright-core/1.23.1:
+    resolution: {integrity: sha512-9CXsE0gawph4KXl6oUaa0ehHRySZjHvly4TybcBXDvzK3N3o6L/eZ8Q6iVWUiMn0LLS5bRFxo1qEtOETlYJxjw==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
