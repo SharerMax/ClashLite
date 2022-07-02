@@ -14,11 +14,11 @@ export async function patchBaseConfig(config: Partial<BaseClashConfig>) {
 }
 
 export async function proxies() {
-  return await axiosInstance.get('/proxies')
+  return await axiosInstance.get<Api.Proxies>('/proxies')
 }
 
 export async function proxy(name: string) {
-  return await axiosInstance.get(`/proxies/${name}`)
+  return await axiosInstance.get<Api.ProxyInfo | Api.ProxyGroupInfo>(`/proxies/${name}`)
 }
 
 export async function selectProxy(name: string) {
@@ -26,11 +26,18 @@ export async function selectProxy(name: string) {
 }
 
 export async function proxyDelay(name: string) {
-  return await axiosInstance.get(`/proxies/${name}/delay`)
+  return await axiosInstance.request<Api.ProxyDelay>({
+    url: `/proxies/${name}/delay`,
+    method: 'get',
+    params: {
+      url: 'http://www.gstatic.com/generate_204',
+      timeout: 3000,
+    },
+  })
 }
 
 export async function rules() {
-  return await axiosInstance.get('/rules')
+  return await axiosInstance.get<Api.Rules>('/rules')
 }
 
 export async function connections() {
@@ -46,15 +53,15 @@ export async function closeConnection(connectionId: string) {
 }
 
 export async function version() {
-  return await axiosInstance.get('/version')
+  return await axiosInstance.get<Api.version>('/version')
 }
 
 export async function proxiesOfProviders() {
-  return await axiosInstance.get('/providers/proxies')
+  return await axiosInstance.get<Api.Providers>('/providers/proxies')
 }
 
 export async function proxiesOfProvider(providerName: string) {
-  return await axiosInstance.get(`/providers/proxies/${providerName}`)
+  return await axiosInstance.get<Api.Provider>(`/providers/proxies/${providerName}`)
 }
 
 export async function selectProxyProvider(providerName: string) {
@@ -62,7 +69,7 @@ export async function selectProxyProvider(providerName: string) {
 }
 
 export async function healthcheckProxyProvider(providerName: string) {
-  return await axiosInstance.get(`/providers/proxies/${providerName}/healthcheck`)
+  return await axiosInstance.get<void>(`/providers/proxies/${providerName}/healthcheck`)
 }
 
 export default {

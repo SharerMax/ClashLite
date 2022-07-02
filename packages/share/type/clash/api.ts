@@ -34,8 +34,6 @@ export interface version {
 }
 
 export interface ProxyInfo {
-  all?: string[]
-  now?: keyof ProxyInfo['all']
   history: {
     time: string
     delay: number
@@ -45,7 +43,36 @@ export interface ProxyInfo {
   udp: boolean
 }
 
-// type A = string[]
-// export type B = keyof A
-// export const a: A = ['1', '2']
-// export const b: B = '1'
+export interface ProxyGroupInfo extends ProxyInfo {
+  all: string[]
+  now: string
+}
+
+export interface Proxies {
+  proxies: {
+    [K: string]: ProxyInfo | ProxyGroupInfo
+  }
+}
+
+export interface ProxyDelay {
+  delay: number
+}
+
+export interface Rule {
+  type: string
+  payload: string
+  proxy: string
+}
+
+export interface Rules {
+  rules: Rule[]
+}
+
+export interface Provider {
+  name: string
+  proxies: Array<ProxyInfo | ProxyGroupInfo>
+}
+
+export interface Providers {
+  [K: string]: Provider
+}
