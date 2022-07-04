@@ -9,7 +9,7 @@ specifiers:
   '@vueuse/core': 8.7.5
   axios: 0.27.2
   chart.js: 3.8.0
-  electron: 19.0.7
+  electron: 19.0.6
   electron-builder: 23.1.0
   electron-devtools-installer: 3.2.0
   eslint: 8.19.0
@@ -38,7 +38,7 @@ devDependencies:
   '@vueuse/core': 8.7.5_vue@3.2.37
   axios: 0.27.2
   chart.js: 3.8.0
-  electron: 19.0.7
+  electron: 19.0.6
   electron-builder: 23.1.0
   electron-devtools-installer: 3.2.0
   eslint: 8.19.0
@@ -1896,8 +1896,8 @@ packages:
       - supports-color
     dev: true
 
-  /electron/19.0.7:
-    resolution: {integrity: sha512-Wyg+oGkY8cWYmm8tVka6CZmhJxnyUx+Us2ALyWiY4w73+dO9XUNB/c7vQNIm1Uk/DLMn9vFzgvcS9YtOOMqpbg==}
+  /electron/19.0.6:
+    resolution: {integrity: sha512-S9Yud32nKhB0iWC0lGl2JXz4FQnCiLCnP5Vehm1/CqyeICcQGmgQaZl2HYpCJ2pesKIsYL9nsgmku/10cxm/gg==}
     engines: {node: '>= 8.6'}
     hasBin: true
     requiresBuild: true
