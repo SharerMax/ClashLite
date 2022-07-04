@@ -1,12 +1,17 @@
 import axios from 'axios'
 
-const secret = '123456789'
-const baseUrl = 'http://127.0.0.1:3001'
 const instance = axios.create({
-  baseURL: baseUrl,
   headers: {
-    'Authorization': `Bearer ${secret}`,
     'Content-Type': 'application/json',
   },
+})
+instance.interceptors.request.use((config) => {
+  const newConfig = window.structuredClone(config)
+  newConfig.baseUrl = localStorage.getItem('ext-ctl')
+  newConfig.headers = {
+    ...newConfig.headers,
+    Authorization: `Bearer ${localStorage.getItem('ctl-secret')}`,
+  }
+  return newConfig
 })
 export default instance
