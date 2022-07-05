@@ -107,7 +107,7 @@
 <script setup lang="ts">
 import {
   NButton, NCard, NEmpty, NGrid, NGridItem, NIcon, NRadioButton, NRadioGroup,
-  NScrollbar, NSpace, NSwitch, NText, useMessage,
+  NScrollbar, NSpace, NSwitch, NText, useDialog, useMessage,
 } from 'naive-ui'
 import { Copy } from '@vicons/carbon'
 import {
@@ -115,15 +115,27 @@ import {
 } from 'vue'
 import type { TChartData } from 'vue-chartjs/dist/types'
 import TrafficChart from '../../components/TrafficChart.vue'
-import { patchBaseConfig } from '@/render/api/clash'
+import { baseConfig, patchBaseConfig } from '@/render/api/clash'
+import { checkClashHealth } from '@/render/utils/clash'
 
 const clashProcessLoading = ref(false)
 const clashRunning = ref(false)
+const dialog = useDialog()
 async function handleClashRunChange(value: boolean) {
   if (value) {
     clashProcessLoading.value = true
     clashRunning.value = !!await window.clash.start()
     clashProcessLoading.value = false
+    setTimeout(() => {
+      baseConfig().then((res) => {
+        if (!checkClashHealth(res.data)) {
+          dialog.error({
+            content: '端口冲突，请检查本地代理端口是否被占用',
+            positiveText: '知道了',
+          })
+        }
+      })
+    }, 500)
   }
   else {
     window.clash.stop()

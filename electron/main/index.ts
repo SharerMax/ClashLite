@@ -79,7 +79,7 @@ async function createWindow() {
     return { action: 'deny' }
   })
   clash.init()
-  // win.webContents.openDevTools()
+  win.webContents.openDevTools()
 }
 
 app.whenReady().then(() => {

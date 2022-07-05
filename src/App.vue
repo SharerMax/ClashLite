@@ -1,7 +1,9 @@
 <template>
   <n-config-provider :theme="theme">
     <n-message-provider>
-      <router-view />
+      <n-dialog-provider>
+        <router-view />
+      </n-dialog-provider>
     </n-message-provider>
     <n-global-style />
   </n-config-provider>
@@ -11,7 +13,8 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
 import {
-  NConfigProvider, NGlobalStyle, NMessageProvider, darkTheme, useOsTheme,
+  NConfigProvider, NDialogProvider, NGlobalStyle, NMessageProvider, darkTheme,
+  useOsTheme,
 } from 'naive-ui'
 import { computed } from 'vue'
 
