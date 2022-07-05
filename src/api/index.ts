@@ -6,8 +6,8 @@ const instance = axios.create({
   },
 })
 instance.interceptors.request.use((config) => {
-  const newConfig = window.structuredClone(config)
-  newConfig.baseUrl = localStorage.getItem('ext-ctl')
+  const newConfig = config
+  newConfig.baseURL = localStorage.getItem('ext-ctl') ?? ''
   newConfig.headers = {
     ...newConfig.headers,
     Authorization: `Bearer ${localStorage.getItem('ctl-secret')}`,

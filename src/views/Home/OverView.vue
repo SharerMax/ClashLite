@@ -8,21 +8,11 @@
         class="p-4 box-border"
       >
         <n-grid-item>
-          <n-card
-            embedded
-            title="运行"
-          >
-            <n-space
-              vertical
-              :size="12"
-            >
+          <n-card embedded title="运行">
+            <n-space vertical :size="12">
               <div>
                 <label class="w-24 inline-block">运行状态：</label>
-                <n-switch
-                  size="medium"
-                  :loading="clashProcessLoading"
-                  @update:value="handleClashRunChange"
-                >
+                <n-switch size="medium" :loading="clashProcessLoading" @update:value="handleClashRunChange">
                   <template #checked>
                     运行中
                   </template>
@@ -37,6 +27,7 @@
                   default-value="direct"
                   :value="activatedRunMode"
                   size="small"
+                  :disabled="!clashRunning"
                   @update:value="handleRunModeChange"
                 >
                   <n-radio-button
@@ -49,11 +40,7 @@
               </div>
               <div class="flex items-center">
                 <label class="w-24 inline-block">本地IP：</label>
-                <n-text
-                  class="mr-0.5 "
-                  type="primary"
-                  code
-                >
+                <n-text class="mr-0.5 " type="primary" code>
                   {{ localIP }}
                 </n-text>
                 <n-button
@@ -69,11 +56,7 @@
               </div>
               <div class="flex items-center">
                 <label class="w-24 inline-block">SOCKS代理：</label>
-                <n-text
-                  class="mr-0.5 "
-                  type="primary"
-                  code
-                >
+                <n-text class="mr-0.5 " type="primary" code>
                   socks5://{{ localIP }}:7890
                 </n-text>
                 <n-button
@@ -89,11 +72,7 @@
               </div>
               <div class="flex items-center ">
                 <label class="w-24 inline-block">HTTP代理：</label>
-                <n-text
-                  class="mr-0.5 "
-                  type="primary"
-                  code
-                >
+                <n-text class="mr-0.5 " type="primary" code>
                   http://{{ localIP }}:7890
                 </n-text>
                 <n-button
@@ -111,11 +90,7 @@
           </n-card>
         </n-grid-item>
         <n-grid-item>
-          <n-card
-            embedded
-            title="访问检测"
-            class="h-full"
-          >
+          <n-card embedded title="访问检测" class="h-full">
             <n-empty description="Coming Soon" />
           </n-card>
         </n-grid-item>
@@ -140,13 +115,15 @@ import {
 } from 'vue'
 import type { TChartData } from 'vue-chartjs/dist/types'
 import TrafficChart from '../../components/TrafficChart.vue'
+import { patchBaseConfig } from '@/render/api/clash'
 
 const clashProcessLoading = ref(false)
-
+const clashRunning = ref(false)
 async function handleClashRunChange(value: boolean) {
   if (value) {
     clashProcessLoading.value = true
-    clashProcessLoading.value = !await window.clash.start()
+    clashRunning.value = !!await window.clash.start()
+    clashProcessLoading.value = false
   }
   else {
     window.clash.stop()
@@ -178,8 +155,9 @@ const runModels: RunMode[] = [{
 const activatedRunMode = ref<RunMode['value']>('direct')
 
 function handleRunModeChange(mode: RunMode['value']) {
-  activatedRunMode.value = mode
-  console.log(mode)
+  patchBaseConfig({ mode }).then(() => {
+    activatedRunMode.value = mode
+  })
 }
 
 const generateLabels = () => {
