@@ -24,7 +24,6 @@
               <div>
                 <label class="w-24 inline-block">运行模式：</label>
                 <n-radio-group
-                  default-value="direct"
                   :value="activatedRunMode"
                   size="small"
                   :disabled="!clashRunning"
@@ -121,6 +120,7 @@ import { checkClashHealth } from '@/render/utils/clash'
 const clashProcessLoading = ref(false)
 const clashRunning = ref(false)
 const dialog = useDialog()
+const defaultRunMode = window.clash.getRunMode()
 async function handleClashRunChange(value: boolean) {
   if (value) {
     clashProcessLoading.value = true
@@ -134,8 +134,11 @@ async function handleClashRunChange(value: boolean) {
             positiveText: '知道了',
           })
         }
+        else {
+          handleRunModeChange(defaultRunMode)
+        }
       })
-    }, 500)
+    }, 1500)
   }
   else {
     window.clash.stop()
@@ -164,11 +167,12 @@ const runModels: RunMode[] = [{
   value: 'global',
 }]
 
-const activatedRunMode = ref<RunMode['value']>('direct')
+const activatedRunMode = ref<RunMode['value']>(defaultRunMode)
 
 function handleRunModeChange(mode: RunMode['value']) {
   patchBaseConfig({ mode }).then(() => {
     activatedRunMode.value = mode
+    window.clash.saveRunMode(mode)
   })
 }
 

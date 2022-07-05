@@ -1,8 +1,13 @@
 import { clipboard, contextBridge, ipcRenderer } from 'electron'
 import { internalIpV4 } from 'internal-ip'
-import type { ClashStartInfo } from '../../packages/share/type'
+import Store from 'electron-store'
 import { domReady } from './utils'
 import { useLoading } from './loading'
+import type { BaseClashConfig, ClashStartInfo, RunMode } from '@/share/type'
+
+const clashStore = new Store<BaseClashConfig>({
+  name: 'clash_config',
+})
 
 function copyTextToClipboard(text: string) {
   clipboard.writeText(text)
@@ -15,6 +20,12 @@ const clashExpose = {
     return !!info.controllerUrl
   }),
   stop: () => ipcRenderer.send('clash:stop'),
+  saveRunMode(mode: RunMode) {
+    clashStore.set('mode', mode)
+  },
+  getRunMode() {
+    return clashStore.get('mode', 'direct')
+  },
 }
 
 export type Expose = typeof clashExpose
