@@ -26,15 +26,17 @@ function handle<T>(api: EventName, listener: (event: IpcMainEvent, ...arg: any[]
 }
 
 function getBinDirPath() {
-  if (app.isPackaged)
+  if (app.isPackaged) {
     return path.join(process.resourcesPath, 'bin')
+  }
 
   return path.join(process.cwd(), 'extra/bin')
 }
 
 function getClashConfigDirPath() {
-  if (process.platform !== 'win32')
+  if (process.platform !== 'win32') {
     return path.join(app.getPath('userData'), 'config')
+  }
 
   return path.join(getBinDirPath(), 'config')
 }
@@ -44,8 +46,9 @@ function getClashDefaultConfigPath() {
 }
 
 function getClashExecPath() {
-  if (process.platform !== 'win32')
+  if (process.platform !== 'win32') {
     return path.join(getBinDirPath(), 'clash')
+  }
 
   return path.join(getBinDirPath(), 'clash.exe')
 }
@@ -86,8 +89,9 @@ export async function startClash() {
 
 export function stopClash() {
   console.log('stop clash')
-  if (clashProcess)
+  if (clashProcess) {
     clashProcess.kill()
+  }
 }
 
 function generateDefaultClashConfig() {
@@ -114,8 +118,9 @@ function generateDefaultClashConfig() {
 
 export function init() {
   console.log('config dir: ', getClashDefaultConfigPath())
-  if (!existsSync(getClashDefaultConfigPath()))
+  if (!existsSync(getClashDefaultConfigPath())) {
     generateDefaultClashConfig()
+  }
 
   handle('start', startClash)
   on('stop', stopClash)

@@ -6,8 +6,9 @@ export function domReady(condition: DocumentReadyState[] = ['complete', 'interac
     }
     else {
       document.addEventListener('readystatechange', () => {
-        if (condition.includes(document.readyState))
+        if (condition.includes(document.readyState)) {
           resolve(true)
+        }
       })
     }
   })

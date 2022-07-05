@@ -41,8 +41,9 @@ const logRowNum = ref(500)
 
 function generateLog(row: number) {
   const l: string[] = []
-  for (let i = 0; i < row; ++i)
+  for (let i = 0; i < row; ++i) {
     l.push(Math.random().toString(16))
+  }
 
   return `${l.join('\n')}\n`
 }

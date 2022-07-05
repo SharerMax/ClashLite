@@ -1,8 +1,6 @@
 <template>
   <div class="h-full">
-    <n-scrollbar
-      trigger="hover"
-    >
+    <n-scrollbar trigger="hover">
       <n-grid
         cols="1 780:2"
         x-gap="10"
@@ -56,12 +54,13 @@
                   type="primary"
                   code
                 >
-                  127.0.0.1
+                  {{ localIP }}
                 </n-text>
                 <n-button
                   quaternary
                   size="small"
-                  @click="handleClipboardCopy('127.0.0.1')"
+                  :focusable="false"
+                  @click="handleClipboardCopy(localIP)"
                 >
                   <template #icon>
                     <n-icon :component="Copy" />
@@ -75,12 +74,13 @@
                   type="primary"
                   code
                 >
-                  socks5://127.0.0.1:7890
+                  socks5://{{ localIP }}:7890
                 </n-text>
                 <n-button
                   quaternary
                   size="small"
-                  @click="handleClipboardCopy('socks5://127.0.0.1:7890')"
+                  :focusable="false"
+                  @click="handleClipboardCopy('socks5://{{localIP}}:7890')"
                 >
                   <template #icon>
                     <n-icon :component="Copy" />
@@ -94,12 +94,13 @@
                   type="primary"
                   code
                 >
-                  http://127.0.0.1:7890
+                  http://{{ localIP }}:7890
                 </n-text>
                 <n-button
                   quaternary
                   size="small"
-                  @click="handleClipboardCopy('http://127.0.0.1:7890')"
+                  :focusable="false"
+                  @click="handleClipboardCopy('http://{{localIP}}:7890')"
                 >
                   <template #icon>
                     <n-icon :component="Copy" />
@@ -183,8 +184,9 @@ function handleRunModeChange(mode: RunMode['value']) {
 
 const generateLabels = () => {
   const labels = Array(60).fill('0')
-  for (let i = 0; i < 60; i++)
+  for (let i = 0; i < 60; i++) {
     labels[i] = (i + 1).toString()
+  }
 
   return labels
 }
@@ -220,6 +222,17 @@ const chartData = computed <TChartData<'line'>>(() => ({
   }],
   labels: generateLabels(),
 }))
+
+const localIP = ref('127.0.0.1')
+onMounted(() => {
+  window.localIPv4().then((ipv4) => {
+    if (ipv4) {
+      localIP.value = ipv4
+    }
+  },
+  )
+})
+
 // const chartData: TChartData<'line'> = {
 //   datasets: [{
 //     data: uploadData.value,

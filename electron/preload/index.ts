@@ -1,4 +1,5 @@
 import { clipboard, contextBridge, ipcRenderer } from 'electron'
+import { internalIpV4 } from 'internal-ip'
 import type { ClashStartInfo } from '../../packages/share/type'
 import { domReady } from './utils'
 import { useLoading } from './loading'
@@ -18,8 +19,12 @@ const clashExpose = {
 
 export type Expose = typeof clashExpose
 
+async function obtainLocalIPv4() {
+  return await internalIpV4()
+}
 const { appendLoading, removeLoading } = useLoading()
 contextBridge.exposeInMainWorld('removeLoading', removeLoading)
 contextBridge.exposeInMainWorld('copyTextToClipboard', copyTextToClipboard)
+contextBridge.exposeInMainWorld('localIPv4', obtainLocalIPv4)
 contextBridge.exposeInMainWorld('clash', clashExpose)
 domReady().then(appendLoading)

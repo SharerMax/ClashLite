@@ -165,8 +165,9 @@ function handleAddProxySubButtonClick() {
 const proxySubForm = ref<null | FormInst>(null)
 function handleProxySubSaveButtonClick() {
   proxySubForm.value?.validate((errors) => {
-    if (!errors)
+    if (!errors) {
       showEditProxySub.value = false
+    }
   })
 }
 

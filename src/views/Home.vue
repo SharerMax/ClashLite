@@ -116,7 +116,7 @@ const router = useRoute()
 watchEffect(() => {
   switch (router.name) {
     case 'HomeOverview':
-      activatedMenu.value = 'overView'
+      activatedMenu.value = 'overview'
       break
     case 'HomeProxy':
       activatedMenu.value = 'proxy'

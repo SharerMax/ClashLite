@@ -8,5 +8,6 @@ export {}
 declare global {
   interface Window {
     clash: Expose
+    localIPv4: () => Promise<string | undefined>
   }
 }

@@ -12,8 +12,19 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'curly': ['error', 'all'],
+    'brace-style': 'off',
+    '@typescript-eslint/brace-style': ['error', 'stroustrup'],
     'vue/component-tags-order': ['error', {
       order: ['template', 'script', 'style'],
+    }],
+    'vue/max-attributes-per-line': ['error', {
+      singleline: {
+        max: 3,
+      },
+      multiline: {
+        max: 1,
+      },
     }],
   },
 }
