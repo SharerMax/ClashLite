@@ -42,3 +42,5 @@ interface ShadowSocksWithV2ray extends BaseShadowSocks {
 }
 
 export type ShadowSocks = BaseShadowSocks | ShadowSocksWithObfs | ShadowSocksWithV2ray
+
+export type ClashProxy = ShadowSocks
