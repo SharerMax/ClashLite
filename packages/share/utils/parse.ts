@@ -32,15 +32,15 @@ function parseClashSubContent(content: string): ClashProxy | null {
 }
 
 // https://shadowsocks.org/guide/configs.html#uri-and-qr-code
-function parseShadowscoksLegacyUri(uri: string) {
-  console.log(uri)
-  return null
-}
+// function parseShadowscoksLegacyUri(uri: string) {
+//   console.log(uri)
+//   return null
+// }
 
 // https://github.com/shadowsocks/shadowsocks-org/wiki/SIP002-URI-Scheme
 // https://shadowsocks.org/guide/sip002.html
-function parseShadowsocksSIP002URI(uri: string) {
-  console.log(uri)
-  return null
-}
+// function parseShadowsocksSIP002URI(uri: string) {
+//   console.log(uri)
+//   return null
+// }
 
