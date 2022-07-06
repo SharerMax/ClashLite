@@ -1,6 +1,6 @@
 // example.spec.ts
 import { expect, test } from '@playwright/test'
-import { env } from '../package.json'
+import { env } from '../../package.json'
 
 const VITE_SERVER_ADDRESS = `http://127.0.0.1:${env.VITE_DEV_SERVER_PORT || 3344}`
 

@@ -4,6 +4,7 @@ interface BaseProxy {
   name: string
   type: ProxType
   port: number
+  server: string
 }
 
 interface BaseShadowSocks extends BaseProxy {

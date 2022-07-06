@@ -15,5 +15,12 @@
   "files.eol": "\n",
   "search.exclude": {
     "**/release": true
-  }
+  },
+  "vitest.exclude": [
+    "**/test/e2e/**",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/cypress/**",
+    "**/.{idea,git,cache,output,temp}/**"
+  ]
 }
