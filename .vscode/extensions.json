@@ -3,7 +3,8 @@
     "antfu.unocss",
     "vue.volar",
     "dbaeumer.vscode-eslint",
-    "Vue.vscode-typescript-vue-plugin",
-    "EditorConfig.EditorConfig"
+    "vue.vscode-typescript-vue-plugin",
+    "editorconfig.editorconfig",
+    "ZixuanChen.vitest-explorer"
   ]
 }
