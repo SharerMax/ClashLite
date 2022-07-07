@@ -18,5 +18,5 @@ fs.writeFileSync(path.join(__dirname, '.debug.env'), envContent.join('\n'))
 spawn(
   process.platform === 'win32' ? 'npm.cmd' : 'npm',
   ['run', 'debug',],
-  { stdio: 'inherit'},
+  { stdio: 'inherit', env: {...process.env, NODE_ENV: 'development'}},
 )
