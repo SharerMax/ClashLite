@@ -33,10 +33,33 @@ function parseClashSubContent(content: string): ClashProxy | null {
 }
 
 // https://shadowsocks.org/guide/configs.html#uri-and-qr-code
-// function parseShadowscoksLegacyUri(uri: string) {
-//   console.log(uri)
-//   return null
-// }
+// ss://YmYtY2ZiOnRlc3QvIUAjOkAxOTIuMTY4LjEwMC4xOjg4ODg#123
+export function parseShadowscoksLegacyUri(uri: string): ClashProxy | null {
+  if (!uri) {
+    return null
+  }
+  const hashIndex = uri.indexOf('#')
+  let name = ''
+  let withOutNameUri = uri
+  if (hashIndex > 0) {
+    [withOutNameUri, name] = uri.split('#')
+  }
+
+  const decodeInfo = decode(withOutNameUri.slice(5))
+  const serveSplitIndex = decodeInfo.lastIndexOf('@')
+  const userInfo = decodeInfo.slice(0, serveSplitIndex)
+  const serverInfo = decodeInfo.slice(serveSplitIndex + 1)
+  const [cipher, password] = userInfo.split(':')
+  const [server, port] = serverInfo.split(':')
+  return {
+    type: 'ss',
+    name,
+    server,
+    cipher: cipher as ClashProxy['cipher'],
+    password,
+    port: parseInt(port),
+  }
+}
 
 // https://github.com/shadowsocks/shadowsocks-org/wiki/SIP002-URI-Scheme
 // https://shadowsocks.org/guide/sip002.html
