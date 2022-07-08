@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     root: fileURLToPath(import.meta.url),
     include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    exclude: ['node_modules', 'dist', '.idea', '.git', '.cache', 'test'],
+    exclude: ['node_modules', 'dist', '.idea', '.git', '.cache', 'test', 'release'],
   },
   resolve: {
     alias: {

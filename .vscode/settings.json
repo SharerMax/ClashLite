@@ -21,6 +21,7 @@
     "**/test/e2e/**",
     "**/node_modules/**",
     "**/dist/**",
+    "**/release/**",
     "**/cypress/**",
     "**/.{idea,git,cache,output,temp}/**"
   ]
