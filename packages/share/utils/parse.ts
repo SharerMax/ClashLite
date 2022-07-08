@@ -105,6 +105,19 @@ export function parseShadowsocksSIP002URI(uri: string): ClashProxy | null {
       }
       else if (pluginName === 'v2ray-plugin') {
         const v2rayPluginConfig = baseSSConfig as ShadowSocksWithV2ray
+        v2rayPluginConfig.plugin = 'v2ray-plugin'
+        const optArgs: Record<string, string> = {}
+        for (const opts of pluginArgs) {
+          const [key, value] = opts.split('=')
+          optArgs[key] = value
+        }
+        const pluginOpt: ShadowSocksWithV2ray['plugin-opt'] = {
+          mode: 'websocket',
+          tls: 'tls' in optArgs,
+          host: optArgs.host ?? '',
+          path: optArgs.path ?? '',
+        }
+        v2rayPluginConfig['plugin-opt'] = pluginOpt
         return v2rayPluginConfig
       }
     }
