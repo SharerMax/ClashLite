@@ -45,7 +45,7 @@
     "internal-ip": "7.0.0",
     "js-base64": "^3.7.2",
     "js-yaml": "4.1.0",
-    "naive-ui": "2.30.8",
+    "naive-ui": "2.31.0",
     "nano-staged": "0.8.0",
     "simple-git-hooks": "2.8.0",
     "typescript": "4.7.4",
