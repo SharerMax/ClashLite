@@ -32,7 +32,7 @@ specifiers:
   vitest: ^0.17.0
   vue: 3.2.37
   vue-chartjs: 4.1.1
-  vue-router: 4.0.16
+  vue-router: 4.1.1
   vue-tsc: 0.38.2
 
 devDependencies:
@@ -67,7 +67,7 @@ devDependencies:
   vitest: 0.17.0
   vue: 3.2.37
   vue-chartjs: 4.1.1_chart.js@3.8.0+vue@3.2.37
-  vue-router: 4.0.16_vue@3.2.37
+  vue-router: 4.1.1_vue@3.2.37
   vue-tsc: 0.38.2_typescript@4.7.4
 
 packages:
@@ -5379,8 +5379,8 @@ packages:
       - supports-color
     dev: true
 
-  /vue-router/4.0.16_vue@3.2.37:
-    resolution: {integrity: sha512-JcO7cb8QJLBWE+DfxGUL3xUDOae/8nhM1KVdnudadTAORbuxIC/xAydC5Zr/VLHUDQi1ppuTF5/rjBGzgzrJNA==}
+  /vue-router/4.1.1_vue@3.2.37:
+    resolution: {integrity: sha512-Wp1mEf2xCwT0ez7o9JvgpfBp9JGnVb+dPERzXDbugTatzJAJ60VWOhJKifQty85k+jOreoFHER4r5fu062PhPw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
