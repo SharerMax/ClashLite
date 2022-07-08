@@ -1,6 +1,6 @@
 import { decode } from 'js-base64'
 import URL from 'url-parse'
-import type { ClashProxy } from '../type'
+import type { ClashProxy, ShadowSocks, ShadowSocksWithObfs, ShadowSocksWithV2ray } from '../type'
 export type ProxySubType = 'plain' | 'base64' | 'sip008' | 'clash'
 
 export function parseProxySubContent(type: ProxySubType, content: string) {
@@ -34,7 +34,7 @@ function parseClashSubContent(content: string): ClashProxy | null {
 
 // https://shadowsocks.org/guide/configs.html#uri-and-qr-code
 // ss://YmYtY2ZiOnRlc3QvIUAjOkAxOTIuMTY4LjEwMC4xOjg4ODg#123
-export function parseShadowscoksLegacyUri(uri: string): ClashProxy | null {
+export function parseShadowsocksLegacyUri(uri: string): ClashProxy | null {
   if (!uri) {
     return null
   }
@@ -69,21 +69,46 @@ export function parseShadowsocksSIP002URI(uri: string): ClashProxy | null {
     // ss://cmM0LW1kNTpwYXNzd2Q@us.proxy.com:8888/?plugin=obfs-local%3Bobfs%3Dhttp#Example2
     // const regex = /ss:\/\/(\S+)@(\S+):(\d+)(?:\/\?plugin=(\S+))?#(\S+)/
     // const [userInfo, host, port, pluginArgs, name] = uri.match(regex) ?? []
-    const ssUrl = new URL(uri)
-    const userInfo = decode(ssUrl.username).split(':')
+    const ssUrl = new URL(decodeURIComponent(uri))
+    const [cipher, password] = decode(ssUrl.username).split(':')
     const host = ssUrl.hostname
     const port = parseInt(ssUrl.port)
-    const pluginArgs = new URLSearchParams(ssUrl.query).get('plugin') || ''
+    const pluginInfo = new URLSearchParams(ssUrl.query).get('plugin') || ''
     const name = ssUrl.hash.slice(1)
-    console.log(userInfo[0], userInfo[1], host, port, pluginArgs, name)
-    return {
+    console.log(cipher, password, host, port, pluginInfo, name)
+
+    const baseSSConfig: ShadowSocks = {
       type: 'ss',
       name,
       server: host,
-      cipher: userInfo[0] as ClashProxy['cipher'],
-      password: userInfo[1],
+      cipher: cipher as ClashProxy['cipher'],
+      password: decodeURIComponent(password),
       port,
     }
+    if (pluginInfo) {
+      const [pluginName, ...pluginArgs] = pluginInfo.split(';')
+      if (pluginName === 'obfs-local' || pluginName === 'obfs') {
+        const obfsConfig = baseSSConfig as ShadowSocksWithObfs
+        const optArgs: Record<string, string> = {}
+        for (const opts of pluginArgs) {
+          const [key, value] = opts.split('=')
+          optArgs[key] = value
+        }
+        obfsConfig.plugin = 'obfs'
+        const pluginOpt = {
+          mode: optArgs.obfs === 'tls' ? 'tls' : 'http',
+          host: optArgs['obfs-host'] ?? '',
+        }
+
+        obfsConfig['plugin-opt'] = pluginOpt as ShadowSocksWithObfs['plugin-opt']
+        return obfsConfig
+      }
+      else if (pluginName === 'v2ray-plugin') {
+        const v2rayPluginConfig = baseSSConfig as ShadowSocksWithV2ray
+        return v2rayPluginConfig
+      }
+    }
+    return baseSSConfig
   }
   return null
 }

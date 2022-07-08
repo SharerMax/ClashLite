@@ -19,7 +19,7 @@ interface BaseShadowSocks extends BaseProxy {
   'chacha20-ietf-poly1305' | 'xchacha20-ietf-poly1305'
 }
 
-interface ShadowSocksWithObfs extends BaseShadowSocks {
+export interface ShadowSocksWithObfs extends BaseShadowSocks {
   plugin: 'obfs'
   'plugin-opt': {
     mode: 'http' | 'tls'
@@ -27,7 +27,7 @@ interface ShadowSocksWithObfs extends BaseShadowSocks {
   }
 }
 
-interface ShadowSocksWithV2ray extends BaseShadowSocks {
+export interface ShadowSocksWithV2ray extends BaseShadowSocks {
   plugin: 'v2ray-plugin'
   'plugin-opt': {
     mode: 'websocket'
