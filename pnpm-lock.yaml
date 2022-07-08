@@ -19,7 +19,7 @@ specifiers:
   internal-ip: 7.0.0
   js-base64: ^3.7.2
   js-yaml: 4.1.0
-  naive-ui: 2.30.8
+  naive-ui: 2.31.0
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.4
@@ -54,7 +54,7 @@ devDependencies:
   internal-ip: 7.0.0
   js-base64: 3.7.2
   js-yaml: 4.1.0
-  naive-ui: 2.30.8_vue@3.2.37
+  naive-ui: 2.31.0_vue@3.2.37
   nano-staged: 0.8.0
   simple-git-hooks: 2.8.0
   typescript: 4.7.4
@@ -3958,8 +3958,8 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /naive-ui/2.30.8_vue@3.2.37:
-    resolution: {integrity: sha512-KRGq9ZwKt/7XyrmSEhqqTNTEDS/gyogCySWX/RKYDcehEDgkJmYrU2WRCtu/RblT/6u3K4d3Dja2+qP1FnHg8Q==}
+  /naive-ui/2.31.0_vue@3.2.37:
+    resolution: {integrity: sha512-70PHh1wDo6GP87MquQE4hHxMaISX6y/SWwmAzS86XfK+1gBCpQPcANHrmxsjPncRxk6Zq9CDeW6tzAqw6qUtfA==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
@@ -3980,7 +3980,7 @@ packages:
       vdirs: 0.1.8_vue@3.2.37
       vooks: 0.2.12_vue@3.2.37
       vue: 3.2.37
-      vueuc: 0.4.45_vue@3.2.37
+      vueuc: 0.4.47_vue@3.2.37
     dev: true
 
   /nano-staged/0.8.0:
@@ -5408,8 +5408,8 @@ packages:
       '@vue/shared': 3.2.37
     dev: true
 
-  /vueuc/0.4.45_vue@3.2.37:
-    resolution: {integrity: sha512-TdiDHn9TkJyStKJYzGGiZlekasdoYTial47UAMwQ5fuVp/5GAeJKvFk4UMtSrDfECsNncfNJ6TNveVBAq+IvrQ==}
+  /vueuc/0.4.47_vue@3.2.37:
+    resolution: {integrity: sha512-lBxGeTWLFp0O36SlcAeBrh29dxE/GboOH/0eUJhocUuE9DRrzUcVmwGau7v7ZWsxjivjJC3Qup7l9sCyA3it+g==}
     peerDependencies:
       vue: ^3.0.11
     dependencies:
