@@ -10,7 +10,7 @@ specifiers:
   '@vueuse/core': 8.8.0
   axios: 0.27.2
   chart.js: 3.8.0
-  electron: 19.0.6
+  electron: 19.0.8
   electron-builder: 23.1.0
   electron-devtools-installer: 3.2.0
   electron-store: 8.0.2
@@ -45,7 +45,7 @@ devDependencies:
   '@vueuse/core': 8.8.0_vue@3.2.37
   axios: 0.27.2
   chart.js: 3.8.0
-  electron: 19.0.6
+  electron: 19.0.8
   electron-builder: 23.1.0
   electron-devtools-installer: 3.2.0
   electron-store: 8.0.2
@@ -2017,8 +2017,8 @@ packages:
       type-fest: 2.16.0
     dev: true
 
-  /electron/19.0.6:
-    resolution: {integrity: sha512-S9Yud32nKhB0iWC0lGl2JXz4FQnCiLCnP5Vehm1/CqyeICcQGmgQaZl2HYpCJ2pesKIsYL9nsgmku/10cxm/gg==}
+  /electron/19.0.8:
+    resolution: {integrity: sha512-OWK3P/NbDFfBUv+wbYv1/OV4jehY5DQPT7n1maQJfN9hsnrWTMktXS/bmS05eSUAjNAzHmKPKfiKH2c1Yr7nGw==}
     engines: {node: '>= 8.6'}
     hasBin: true
     requiresBuild: true
