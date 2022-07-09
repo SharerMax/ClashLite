@@ -55,7 +55,7 @@ export function parseShadowsocksLegacyUri(uri: string): ClashProxy | null {
     type: 'ss',
     name,
     server,
-    cipher: cipher as ClashProxy['cipher'],
+    cipher: cipher as ShadowSocks['cipher'],
     password,
     port: parseInt(port),
   }
@@ -81,7 +81,7 @@ export function parseShadowsocksSIP002URI(uri: string): ClashProxy | null {
       type: 'ss',
       name,
       server: host,
-      cipher: cipher as ClashProxy['cipher'],
+      cipher: cipher as ShadowSocks['cipher'],
       password: decodeURIComponent(password),
       port,
     }
@@ -124,5 +124,9 @@ export function parseShadowsocksSIP002URI(uri: string): ClashProxy | null {
     return baseSSConfig
   }
   return null
+}
+
+export function parseHttp() {
+
 }
 
