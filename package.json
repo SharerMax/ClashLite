@@ -55,7 +55,7 @@
     "vite": "2.9.13",
     "vite-plugin-electron": "0.7.2",
     "vite-plugin-resolve": "2.1.2",
-    "vitest": "0.17.1",
+    "vitest": "0.18.0",
     "vue": "3.2.37",
     "vue-chartjs": "4.1.1",
     "vue-router": "4.1.1",
