@@ -1,6 +1,6 @@
 import { decode } from 'js-base64'
 import URL from 'url-parse'
-import type { ClashProxy, ShadowSocks, ShadowSocksWithObfs, ShadowSocksWithV2ray } from '../type'
+import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksWithObfs, ShadowSocksWithV2ray } from '../type'
 export type ProxySubType = 'plain' | 'base64' | 'sip008' | 'clash'
 
 export function parseProxySubContent(type: ProxySubType, content: string) {
@@ -126,7 +126,36 @@ export function parseShadowsocksSIP002URI(uri: string): ClashProxy | null {
   return null
 }
 
-export function parseHttp() {
+export function parseHttpUri(uri: string): HttpProxy | null {
+  if (uri) {
+    const parsed = new URL(uri)
+    const protocol = parsed.protocol
+    // TODO will check http(s) proxy scheme
+    if (protocol.startsWith('https')) {
+      return {
+        'name': parsed.hash ? encodeURIComponent(parsed.hash.slice(1)) : parsed.hostname,
+        'type': 'http',
+        'tls': true,
+        'username': parsed.username,
+        'password': parsed.password,
+        'port': +parsed.port,
+        'skip-cert-verify': false,
+        'server': parsed.hostname,
+      }
+    }
+    else if (protocol.startsWith('http')) {
+      return {
+        'name': parsed.hash ? encodeURIComponent(parsed.hash.slice(1)) : parsed.hostname,
+        'type': 'http',
+        'tls': false,
+        'username': parsed.username,
+        'password': parsed.password,
+        'port': +parsed.port,
+        'skip-cert-verify': false,
+        'server': parsed.hostname,
+      }
+    }
+  }
 
+  return null
 }
-

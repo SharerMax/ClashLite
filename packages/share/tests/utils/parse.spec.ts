@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { parseShadowsocksLegacyUri, parseShadowsocksSIP002URI } from '../../utils/parse'
+import { parseHttpUri, parseShadowsocksLegacyUri, parseShadowsocksSIP002URI } from '../../utils/parse'
 
 describe('utils:parse', () => {
   test('parseShadowsocksSIP002UR', () => {
@@ -52,6 +52,34 @@ describe('utils:parse', () => {
       cipher: 'rc4-md5',
       password: 'test/!@#',
       port: 8888,
+    })
+  })
+  test('parseHttpProxy', () => {
+    const nullResult = parseHttpUri('')
+    expect(nullResult).toBeNull()
+    const httpResult = parseHttpUri('http://user:password@192.168.1.2:8888#Example')
+    expect(httpResult).toBeTruthy()
+    expect(httpResult).toEqual({
+      'type': 'http',
+      'server': '192.168.1.2',
+      'port': 8888,
+      'username': 'user',
+      'password': 'password',
+      'name': 'Example',
+      'skip-cert-verify': false,
+      'tls': false,
+    })
+    const httpsResult = parseHttpUri('https://user:password@192.168.1.2:8888#Example')
+    expect(httpsResult).toBeTruthy()
+    expect(httpsResult).toEqual({
+      'type': 'http',
+      'server': '192.168.1.2',
+      'port': 8888,
+      'username': 'user',
+      'password': 'password',
+      'name': 'Example',
+      'skip-cert-verify': false,
+      'tls': true,
     })
   })
 })
