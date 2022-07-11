@@ -126,8 +126,9 @@ export interface ShadowSocksRProxy extends BaseProxy {
 /**
  * https://www.v2fly.org/config/protocols/vmess.html
  */
-type VmessCipher = 'auto' | 'aes-128-gcm' | 'chacha20-poly1305' | 'none'
-export interface OrdinaryVmessProxy extends BaseProxy {
+type VmessCipher = 'auto' | 'aes-128-gcm' | 'chacha20-poly1305' | 'none' | 'zero'
+
+interface BaseVmessProxy extends BaseProxy {
   type: 'vmess'
   uuid: string
   alertId: number
@@ -135,21 +136,24 @@ export interface OrdinaryVmessProxy extends BaseProxy {
   udp: boolean
 }
 
+export interface OrdinaryVmessProxy extends BaseVmessProxy {
+  tls: boolean
+  'skip-cert-verify': boolean
+  servername?: string
+}
+
 /**
  * vmess with websocket
  */
 export interface VmessWebsocketProxy extends OrdinaryVmessProxy {
   network: 'ws'
-  tls: boolean
-  'skip-cert-verify': boolean
-  servername?: string
   'ws-opts': {
     path: string
     headers?: {
       Host: string
     }
-    'max-early-data': number
-    'early-data-header-name': string
+    'max-early-data'?: number
+    'early-data-header-name'?: string
   }
 }
 /**
@@ -158,8 +162,6 @@ export interface VmessWebsocketProxy extends OrdinaryVmessProxy {
  */
 export interface VmessH2Proxy extends OrdinaryVmessProxy {
   network: 'h2'
-  tls: true
-  'skip-cert-verify': boolean
   'h2-opts': {
     host: string[]
     path: string
@@ -169,7 +171,7 @@ export interface VmessH2Proxy extends OrdinaryVmessProxy {
  * vmess with http
  * https://www.v2fly.org/config/transport/tcp.html#httprequestobject
  */
-export interface VmessHttpProxy extends OrdinaryVmessProxy {
+export interface VmessHttpProxy extends BaseVmessProxy {
   network: 'http'
   'http-opts': {
     method: 'PUT' | 'GET' | 'DELETE' | 'POST' | 'PATCH' // other can use ?
@@ -183,9 +185,6 @@ export interface VmessHttpProxy extends OrdinaryVmessProxy {
  */
 export interface VmessGrpcProxy extends OrdinaryVmessProxy {
   network: 'grpc'
-  tls: boolean
-  'skip-cert-verify': boolean
-  servername?: string
   'grpc-opts': {
     'grpc-service-name': string
   }

@@ -1,7 +1,7 @@
 import { decode } from 'js-base64'
 import URL from 'url-parse'
 import { toUnicode } from 'punycode-esm'
-import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksWithObfs, ShadowSocksWithV2ray, SocksProxy, TrojanProxy } from '../type'
+import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksWithObfs, ShadowSocksWithV2ray, SocksProxy, TrojanProxy, VmessProxy } from '../type'
 export type ProxySubType = 'plain' | 'base64' | 'sip008' | 'clash'
 
 export function parseProxySubContent(type: ProxySubType, content: string) {
@@ -76,7 +76,7 @@ export function parseShadowsocksSIP002URI(uri: string): ClashProxy | null {
     const port = parseInt(ssUrl.port)
     const pluginInfo = new URLSearchParams(ssUrl.query).get('plugin') || ''
     const name = ssUrl.hash.slice(1)
-    console.log(cipher, password, host, port, pluginInfo, name)
+    // console.log(cipher, password, host, port, pluginInfo, name)
 
     const baseSSConfig: ShadowSocks = {
       type: 'ss',
@@ -221,6 +221,140 @@ export function parseTrojanUri(uri: string): TrojanProxy | null {
           headers: {
             Host: host,
           },
+        },
+      }
+    }
+  }
+  return null
+}
+
+interface V2rayNUri {
+  v: string
+  ps: string
+  add: string
+  port: string
+  id: string
+  aid: string
+  scy: 'auto' | 'aes-128-gcm' | 'chacha20-poly1305' | 'none' | 'zero'
+  net: string
+  type: string
+  host: string
+  path: string
+  tls: string
+  sni: string
+}
+
+export function parseVmessUri(uri: string): VmessProxy | null {
+  if (uri && uri.startsWith('vmess://')) {
+    const encodedUri = uri.slice(8)
+    const v2rayNFormat = decode(encodedUri)
+    const uriObj = JSON.parse(v2rayNFormat) as V2rayNUri
+    const name = uriObj.ps
+    const alertId = +uriObj.aid
+    const uuid = uriObj.id
+    const port = +uriObj.port
+    const cipher = uriObj.scy
+    const server = uriObj.add
+    const netType = uriObj.net
+    const tls = Boolean(uriObj.tls)
+    if (netType === 'tcp') {
+      const obfsType = uriObj.type
+      if (obfsType === 'http') {
+        const path = uriObj.path
+        const host = uriObj.host
+
+        return {
+          name,
+          'type': 'vmess',
+          server,
+          port,
+          cipher,
+          alertId,
+          'udp': true,
+          uuid,
+          'network': 'http',
+          'http-opts': {
+            method: 'PUT',
+            path: [path],
+            headers: {
+              Host: host.split(','),
+            },
+          },
+        }
+      }
+      return {
+        name,
+        'type': 'vmess',
+        server,
+        port,
+        cipher,
+        alertId,
+        'udp': true,
+        uuid,
+        tls,
+        'skip-cert-verify': false,
+      }
+    }
+    else if (netType === 'ws') {
+      const host = uriObj.host
+      const path = uriObj.path
+      return {
+        name,
+        'type': 'vmess',
+        server,
+        port,
+        cipher,
+        alertId,
+        'udp': true,
+        uuid,
+        tls,
+        'skip-cert-verify': false,
+        'network': 'ws',
+        'ws-opts': {
+          path,
+          headers: {
+            Host: host,
+          },
+        },
+      }
+    }
+    else if (netType === 'h2') {
+      const host = uriObj.host
+      const path = uriObj.path
+      return {
+        name,
+        'type': 'vmess',
+        server,
+        port,
+        cipher,
+        alertId,
+        'udp': true,
+        uuid,
+        tls,
+        'skip-cert-verify': false,
+        'network': 'h2',
+        'h2-opts': {
+          host: host.split(','),
+          path,
+        },
+      }
+    }
+    else if (netType === 'grpc') {
+      const path = uriObj.path
+      return {
+        name,
+        'type': 'vmess',
+        server,
+        port,
+        cipher,
+        alertId,
+        'udp': true,
+        uuid,
+        tls,
+        'skip-cert-verify': false,
+        'network': 'grpc',
+        'grpc-opts': {
+          'grpc-service-name': path,
         },
       }
     }
