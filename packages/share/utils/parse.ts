@@ -1,6 +1,7 @@
 import { decode } from 'js-base64'
 import URL from 'url-parse'
-import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksWithObfs, ShadowSocksWithV2ray, SocksProxy } from '../type'
+import { toUnicode } from 'punycode-esm'
+import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksWithObfs, ShadowSocksWithV2ray, SocksProxy, TrojanProxy } from '../type'
 export type ProxySubType = 'plain' | 'base64' | 'sip008' | 'clash'
 
 export function parseProxySubContent(type: ProxySubType, content: string) {
@@ -167,7 +168,7 @@ export function parseSocksUri(uri: string): SocksProxy | null {
   const socksUrl = new URL(uri)
   return {
     'type': 'socks5',
-    'name': socksUrl.hash ? encodeURIComponent(socksUrl.hash.slice(1)) : socksUrl.hostname,
+    'name': socksUrl.hash ? decodeURIComponent(socksUrl.hash.slice(1)) : socksUrl.hostname,
     'server': socksUrl.hostname,
     'port': +socksUrl.port,
     'username': socksUrl.username || '',
@@ -177,4 +178,52 @@ export function parseSocksUri(uri: string): SocksProxy | null {
     'sni': '',
     'skip-cert-verify': false,
   }
+}
+
+export function parseTrojanUri(uri: string): TrojanProxy | null {
+  if (uri && (uri.startsWith('trojan://') || uri.startsWith('trojan-go://'))) {
+    const trojanUrl = new URL(uri)
+    const name = trojanUrl.hash ? decodeURIComponent(trojanUrl.hash) : trojanUrl.hostname
+    const server = toUnicode(trojanUrl.hostname)
+    const port = +trojanUrl.port || 443
+    const password = decodeURIComponent(trojanUrl.auth)
+    const queryParams = new URLSearchParams(trojanUrl.query)
+    const trojanType = queryParams.get('type')
+    if (!trojanType) {
+      return {
+        'type': 'trojan',
+        name,
+        server,
+        port,
+        password,
+        'alpn': ['h2', 'http/1.1'],
+        'skip-cert-verify': false,
+        'udp': true,
+      }
+    }
+    else if (trojanType === 'ws') {
+      const wsPath = decodeURIComponent(queryParams.get('path') || '') || '/'
+      const host = decodeURIComponent(queryParams.get('host') || '') || server
+      const sni = decodeURIComponent(queryParams.get('sni') || '') || server
+      const tls = queryParams.has('tls') || !queryParams.has('allowInsecure')
+      return {
+        'type': 'trojan',
+        name,
+        server,
+        port,
+        password,
+        'network': 'ws',
+        sni,
+        'skip-cert-verify': !tls,
+        'udp': true,
+        'ws-opts': {
+          path: wsPath,
+          headers: {
+            Host: host,
+          },
+        },
+      }
+    }
+  }
+  return null
 }

@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest'
-import { parseHttpUri, parseShadowsocksLegacyUri, parseShadowsocksSIP002URI, parseSocksUri } from '../../utils/parse'
+import { parseHttpUri, parseShadowsocksLegacyUri, parseShadowsocksSIP002URI, parseSocksUri, parseTrojanUri } from '../../utils/parse'
+import type { OrdinaryTrojanProxy, TrojanWebsocketProxy } from '@/share/type'
 
 describe('utils:parse', () => {
   test('parseShadowsocksSIP002UR', () => {
@@ -100,5 +101,39 @@ describe('utils:parse', () => {
       'sni': '',
     })
   })
-})
 
+  test('parseTrojanProxy', () => {
+    const emptyResult = parseTrojanUri('')
+    expect(emptyResult).toBeNull()
+    const originResult = parseTrojanUri('trojan://password1234@google.com:8443')
+    expect(originResult).toEqual<OrdinaryTrojanProxy>({
+      'type': 'trojan',
+      'skip-cert-verify': false,
+      'alpn': ['h2', 'http/1.1'],
+      'name': 'google.com',
+      'password': 'password1234',
+      'port': 8443,
+      'server': 'google.com',
+      'udp': true,
+    })
+    const trojanResult = parseTrojanUri('trojan-go://password1234@google.com/?sni=microsoft.com&type=ws&host=youtube.com&path=%2Fgo&encryption=ss%3Baes-256-gcm%3Afuckgfw')
+    expect(trojanResult).toEqual<TrojanWebsocketProxy>({
+      'type': 'trojan',
+      'name': 'google.com',
+      'skip-cert-verify': false,
+      'network': 'ws',
+      'password': 'password1234',
+      'server': 'google.com',
+      'port': 443,
+      'sni': 'microsoft.com',
+      'udp': true,
+      'ws-opts': {
+        path: '/go',
+        headers: {
+          Host: 'youtube.com',
+        },
+      },
+
+    })
+  })
+})

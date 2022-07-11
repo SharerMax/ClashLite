@@ -98,7 +98,7 @@ export interface TrojanWebsocketProxy extends BaseProxy {
   type: 'trojan'
   password: string
   network: 'ws'
-  sin: string
+  sni: string
   udp: boolean
   'skip-cert-verify': boolean
   'ws-opts'?: {
