@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { parseHttpUri, parseShadowsocksLegacyUri, parseShadowsocksSIP002URI } from '../../utils/parse'
+import { parseHttpUri, parseShadowsocksLegacyUri, parseShadowsocksSIP002URI, parseSocksUri } from '../../utils/parse'
 
 describe('utils:parse', () => {
   test('parseShadowsocksSIP002UR', () => {
@@ -80,6 +80,24 @@ describe('utils:parse', () => {
       'name': 'Example',
       'skip-cert-verify': false,
       'tls': true,
+    })
+  })
+
+  test('parseSocksProxy', () => {
+    const nullSocksResult = parseSocksUri('')
+    expect(nullSocksResult).toBeNull()
+    const socksResult = parseSocksUri('socks5://username:password@192.168.100.123:8000#Example')
+    expect(socksResult).toEqual({
+      'type': 'socks5',
+      'name': 'Example',
+      'server': '192.168.100.123',
+      'port': 8000,
+      'username': 'username',
+      'password': 'password',
+      'tls': false,
+      'skip-cert-verify': false,
+      'udp': true,
+      'sni': '',
     })
   })
 })

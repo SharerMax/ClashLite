@@ -1,6 +1,6 @@
 import { decode } from 'js-base64'
 import URL from 'url-parse'
-import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksWithObfs, ShadowSocksWithV2ray } from '../type'
+import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksWithObfs, ShadowSocksWithV2ray, SocksProxy } from '../type'
 export type ProxySubType = 'plain' | 'base64' | 'sip008' | 'clash'
 
 export function parseProxySubContent(type: ProxySubType, content: string) {
@@ -158,4 +158,23 @@ export function parseHttpUri(uri: string): HttpProxy | null {
   }
 
   return null
+}
+
+export function parseSocksUri(uri: string): SocksProxy | null {
+  if (!uri) {
+    return null
+  }
+  const socksUrl = new URL(uri)
+  return {
+    'type': 'socks5',
+    'name': socksUrl.hash ? encodeURIComponent(socksUrl.hash.slice(1)) : socksUrl.hostname,
+    'server': socksUrl.hostname,
+    'port': +socksUrl.port,
+    'username': socksUrl.username || '',
+    'password': socksUrl.password || '',
+    'tls': false,
+    'udp': true,
+    'sni': '',
+    'skip-cert-verify': false,
+  }
 }
