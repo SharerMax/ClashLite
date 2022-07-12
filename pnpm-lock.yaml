@@ -21,7 +21,7 @@ specifiers:
   js-yaml: 4.1.0
   naive-ui: 2.31.0
   nano-staged: 0.8.0
-  punycode-esm: ^1.0.5
+  punycode-esm: 1.0.5
   simple-git-hooks: 2.8.0
   typescript: 4.7.4
   unocss: 0.43.2
