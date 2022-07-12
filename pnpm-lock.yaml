@@ -7,7 +7,7 @@ specifiers:
   '@types/url-parse': 1.4.8
   '@vicons/carbon': 0.12.0
   '@vitejs/plugin-vue': 2.3.3
-  '@vueuse/core': 8.9.1
+  '@vueuse/core': 8.9.2
   axios: 0.27.2
   chart.js: 3.8.0
   electron: 19.0.8
@@ -43,7 +43,7 @@ devDependencies:
   '@types/url-parse': 1.4.8
   '@vicons/carbon': 0.12.0
   '@vitejs/plugin-vue': 2.3.3_vite@2.9.14+vue@3.2.37
-  '@vueuse/core': 8.9.1_vue@3.2.37
+  '@vueuse/core': 8.9.2_vue@3.2.37
   axios: 0.27.2
   chart.js: 3.8.0
   electron: 19.0.8
@@ -951,8 +951,8 @@ packages:
     resolution: {integrity: sha512-4rSJemR2NQIo9Klm1vabqWjD8rs/ZaJSzMxkMNeJS6lHiUjjUeYFbooN19NgFjztubEKh3WlZUeOLVdbbUWHsw==}
     dev: true
 
-  /@vueuse/core/8.9.1_vue@3.2.37:
-    resolution: {integrity: sha512-a7goYb/gJxjXRBw4Fr/jEACiN33ghwM1ohJVu+Zwsr3lNL4qCQ1nU+ogta98lNg5hXJxWj7mYEmQDjjyWOu5nA==}
+  /@vueuse/core/8.9.2_vue@3.2.37:
+    resolution: {integrity: sha512-dE3/JgwqIHmmtmRBdZAnq87rZCSFbYVps2t3gWy9Jv/+Qp6sHSSKuPFtwguJVZ2OnaGnB/AMRmx4CuFRxFin3A==}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
       vue: ^2.6.0 || ^3.2.0
@@ -963,18 +963,18 @@ packages:
         optional: true
     dependencies:
       '@types/web-bluetooth': 0.0.14
-      '@vueuse/metadata': 8.9.1
-      '@vueuse/shared': 8.9.1_vue@3.2.37
+      '@vueuse/metadata': 8.9.2
+      '@vueuse/shared': 8.9.2_vue@3.2.37
       vue: 3.2.37
       vue-demi: 0.13.1_vue@3.2.37
     dev: true
 
-  /@vueuse/metadata/8.9.1:
-    resolution: {integrity: sha512-6LADOlyl3oENHa9dsoY7LXjU1Mh14DnpM6ztETI3hpm5ZffOMIG5CB2Q6aEZfIvYr1lkJVmG2L82wFKk7VRfIA==}
+  /@vueuse/metadata/8.9.2:
+    resolution: {integrity: sha512-g2s2BeyeEtJElmMFfFPnM+BTvnt0omniyvz8U18/zXDpQIMGozlNQgHoFeratyMfgVBhH/u2VKzmchChtDsgPQ==}
     dev: true
 
-  /@vueuse/shared/8.9.1_vue@3.2.37:
-    resolution: {integrity: sha512-klZfn7ijI3juqVgpfQVrrlBh4uTFajwSCWm8Cdt45Kg26b1LZ9jn9n7J6GhmkFay5016GnjjivQoekQSMeJNUg==}
+  /@vueuse/shared/8.9.2_vue@3.2.37:
+    resolution: {integrity: sha512-s4Nk82oheL5z1GywyGnqjob0MzbAt88olMZa0vgt/p3gcMsT8Ff7+SqmNgEFC6AAs6xiuhOAZpnew9Zs3d90yQ==}
     peerDependencies:
       '@vue/composition-api': ^1.1.0
       vue: ^2.6.0 || ^3.2.0
