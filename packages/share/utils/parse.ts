@@ -253,15 +253,16 @@ export function parseVmessUri(uri: string): VmessProxy | null {
     const alertId = +uriObj.aid
     const uuid = uriObj.id
     const port = +uriObj.port
-    const cipher = uriObj.scy
+    const cipher = uriObj.scy || 'auto'
     const server = uriObj.add
     const netType = uriObj.net
     const tls = Boolean(uriObj.tls)
+    const sni = uriObj.sni || uriObj.add
     if (netType === 'tcp') {
       const obfsType = uriObj.type
       if (obfsType === 'http') {
-        const path = uriObj.path
-        const host = uriObj.host
+        const path = uriObj.path || '/'
+        const host = uriObj.host || server
 
         return {
           name,
@@ -292,12 +293,13 @@ export function parseVmessUri(uri: string): VmessProxy | null {
         'udp': true,
         uuid,
         tls,
+        'servername': sni,
         'skip-cert-verify': false,
       }
     }
     else if (netType === 'ws') {
-      const host = uriObj.host
-      const path = uriObj.path
+      const host = uriObj.host || server
+      const path = uriObj.path || '/'
       return {
         name,
         'type': 'vmess',
@@ -308,6 +310,7 @@ export function parseVmessUri(uri: string): VmessProxy | null {
         'udp': true,
         uuid,
         tls,
+        'servername': sni,
         'skip-cert-verify': false,
         'network': 'ws',
         'ws-opts': {
@@ -319,8 +322,8 @@ export function parseVmessUri(uri: string): VmessProxy | null {
       }
     }
     else if (netType === 'h2') {
-      const host = uriObj.host
-      const path = uriObj.path
+      const host = uriObj.host || server
+      const path = uriObj.path || '/'
       return {
         name,
         'type': 'vmess',
@@ -331,6 +334,7 @@ export function parseVmessUri(uri: string): VmessProxy | null {
         'udp': true,
         uuid,
         tls,
+        'servername': sni,
         'skip-cert-verify': false,
         'network': 'h2',
         'h2-opts': {
@@ -340,7 +344,7 @@ export function parseVmessUri(uri: string): VmessProxy | null {
       }
     }
     else if (netType === 'grpc') {
-      const path = uriObj.path
+      const path = uriObj.path || '/'
       return {
         name,
         'type': 'vmess',
@@ -351,6 +355,7 @@ export function parseVmessUri(uri: string): VmessProxy | null {
         'udp': true,
         uuid,
         tls,
+        'servername': sni,
         'skip-cert-verify': false,
         'network': 'grpc',
         'grpc-opts': {
