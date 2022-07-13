@@ -175,7 +175,6 @@ describe('utils:parse', () => {
     })
   })
   const h2VmessProxy = parseVmessUri('vmess://eyJ2IjoiMiIsInBzIjoiRXhhbXBsZSIsImFkZCI6Imdvb2dsZS5jb20iLCJwb3J0IjoiNDQzIiwiaWQiOiIwNDljM2JiNi1lNzcxLTQyODYtYjZmMi0zMzg3ZjhhNjZiMTMiLCJhaWQiOiIwIiwibmV0IjoiaDIiLCJ0eXBlIjoibm9uZSIsImhvc3QiOiJmYWNlYm9vay5jb20iLCJwYXRoIjoiIiwidGxzIjoidGxzIiwgInNuaSI6ICJiaW5nLmNvbSIsICJzY3kiOiAibm9uZSJ9')
-  console.log(h2VmessProxy)
   expect(h2VmessProxy).toEqual<VmessH2Proxy>({
     'type': 'vmess',
     'name': 'Example',
