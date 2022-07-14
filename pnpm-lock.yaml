@@ -6,7 +6,7 @@ specifiers:
   '@types/js-yaml': 4.0.5
   '@types/url-parse': 1.4.8
   '@vicons/carbon': 0.12.0
-  '@vitejs/plugin-vue': 2.3.3
+  '@vitejs/plugin-vue': 3.0.0
   '@vueuse/core': 8.9.2
   axios: 0.27.2
   chart.js: 3.8.0
@@ -27,7 +27,7 @@ specifiers:
   unocss: 0.44.1
   url-parse: 1.5.10
   vfonts: 0.0.3
-  vite: 2.9.14
+  vite: 3.0.0
   vite-plugin-electron: 0.7.2
   vite-plugin-resolve: 2.1.2
   vitest: 0.18.0
@@ -42,7 +42,7 @@ devDependencies:
   '@types/js-yaml': 4.0.5
   '@types/url-parse': 1.4.8
   '@vicons/carbon': 0.12.0
-  '@vitejs/plugin-vue': 2.3.3_vite@2.9.14+vue@3.2.37
+  '@vitejs/plugin-vue': 3.0.0_vite@3.0.0+vue@3.2.37
   '@vueuse/core': 8.9.2_vue@3.2.37
   axios: 0.27.2
   chart.js: 3.8.0
@@ -60,10 +60,10 @@ devDependencies:
   punycode-esm: 1.0.5
   simple-git-hooks: 2.8.0
   typescript: 4.7.4
-  unocss: 0.44.1_vite@2.9.14
+  unocss: 0.44.1_vite@3.0.0
   url-parse: 1.5.10
   vfonts: 0.0.3
-  vite: 2.9.14
+  vite: 3.0.0
   vite-plugin-electron: 0.7.2
   vite-plugin-resolve: 2.1.2
   vitest: 0.18.0
@@ -804,7 +804,7 @@ packages:
       '@unocss/core': 0.44.1
     dev: true
 
-  /@unocss/vite/0.44.1_vite@2.9.14:
+  /@unocss/vite/0.44.1_vite@3.0.0:
     resolution: {integrity: sha512-Yf3+1acbyu3BfkWmjTEt48LG1DTe8/PCvhXyvyy6s8nScWcgeJ4rCHN13tAQVqq5xlkjgTpMAUV+tT8t6eUxtg==}
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0
@@ -816,21 +816,21 @@ packages:
       '@unocss/scope': 0.44.1
       '@unocss/transformer-directives': 0.44.1
       magic-string: 0.26.2
-      vite: 2.9.14
+      vite: 3.0.0
     dev: true
 
   /@vicons/carbon/0.12.0:
     resolution: {integrity: sha512-kCOgr/ZOhZzoiFLJ8pwxMa2TMxrkCUOA22qExPabus35F4+USqzcsxaPoYtqRd9ROOYiHrSqwapak/ywF0D9bg==}
     dev: true
 
-  /@vitejs/plugin-vue/2.3.3_vite@2.9.14+vue@3.2.37:
-    resolution: {integrity: sha512-SmQLDyhz+6lGJhPELsBdzXGc+AcaT8stgkbiTFGpXPe8Tl1tJaBw1A6pxDqDuRsVkD8uscrkx3hA7QDOoKYtyw==}
-    engines: {node: '>=12.0.0'}
+  /@vitejs/plugin-vue/3.0.0_vite@3.0.0+vue@3.2.37:
+    resolution: {integrity: sha512-yWP34ArFh/jAeNUDkkLz/kVRLjf5ppJiq4L36f64Cp6dIrMQeYZGDP9xxdemlXfZR9ylN9JgHUl3GzfqOtgYDg==}
+    engines: {node: '>=14.18.0'}
     peerDependencies:
-      vite: ^2.5.10
+      vite: ^3.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 2.9.14
+      vite: 3.0.0
       vue: 3.2.37
     dev: true
 
@@ -5137,7 +5137,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unocss/0.44.1_vite@2.9.14:
+  /unocss/0.44.1_vite@3.0.0:
     resolution: {integrity: sha512-HNOomMq9w0skX2X6dpfBdz/pUfzsb05HiYZbukvKeV+GayqXhYNCYJhuKGpOoI7Q5DvQ3jfgZXKHorl7c5PFeA==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -5160,7 +5160,7 @@ packages:
       '@unocss/transformer-compile-class': 0.44.1
       '@unocss/transformer-directives': 0.44.1
       '@unocss/transformer-variant-group': 0.44.1
-      '@unocss/vite': 0.44.1_vite@2.9.14
+      '@unocss/vite': 0.44.1_vite@3.0.0
     transitivePeerDependencies:
       - supports-color
       - vite
@@ -5272,20 +5272,23 @@ packages:
     resolution: {integrity: sha512-u1qAHClpMS6v/UM6yBiLOXEeceeK+zvZYRjYC0ReOy1Y2Anxcbf9oKHqN29MOMPxif5ZFLqy2dSsSdXv3rz9eQ==}
     dev: true
 
-  /vite/2.9.14:
-    resolution: {integrity: sha512-P/UCjSpSMcE54r4mPak55hWAZPlyfS369svib/gpmz8/01L822lMPOJ/RYW6tLCe1RPvMvOsJ17erf55bKp4Hw==}
-    engines: {node: '>=12.2.0'}
+  /vite/3.0.0:
+    resolution: {integrity: sha512-M7phQhY3+fRZa0H+1WzI6N+/onruwPTBTMvaj7TzgZ0v2TE+N2sdLKxJOfOv9CckDWt5C4HmyQP81xB4dwRKzA==}
+    engines: {node: '>=14.18.0'}
     hasBin: true
     peerDependencies:
       less: '*'
       sass: '*'
       stylus: '*'
+      terser: ^5.4.0
     peerDependenciesMeta:
       less:
         optional: true
       sass:
         optional: true
       stylus:
+        optional: true
+      terser:
         optional: true
     dependencies:
       esbuild: 0.14.47
@@ -5326,12 +5329,13 @@ packages:
       local-pkg: 0.4.1
       tinypool: 0.2.2
       tinyspy: 0.3.3
-      vite: 2.9.14
+      vite: 3.0.0
     transitivePeerDependencies:
       - less
       - sass
       - stylus
       - supports-color
+      - terser
     dev: true
 
   /vooks/0.2.12_vue@3.2.37:
