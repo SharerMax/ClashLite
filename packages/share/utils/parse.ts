@@ -18,9 +18,18 @@ function parsePlainProxyContent(content: string): ClashProxy | null {
   return null
 }
 
-function parseBase64SubContent(content: string): ClashProxy | null {
+function parseBase64SubContent(content: string): ClashProxy[] | null {
   console.log(content)
-  return null
+  const decodedContent = decode(content)
+  const uriList = decodedContent.split('\n')
+  const clashProxyList: ClashProxy[] = []
+  for (const uri of uriList) {
+    const clashProxy = parseUri(uri)
+    if (clashProxy) {
+      clashProxyList.push(clashProxy)
+    }
+  }
+  return clashProxyList
 }
 
 function parseSIP008SubContent(content: string): ClashProxy | null {
@@ -33,9 +42,40 @@ function parseClashSubContent(content: string): ClashProxy | null {
   return null
 }
 
+export function parseUri(uri: string): ClashProxy | null {
+  const protocol = new URL(uri).protocol
+  switch (protocol) {
+    case 'ss':
+      return parseShadowsocksUri(uri)
+    case 'vmess':
+      return parseVmessUri(uri)
+    case 'trojan':
+    case 'trojan-go':
+      return parseTrojanUri(uri)
+    case 'http':
+    case 'https':
+      return parseHttpUri(uri)
+    case 'socks5':
+      return parseSocksUri(uri)
+  }
+  return null
+}
+
+export function parseShadowsocksUri(uri: string): ShadowSocks | null {
+  if (uri) {
+    if (uri.includes('@')) {
+      return parseShadowsocksUri(uri)
+    }
+    else {
+      return parseShadowsocksLegacyUri(uri)
+    }
+  }
+  return null
+}
+
 // https://shadowsocks.org/guide/configs.html#uri-and-qr-code
 // ss://YmYtY2ZiOnRlc3QvIUAjOkAxOTIuMTY4LjEwMC4xOjg4ODg#123
-export function parseShadowsocksLegacyUri(uri: string): ClashProxy | null {
+export function parseShadowsocksLegacyUri(uri: string): ShadowSocks | null {
   if (!uri) {
     return null
   }

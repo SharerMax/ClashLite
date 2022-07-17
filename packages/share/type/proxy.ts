@@ -192,4 +192,4 @@ export interface VmessGrpcProxy extends OrdinaryVmessProxy {
 
 export type VmessProxy = OrdinaryVmessProxy | VmessWebsocketProxy | VmessH2Proxy | VmessHttpProxy | VmessGrpcProxy
 
-export type ClashProxy = ShadowSocks | ShadowSocksRProxy | HttpProxy | SocksProxy | SnellProxy | TrojanProxy
+export type ClashProxy = ShadowSocks | ShadowSocksRProxy | HttpProxy | SocksProxy | SnellProxy | TrojanProxy | VmessProxy
