@@ -1,7 +1,7 @@
 import { release } from 'os'
 import { join } from 'path'
 import {
-  BrowserWindow, app, session, shell,
+  BrowserWindow, app, shell,
 } from 'electron'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import clash from '@/main/clash'
@@ -85,10 +85,10 @@ async function createWindow() {
 app.whenReady().then(() => {
   createWindow()
   if (!app.isPackaged) {
-    session.defaultSession.setProxy({
-      mode: 'fixed_servers',
-      proxyRules: 'socks5://127.0.0.1:7890',
-    })
+    // session.defaultSession.setProxy({
+    //   mode: 'fixed_servers',
+    //   proxyRules: 'socks5://127.0.0.1:7890',
+    // })
     installExtension(VUEJS_DEVTOOLS.id)
       .then(name => console.log(`Added Extension:  ${name}`))
       .catch(err => console.log('An error occurred: ', err))
