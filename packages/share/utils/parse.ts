@@ -1,7 +1,7 @@
 import { decode } from 'js-base64'
 import URL from 'url-parse'
 import { toUnicode } from 'punycode-esm'
-import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksWithObfs, ShadowSocksWithV2ray, SocksProxy, TrojanProxy, VmessProxy } from '../type'
+import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksCipher, ShadowSocksRProxy, ShadowSocksWithObfs, ShadowSocksWithV2ray, ShadowsocksRObfs, ShadowsocksRProtocol, SocksProxy, TrojanProxy, VmessProxy } from '../type'
 export type ProxySubType = 'plain' | 'base64' | 'sip008' | 'clash'
 
 export function parseProxySubContent(type: ProxySubType, content: string) {
@@ -73,6 +73,17 @@ export function parseShadowsocksUri(uri: string): ShadowSocks | null {
   return null
 }
 
+function fillBase64Content(content: string) {
+  if (content) {
+    const length = content.length
+    const fillCount = length % 4
+    if (fillCount !== 0) {
+      return content + '='.repeat(fillCount)
+    }
+  }
+  return content
+}
+
 // https://shadowsocks.org/guide/configs.html#uri-and-qr-code
 // ss://YmYtY2ZiOnRlc3QvIUAjOkAxOTIuMTY4LjEwMC4xOjg4ODg#123
 export function parseShadowsocksLegacyUri(uri: string): ShadowSocks | null {
@@ -86,7 +97,7 @@ export function parseShadowsocksLegacyUri(uri: string): ShadowSocks | null {
     [withOutNameUri, name] = uri.split('#')
   }
 
-  const decodeInfo = decode(withOutNameUri.slice(5))
+  const decodeInfo = decode(fillBase64Content(withOutNameUri.slice(5)))
   const serveSplitIndex = decodeInfo.lastIndexOf('@')
   const userInfo = decodeInfo.slice(0, serveSplitIndex)
   const serverInfo = decodeInfo.slice(serveSplitIndex + 1)
@@ -401,6 +412,43 @@ export function parseVmessUri(uri: string): VmessProxy | null {
         'grpc-opts': {
           'grpc-service-name': path,
         },
+      }
+    }
+  }
+  return null
+}
+
+// https://github.com/tindy2013/subconverter/blob/a24cb7c00a7e5a71ef2e6c0d64d84d91bc7a21d6/src/parser/subparser.cpp#L531-L566
+export function parseShadowsocksRUri(uri: string): ShadowSocksRProxy | null {
+  if (uri) {
+    // ssr6.ssrsub.com:8333:origin:rc4-md5:plain:cGFzc2Z3MnhzNGUh
+    //
+    // ssr://c3NyNi5zc3JzdWIuY29tOjgzMzM6b3JpZ2luOnJjNC1tZDU6cGxhaW46Y0dGemMyWjNNbmh6TkdVaC8/b2Jmc3BhcmFtPVYxZFhMbGxQVlU1RlJVUXVWMGxPJnByb3RvcGFyYW09VjFkWExsbFBWVTVGUlVRdVYwbE8mcmVtYXJrcz1WMWRYTGxsUFZVNUZSVVF1VjBsTyZncm91cD1WMWRYTGxsUFZVNUZSVVF1VjBsTw==
+    const ssrUri = decode(fillBase64Content(uri.slice(6)))
+    const queryIndex = ssrUri.indexOf('/?')
+    const serverInfo = ssrUri.slice(0, queryIndex)
+    // ssr6.ssrsub.com:8333:origin:rc4-md5:plain:cGFzc2Z3MnhzNGUh
+    const matchResult = serverInfo.match(/(\S+):(\d+):(\S+):(\S+):(\S+):(\S+)/)
+    if (matchResult) {
+      const [,server, port, protocol, method, obfs, password] = matchResult
+      //  /?obfsparam=V1dXLllPVU5FRUQuV0lO&protoparam=V1dXLllPVU5FRUQuV0lO&remarks=V1dXLllPVU5FRUQuV0lO&group=V1dXLllPVU5FRUQuV0lO
+      const params = new URLSearchParams(ssrUri.slice(queryIndex + 2))
+      const group = decode(fillBase64Content(params.has('group') ? params.get('group') || '' : ''))
+      const name = `${group}-${decode(fillBase64Content(params.has('remarks') ? params.get('remarks') || '' : server))}`
+      const obfsparam = decode(fillBase64Content(params.has('obfsparam') ? params.get('obfsparam') || '' : ''))
+      const protoparam = decode(fillBase64Content(params.has('protoparam') ? params.get('protoparam') || '' : ''))
+      return {
+        server,
+        'port': +port,
+        'type': 'ssr',
+        'protocol': protocol as ShadowsocksRProtocol,
+        'cipher': method as ShadowSocksCipher,
+        'obfs': obfs as ShadowsocksRObfs,
+        'password': decode(fillBase64Content(password)),
+        'udp': true,
+        'name': name || server,
+        'obfs-param': obfsparam,
+        'protocol-param': protoparam,
       }
     }
   }
