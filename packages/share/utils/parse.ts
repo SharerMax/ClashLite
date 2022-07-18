@@ -13,32 +13,32 @@ export function parseProxySubContent(type: ProxySubType, content: string) {
   }
 }
 
-function parsePlainProxyContent(content: string): ClashProxy | null {
-  console.log(content)
+function parsePlainProxyContent(content: string): ClashProxy[] | null {
+  if (content) {
+    const uriList = content.split('\n|\r\n')
+    const clashProxyList: ClashProxy[] = []
+    for (const uri of uriList) {
+      const clashProxy = parseUri(uri)
+      if (clashProxy) {
+        clashProxyList.push(clashProxy)
+      }
+    }
+    return clashProxyList
+  }
+
   return null
 }
 
 function parseBase64SubContent(content: string): ClashProxy[] | null {
-  console.log(content)
   const decodedContent = decode(content)
-  const uriList = decodedContent.split('\n')
-  const clashProxyList: ClashProxy[] = []
-  for (const uri of uriList) {
-    const clashProxy = parseUri(uri)
-    if (clashProxy) {
-      clashProxyList.push(clashProxy)
-    }
-  }
-  return clashProxyList
+  return parsePlainProxyContent(decodedContent)
 }
 
-function parseSIP008SubContent(content: string): ClashProxy | null {
-  console.log(content)
+function parseSIP008SubContent(_content: string): ClashProxy | null {
   return null
 }
 
-function parseClashSubContent(content: string): ClashProxy | null {
-  console.log(content)
+function parseClashSubContent(_content: string): ClashProxy | null {
   return null
 }
 
