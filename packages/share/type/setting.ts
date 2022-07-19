@@ -1,3 +1,5 @@
+import type { RunMode } from './clash'
+
 export interface AppSetting {
   autoStartClash: boolean
   autoStartApp: boolean
@@ -10,6 +12,7 @@ export interface ClashSettingSubscribe {
   type: 'plain' | 'base64' | 'sip008' | 'clash'
 }
 export interface ClashSettings {
+  mode: RunMode
   listenProt: number
   listenType: 'http' | 'socks5' | 'mixed'
   allowLan: boolean
