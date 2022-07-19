@@ -8,6 +8,7 @@ import { app, ipcMain } from 'electron'
 import type { IpcMainEvent } from 'electron'
 import yaml from 'js-yaml'
 import getPort, { portNumbers } from 'get-port'
+import Store from 'electron-store'
 
 import type { BaseClashConfig, ClashStartInfo } from '../../packages/share/type/clash'
 
@@ -124,6 +125,7 @@ export function init() {
 
   handle('start', startClash)
   on('stop', stopClash)
+  Store.initRenderer()
 }
 
 export default {
