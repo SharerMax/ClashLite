@@ -156,17 +156,21 @@ import {
 } from 'naive-ui'
 import { Add, Edit, View } from '@vicons/carbon'
 import { ref } from 'vue'
+import type { ClashSettingSubscribe } from '@/share/type'
 
 const showEditProxySub = ref(false)
 function handleAddProxySubButtonClick() {
   showEditProxySub.value = true
 }
 
+const subProxyData = ref<ClashSettingSubscribe>(window.clash.getProxySubscribe())
+
 const proxySubForm = ref<null | FormInst>(null)
 function handleProxySubSaveButtonClick() {
   proxySubForm.value?.validate((errors) => {
     if (!errors) {
       showEditProxySub.value = false
+      window.clash.saveProxySubscribe(subProxyData.value)
     }
   })
 }
@@ -174,12 +178,6 @@ function handleProxySubSaveButtonClick() {
 function handleProxySubCancelButtonClick() {
   showEditProxySub.value = false
 }
-
-const subProxyData = ref({
-  url: null,
-  type: 'plain',
-  period: 10,
-})
 
 const proxySubFormRules: FormRules = {
   url: {

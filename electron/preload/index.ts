@@ -3,9 +3,9 @@ import { internalIpV4 } from 'internal-ip'
 import Store from 'electron-store'
 import { domReady } from './utils'
 import { useLoading } from './loading'
-import type { BaseClashConfig, ClashStartInfo, RunMode } from '@/share/type'
+import type { ClashSettingSubscribe, ClashSettings, ClashStartInfo, RunMode } from '@/share/type'
 
-const clashStore = new Store<BaseClashConfig>({
+const clashStore = new Store<ClashSettings>({
   name: 'clash_config',
 })
 
@@ -25,6 +25,12 @@ const clashExpose = {
   },
   getRunMode() {
     return clashStore.get('mode', 'direct')
+  },
+  saveProxySubscribe(subscribe: ClashSettingSubscribe) {
+    clashStore.set('subscribe', subscribe)
+  },
+  getProxySubscribe() {
+    return clashStore.get('subscribe', { period: 10, url: '', type: 'plain' })
   },
 }
 

@@ -6,7 +6,7 @@ export interface AppSetting {
 
 export interface ClashSettingSubscribe {
   url: string
-  period: number
+  period: number // unit is minutes
   type: 'plain' | 'base64' | 'sip008' | 'clash'
 }
 export interface ClashSettings {
