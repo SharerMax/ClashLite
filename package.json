@@ -22,9 +22,11 @@
     "debug": "vite --mode debug",
     "build": "vue-tsc --noEmit && vite build && electron-builder",
     "build:dir": "vue-tsc --noEmit && vite build && electron-builder --dir",
+    "test": "vitest",
     "test:e2e": "npx playwright test",
     "test:e2e:headless": "npx playwright test --headed",
-    "test:unit": "vitest"
+    "test:unit": "vitest",
+    "typecheck": "vue-tsc --noEmit"
   },
   "devDependencies": {
     "@antfu/eslint-config": "0.25.2",

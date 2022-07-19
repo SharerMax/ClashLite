@@ -128,7 +128,7 @@ import { Save } from '@vicons/carbon'
 import { ref } from 'vue'
 import type { AppSetting, ClashSettings } from '../../../packages/share/type'
 
-const clashSettings = ref<ClashSettings>({
+const clashSettings = ref<Pick<ClashSettings, 'listenProt' | 'allowLan' | 'listenType' | 'autoStart'>>({
   listenProt: 7890,
   listenType: 'mixed',
   allowLan: false,
