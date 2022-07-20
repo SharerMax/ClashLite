@@ -10,7 +10,7 @@
         @click="handleAddProxySubButtonClick"
       >
         <template #icon>
-          <n-icon :component="Add" />
+          <n-icon :component="CloudDownload" />
         </template>
       </n-button>
     </div>
@@ -24,35 +24,21 @@
         <div class="flex flex-col">
           <span>127.0.0.1:1080</span>
           <div>
-            <n-tag
-              type="success"
-              size="small"
-            >
+            <n-tag type="success" size="small">
               vmess
             </n-tag>
           </div>
         </div>
         <template #suffix>
           <div class="flex">
-            <n-button
-              quaternary
-              size="small"
-              disabled
-            >
+            <n-button quaternary size="small" disabled>
               <template #icon>
-                <n-icon
-                  :component="Edit"
-                />
+                <n-icon :component="Edit" />
               </template>
             </n-button>
-            <n-button
-              quaternary
-              size="small"
-            >
+            <n-button quaternary size="small">
               <template #icon>
-                <n-icon
-                  :component="View"
-                />
+                <n-icon :component="View" />
               </template>
             </n-button>
           </div>
@@ -65,7 +51,7 @@
     class="w-100"
     preset="card"
     closable
-    title="新增订阅"
+    :title="proxySubFormTitle"
     size="small"
   >
     <n-form
@@ -75,47 +61,26 @@
       :rules="proxySubFormRules"
       :model="subProxyData"
     >
-      <n-form-item
-        label="订阅"
-        path="url"
-      >
-        <n-input
-          v-model:value="subProxyData.url"
-          placeholder="订阅地址"
-        />
+      <n-form-item label="订阅" path="url">
+        <n-input v-model:value="subProxyData.url" placeholder="订阅地址" />
       </n-form-item>
-      <n-form-item
-        label="类型"
-        path="type"
-      >
+      <n-form-item label="类型" path="type">
         <n-radio-group v-model:value="subProxyData.type">
-          <n-radio-button
-            value="plain"
-          >
+          <n-radio-button value="plain">
             PLAIN
           </n-radio-button>
-          <n-radio-button
-            label="BASE64"
-            value="base64"
-          >
+          <n-radio-button label="BASE64" value="base64">
             BASE64
           </n-radio-button>
-          <n-radio-button
-            value="sip008"
-          >
+          <n-radio-button value="sip008">
             SIP008
           </n-radio-button>
-          <n-radio-button
-            value="clash"
-          >
+          <n-radio-button value="clash">
             CLASH
           </n-radio-button>
         </n-radio-group>
       </n-form-item>
-      <n-form-item
-        label="更新"
-        path="period"
-      >
+      <n-form-item label="更新" path="period">
         <n-input-number
           v-model:value="subProxyData.period"
           placeholder="更新周期；[10, 10000]"
@@ -130,17 +95,10 @@
     </n-form>
     <template #action>
       <div class="flex">
-        <n-button
-          class="ml-a"
-          @click="handleProxySubCancelButtonClick"
-        >
+        <n-button class="ml-a" @click="handleProxySubCancelButtonClick">
           取消
         </n-button>
-        <n-button
-          class="ml-4"
-          type="primary"
-          @click="handleProxySubSaveButtonClick"
-        >
+        <n-button class="ml-4" type="primary" @click="handleProxySubSaveButtonClick">
           保存
         </n-button>
       </div>
@@ -154,7 +112,7 @@ import {
   NButton, NForm, NFormItem, NH2, NIcon, NInput, NInputNumber, NList, NListItem, NModal,
   NRadioButton, NRadioGroup, NTag,
 } from 'naive-ui'
-import { Add, Edit, View } from '@vicons/carbon'
+import { CloudDownload, Edit, View } from '@vicons/carbon'
 import { ref } from 'vue'
 import type { ClashSettingSubscribe } from '@/share/type'
 
@@ -162,15 +120,18 @@ const showEditProxySub = ref(false)
 function handleAddProxySubButtonClick() {
   showEditProxySub.value = true
 }
-
-const subProxyData = ref<ClashSettingSubscribe>(window.clash.getProxySubscribe())
-
+const defaultProxySub = window.clash.getProxySubscribe()
+const subProxyData = ref<ClashSettingSubscribe>(defaultProxySub)
+const proxySubFormTitle = ref(defaultProxySub.url ? '编辑订阅' : '新增订阅')
 const proxySubForm = ref<null | FormInst>(null)
 function handleProxySubSaveButtonClick() {
   proxySubForm.value?.validate((errors) => {
     if (!errors) {
       showEditProxySub.value = false
-      window.clash.saveProxySubscribe(subProxyData.value)
+      // IPC transform pure js object
+      // https://www.electronjs.org/docs/latest/breaking-changes#behavior-changed-sending-non-js-objects-over-ipc-now-throws-an-exception
+      window.clash.saveProxySubscribe({ ...subProxyData.value })
+      proxySubFormTitle.value = '编辑订阅'
     }
   })
 }

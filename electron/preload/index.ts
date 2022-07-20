@@ -27,6 +27,7 @@ const clashExpose = {
     return clashStore.get('mode', 'direct')
   },
   saveProxySubscribe(subscribe: ClashSettingSubscribe) {
+    console.log('save')
     clashStore.set('subscribe', subscribe)
   },
   getProxySubscribe() {
