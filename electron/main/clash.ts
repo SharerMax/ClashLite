@@ -3,14 +3,14 @@ import process from 'process'
 import path from 'path'
 import type { ChildProcess } from 'child_process'
 import { spawn } from 'child_process'
-import { existsSync, mkdirSync, writeFileSync } from 'fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
 import { app, ipcMain, net } from 'electron'
 import type { IpcMainEvent } from 'electron'
 import yaml from 'js-yaml'
 import getPort, { portNumbers } from 'get-port'
 import Store from 'electron-store'
 
-import type { BaseClashConfig, ClashStartInfo } from '../../packages/share/type/clash'
+import type { BaseClashConfig, ClashConfig, ClashStartInfo, ProxyProviders } from '../../packages/share/type/clash'
 import { parseProxySubContent } from '@/share/utils/parse'
 
 let clashProcess: ChildProcess | null = null
@@ -54,6 +54,15 @@ function getClashExecPath() {
 
   return path.join(getBinDirPath(), 'clash.exe')
 }
+
+function getProxyProviderDirPath() {
+  return path.join(getClashConfigDirPath(), 'proxies')
+}
+
+function getProxyProviderFilePath() {
+  return path.join(getProxyProviderDirPath(), 'subscribe_provider.yml')
+}
+
 // 1. check config
 // 2. generate basic config
 
@@ -103,7 +112,51 @@ export function updateProxySub() {
       const decoder = new TextDecoder()
       const content = decoder.decode(chunk)
       const proxies = parseProxySubContent('base64', content)
+      if (!proxies) {
+        return
+      }
       console.log(JSON.stringify(proxies))
+      const proxiesYaml = yaml.dump({
+        proxies,
+      })
+      const proxyProviderDir = getProxyProviderDirPath()
+      if (!existsSync(proxyProviderDir)) {
+        mkdirSync(proxyProviderDir)
+      }
+      const proxyProviderFilePath = getProxyProviderFilePath()
+      writeFileSync(proxyProviderFilePath, proxiesYaml)
+
+      const configFilePath = getClashDefaultConfigPath()
+      const configYaml = (yaml.load(readFileSync(configFilePath, 'utf-8')) as any) as ClashConfig
+      let needUpdateConfigFile = false
+      if (configYaml && typeof configYaml === 'object') {
+        if (!('proxy-providers' in configYaml)) {
+          const proxyProvider: ProxyProviders = {
+            'subscribe-proxies': {
+              'type': 'file',
+              'path': proxyProviderFilePath,
+              'health-check': {
+                enable: false,
+                url: 'http://www.gstatic.com/generate_204',
+                interval: 36000,
+              },
+            },
+          }
+          configYaml['proxy-providers'] = proxyProvider
+          needUpdateConfigFile = true
+        }
+        if (!('proxy-groups' in configYaml)) {
+          configYaml['proxy-groups'] = [{
+            name: 'Proxy',
+            type: 'select',
+            use: ['subscribe-proxies'],
+          }]
+          needUpdateConfigFile = true
+        }
+        if (needUpdateConfigFile) {
+          writeFileSync(configFilePath, yaml.dump(configYaml))
+        }
+      }
     })
   })
   request.end()
@@ -140,7 +193,7 @@ export function init() {
   handle('start', startClash)
   on('stop', stopClash)
   Store.initRenderer()
-  // updateProxySub()
+  updateProxySub()
 }
 
 export default {

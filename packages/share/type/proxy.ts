@@ -131,7 +131,7 @@ type VmessCipher = 'auto' | 'aes-128-gcm' | 'chacha20-poly1305' | 'none' | 'zero
 interface BaseVmessProxy extends BaseProxy {
   type: 'vmess'
   uuid: string
-  alertId: number
+  alterId: number
   cipher: VmessCipher
   udp: boolean
 }

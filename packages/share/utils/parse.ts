@@ -5,7 +5,7 @@ import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksCipher, ShadowSocks
 import { parse as parseJson } from './json-helper'
 export type ProxySubType = 'plain' | 'base64' | 'sip008' | 'clash'
 
-export function parseProxySubContent(type: ProxySubType, content: string) {
+export function parseProxySubContent(type: ProxySubType, content: string): ClashProxy[] | null {
   switch (type) {
     case 'plain': return parsePlainProxyContent(content)
     case 'base64': return parseBase64SubContent(content)
@@ -43,11 +43,11 @@ function parseBase64SubContent(content: string): ClashProxy[] | null {
   return null
 }
 
-function parseSIP008SubContent(_content: string): ClashProxy | null {
+function parseSIP008SubContent(_content: string): ClashProxy[] | null {
   return null
 }
 
-function parseClashSubContent(_content: string): ClashProxy | null {
+function parseClashSubContent(_content: string): ClashProxy[] | null {
   return null
 }
 
@@ -315,7 +315,7 @@ export function parseVmessUri(uri: string): VmessProxy | null {
       return null
     }
     const name = uriObj.ps
-    const alertId = +uriObj.aid
+    const alterId = +uriObj.aid
     const uuid = uriObj.id
     const port = +uriObj.port
     const cipher = uriObj.scy || 'auto'
@@ -335,7 +335,7 @@ export function parseVmessUri(uri: string): VmessProxy | null {
           server,
           port,
           cipher,
-          alertId,
+          alterId,
           'udp': true,
           uuid,
           'network': 'http',
@@ -354,7 +354,7 @@ export function parseVmessUri(uri: string): VmessProxy | null {
         server,
         port,
         cipher,
-        alertId,
+        alterId,
         'udp': true,
         uuid,
         tls,
@@ -371,7 +371,7 @@ export function parseVmessUri(uri: string): VmessProxy | null {
         server,
         port,
         cipher,
-        alertId,
+        alterId,
         'udp': true,
         uuid,
         tls,
@@ -395,7 +395,7 @@ export function parseVmessUri(uri: string): VmessProxy | null {
         server,
         port,
         cipher,
-        alertId,
+        alterId,
         'udp': true,
         uuid,
         tls,
@@ -416,7 +416,7 @@ export function parseVmessUri(uri: string): VmessProxy | null {
         server,
         port,
         cipher,
-        alertId,
+        alterId,
         'udp': true,
         uuid,
         tls,
