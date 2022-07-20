@@ -4,13 +4,14 @@ import path from 'path'
 import type { ChildProcess } from 'child_process'
 import { spawn } from 'child_process'
 import { existsSync, mkdirSync, writeFileSync } from 'fs'
-import { app, ipcMain } from 'electron'
+import { app, ipcMain, net } from 'electron'
 import type { IpcMainEvent } from 'electron'
 import yaml from 'js-yaml'
 import getPort, { portNumbers } from 'get-port'
 import Store from 'electron-store'
 
 import type { BaseClashConfig, ClashStartInfo } from '../../packages/share/type/clash'
+import { parseProxySubContent } from '@/share/utils/parse'
 
 let clashProcess: ChildProcess | null = null
 
@@ -95,6 +96,19 @@ export function stopClash() {
   }
 }
 
+export function updateProxySub() {
+  const request = net.request('https://suo.yt/bj65Oxe')
+  request.on('response', (response) => {
+    response.on('data', (chunk) => {
+      const decoder = new TextDecoder()
+      const content = decoder.decode(chunk)
+      const proxies = parseProxySubContent('base64', content)
+      console.log(JSON.stringify(proxies))
+    })
+  })
+  request.end()
+}
+
 function generateDefaultClashConfig() {
   const defaultConfig: BaseClashConfig = {
     'mode': 'direct',
@@ -126,6 +140,7 @@ export function init() {
   handle('start', startClash)
   on('stop', stopClash)
   Store.initRenderer()
+  // updateProxySub()
 }
 
 export default {

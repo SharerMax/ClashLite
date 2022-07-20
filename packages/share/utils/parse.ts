@@ -1,7 +1,8 @@
-import { decode } from 'js-base64'
+import { decode as decodeBase64, isValid as isBase64Valid } from 'js-base64'
 import URL from 'url-parse'
 import { toUnicode } from 'punycode-esm'
 import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksCipher, ShadowSocksRProxy, ShadowSocksWithObfs, ShadowSocksWithV2ray, ShadowsocksRObfs, ShadowsocksRProtocol, SocksProxy, TrojanProxy, VmessProxy } from '../type'
+import { parse as parseJson } from './json-helper'
 export type ProxySubType = 'plain' | 'base64' | 'sip008' | 'clash'
 
 export function parseProxySubContent(type: ProxySubType, content: string) {
@@ -15,10 +16,15 @@ export function parseProxySubContent(type: ProxySubType, content: string) {
 
 function parsePlainProxyContent(content: string): ClashProxy[] | null {
   if (content) {
-    const uriList = content.split('\n|\r\n')
+    const uriList = content.split(/\s/)
+    console.log(uriList)
     const clashProxyList: ClashProxy[] = []
     for (const uri of uriList) {
-      const clashProxy = parseUri(uri)
+      const clashProxy = parseUri(uri.trim())
+      console.log('============')
+      console.log(`raw: ${uri}`)
+      console.log(`clash: ${JSON.stringify(clashProxy)}`)
+      console.log('============')
       if (clashProxy) {
         clashProxyList.push(clashProxy)
       }
@@ -30,8 +36,11 @@ function parsePlainProxyContent(content: string): ClashProxy[] | null {
 }
 
 function parseBase64SubContent(content: string): ClashProxy[] | null {
-  const decodedContent = decode(content)
-  return parsePlainProxyContent(decodedContent)
+  if (isBase64Valid(content)) {
+    const decodedContent = decodeBase64(content)
+    return parsePlainProxyContent(decodedContent)
+  }
+  return null
 }
 
 function parseSIP008SubContent(_content: string): ClashProxy | null {
@@ -44,18 +53,19 @@ function parseClashSubContent(_content: string): ClashProxy | null {
 
 export function parseUri(uri: string): ClashProxy | null {
   const protocol = new URL(uri).protocol
+  console.log(uri, protocol)
   switch (protocol) {
-    case 'ss':
+    case 'ss:':
       return parseShadowsocksUri(uri)
-    case 'vmess':
+    case 'vmess:':
       return parseVmessUri(uri)
-    case 'trojan':
-    case 'trojan-go':
+    case 'trojan:':
+    case 'trojan-go:':
       return parseTrojanUri(uri)
-    case 'http':
-    case 'https':
+    case 'http:':
+    case 'https:':
       return parseHttpUri(uri)
-    case 'socks5':
+    case 'socks5:':
       return parseSocksUri(uri)
   }
   return null
@@ -97,7 +107,7 @@ export function parseShadowsocksLegacyUri(uri: string): ShadowSocks | null {
     [withOutNameUri, name] = uri.split('#')
   }
 
-  const decodeInfo = decode(fillBase64Content(withOutNameUri.slice(5)))
+  const decodeInfo = decodeBase64(fillBase64Content(withOutNameUri.slice(5)))
   const serveSplitIndex = decodeInfo.lastIndexOf('@')
   const userInfo = decodeInfo.slice(0, serveSplitIndex)
   const serverInfo = decodeInfo.slice(serveSplitIndex + 1)
@@ -122,7 +132,7 @@ export function parseShadowsocksSIP002URI(uri: string): ClashProxy | null {
     // const regex = /ss:\/\/(\S+)@(\S+):(\d+)(?:\/\?plugin=(\S+))?#(\S+)/
     // const [userInfo, host, port, pluginArgs, name] = uri.match(regex) ?? []
     const ssUrl = new URL(decodeURIComponent(uri))
-    const [cipher, password] = decode(ssUrl.username).split(':')
+    const [cipher, password] = decodeBase64(ssUrl.username).split(':')
     const host = ssUrl.hostname
     const port = parseInt(ssUrl.port)
     const pluginInfo = new URLSearchParams(ssUrl.query).get('plugin') || ''
@@ -298,8 +308,12 @@ interface V2rayNUri {
 export function parseVmessUri(uri: string): VmessProxy | null {
   if (uri && uri.startsWith('vmess://')) {
     const encodedUri = uri.slice(8)
-    const v2rayNFormat = decode(encodedUri)
-    const uriObj = JSON.parse(v2rayNFormat) as V2rayNUri
+    const v2rayNFormat = decodeBase64(encodedUri)
+    // dirty handle
+    const uriObj = parseJson(v2rayNFormat) as V2rayNUri
+    if (!uriObj) {
+      return null
+    }
     const name = uriObj.ps
     const alertId = +uriObj.aid
     const uuid = uriObj.id
@@ -424,7 +438,7 @@ export function parseShadowsocksRUri(uri: string): ShadowSocksRProxy | null {
     // ssr6.ssrsub.com:8333:origin:rc4-md5:plain:cGFzc2Z3MnhzNGUh
     //
     // ssr://c3NyNi5zc3JzdWIuY29tOjgzMzM6b3JpZ2luOnJjNC1tZDU6cGxhaW46Y0dGemMyWjNNbmh6TkdVaC8/b2Jmc3BhcmFtPVYxZFhMbGxQVlU1RlJVUXVWMGxPJnByb3RvcGFyYW09VjFkWExsbFBWVTVGUlVRdVYwbE8mcmVtYXJrcz1WMWRYTGxsUFZVNUZSVVF1VjBsTyZncm91cD1WMWRYTGxsUFZVNUZSVVF1VjBsTw==
-    const ssrUri = decode(fillBase64Content(uri.slice(6)))
+    const ssrUri = decodeBase64(fillBase64Content(uri.slice(6)))
     const queryIndex = ssrUri.indexOf('/?')
     const serverInfo = ssrUri.slice(0, queryIndex)
     // ssr6.ssrsub.com:8333:origin:rc4-md5:plain:cGFzc2Z3MnhzNGUh
@@ -433,10 +447,10 @@ export function parseShadowsocksRUri(uri: string): ShadowSocksRProxy | null {
       const [,server, port, protocol, method, obfs, password] = matchResult
       //  /?obfsparam=V1dXLllPVU5FRUQuV0lO&protoparam=V1dXLllPVU5FRUQuV0lO&remarks=V1dXLllPVU5FRUQuV0lO&group=V1dXLllPVU5FRUQuV0lO
       const params = new URLSearchParams(ssrUri.slice(queryIndex + 2))
-      const group = decode(fillBase64Content(params.has('group') ? params.get('group') || '' : ''))
-      const name = `${group}-${decode(fillBase64Content(params.has('remarks') ? params.get('remarks') || '' : server))}`
-      const obfsparam = decode(fillBase64Content(params.has('obfsparam') ? params.get('obfsparam') || '' : ''))
-      const protoparam = decode(fillBase64Content(params.has('protoparam') ? params.get('protoparam') || '' : ''))
+      const group = decodeBase64(fillBase64Content(params.has('group') ? params.get('group') || '' : ''))
+      const name = `${group}-${decodeBase64(fillBase64Content(params.has('remarks') ? params.get('remarks') || '' : server))}`
+      const obfsparam = decodeBase64(fillBase64Content(params.has('obfsparam') ? params.get('obfsparam') || '' : ''))
+      const protoparam = decodeBase64(fillBase64Content(params.has('protoparam') ? params.get('protoparam') || '' : ''))
       return {
         server,
         'port': +port,
@@ -444,7 +458,7 @@ export function parseShadowsocksRUri(uri: string): ShadowSocksRProxy | null {
         'protocol': protocol as ShadowsocksRProtocol,
         'cipher': method as ShadowSocksCipher,
         'obfs': obfs as ShadowsocksRObfs,
-        'password': decode(fillBase64Content(password)),
+        'password': decodeBase64(fillBase64Content(password)),
         'udp': true,
         'name': name || server,
         'obfs-param': obfsparam,
