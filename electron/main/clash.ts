@@ -9,11 +9,19 @@ import type { IpcMainEvent } from 'electron'
 import yaml from 'js-yaml'
 import getPort, { portNumbers } from 'get-port'
 import Store from 'electron-store'
-
+import schedule from 'node-schedule'
+import dayjs from 'dayjs'
 import type { BaseClashConfig, ClashConfig, ClashStartInfo, ProxyProviders } from '../../packages/share/type/clash'
 import { parseProxySubContent } from '@/share/utils/parse'
+import type { ClashSettings } from '@/share/type'
+import { isSubScribeEqual } from '@/share/utils/setting'
 
 let clashProcess: ChildProcess | null = null
+let proxySubscribeDateBaseJob: null | schedule.Job = null
+let proxySubscribeCronJob: null | schedule.Job = null
+const store = new Store<ClashSettings>({
+  name: 'clash_config',
+})
 
 type EventName = 'start' | 'stop'
 
@@ -105,8 +113,50 @@ export function stopClash() {
   }
 }
 
-export function updateProxySub() {
-  const request = net.request('https://suo.yt/bj65Oxe')
+function startDateBaseProxySubscribeSchedule(date: Date) {
+  proxySubscribeDateBaseJob = schedule.scheduleJob(date, () => {
+    updateProxySub()
+  })
+}
+
+function startCronBaseProxySubscribeSchedule(period: number) {
+  proxySubscribeCronJob = schedule.scheduleJob(`*/${period} * * * *`, () => {
+    updateProxySub()
+  })
+}
+
+function cancelAllProxySubscribeJob() {
+  proxySubscribeCronJob?.cancel()
+  proxySubscribeDateBaseJob?.cancel()
+}
+
+function checkProxySubTask() {
+  const subscribe = store.get('subscribe', null)
+  if (subscribe) {
+    const updateTime = subscribe.updateTime
+    if (!updateTime) {
+      const period = subscribe.period
+      const now = Date.now()
+      const willUpdateTime = now - period
+      if (willUpdateTime >= period * 60 * 1000) {
+        updateProxySub()
+      }
+      else {
+        const willUpdateDate = dayjs().add(willUpdateTime, 'millisecond')
+        startDateBaseProxySubscribeSchedule(willUpdateDate.toDate())
+      }
+      //
+    }
+  }
+}
+
+function updateProxySub() {
+  const subscribe = store.get('subscribe', null)
+  const subscribeUrl = subscribe?.url
+  if (!subscribeUrl) {
+    return
+  }
+  const request = net.request(subscribeUrl)
   request.on('response', (response) => {
     response.on('data', (chunk) => {
       const decoder = new TextDecoder()
@@ -115,7 +165,6 @@ export function updateProxySub() {
       if (!proxies) {
         return
       }
-      console.log(JSON.stringify(proxies))
       const proxiesYaml = yaml.dump({
         proxies,
       })
@@ -157,6 +206,8 @@ export function updateProxySub() {
           writeFileSync(configFilePath, yaml.dump(configYaml))
         }
       }
+      subscribe.updateTime = Date.now()
+      startCronBaseProxySubscribeSchedule(subscribe.period)
     })
   })
   request.end()
@@ -184,6 +235,17 @@ function generateDefaultClashConfig() {
   writeFileSync(getClashDefaultConfigPath(), yamlContent, { encoding: 'utf-8' })
 }
 
+function initClashConfigStore() {
+  Store.initRenderer()
+  // FIXME: handle proxy sub change
+  store.onDidChange('subscribe', (newSubscribe, oldSubscribe) => {
+    if (!isSubScribeEqual(newSubscribe, oldSubscribe)) {
+      cancelAllProxySubscribeJob()
+      checkProxySubTask()
+    }
+  })
+}
+
 export function init() {
   console.log('config dir: ', getClashDefaultConfigPath())
   if (!existsSync(getClashDefaultConfigPath())) {
@@ -192,8 +254,8 @@ export function init() {
 
   handle('start', startClash)
   on('stop', stopClash)
-  Store.initRenderer()
-  updateProxySub()
+  initClashConfigStore()
+  checkProxySubTask()
 }
 
 export default {

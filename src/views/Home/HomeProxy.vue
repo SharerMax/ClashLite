@@ -115,22 +115,27 @@ import {
 import { CloudDownload, Edit, View } from '@vicons/carbon'
 import { ref } from 'vue'
 import type { ClashSettingSubscribe } from '@/share/type'
+import { isSubScribeEqual } from '@/share/utils/setting'
 
 const showEditProxySub = ref(false)
 function handleAddProxySubButtonClick() {
   showEditProxySub.value = true
 }
-const defaultProxySub = window.clash.getProxySubscribe()
-const subProxyData = ref<ClashSettingSubscribe>(defaultProxySub)
-const proxySubFormTitle = ref(defaultProxySub.url ? '编辑订阅' : '新增订阅')
+let savedProxySub = window.clash.getProxySubscribe()
+// prevent side effect of proxy object
+const subProxyData = ref<ClashSettingSubscribe>({ ...savedProxySub })
+const proxySubFormTitle = ref(savedProxySub.url ? '编辑订阅' : '新增订阅')
 const proxySubForm = ref<null | FormInst>(null)
 function handleProxySubSaveButtonClick() {
   proxySubForm.value?.validate((errors) => {
     if (!errors) {
       showEditProxySub.value = false
-      // IPC transform pure js object
+      if (!isSubScribeEqual(savedProxySub, subProxyData.value)) {
+        // IPC transform pure js object
       // https://www.electronjs.org/docs/latest/breaking-changes#behavior-changed-sending-non-js-objects-over-ipc-now-throws-an-exception
-      window.clash.saveProxySubscribe({ ...subProxyData.value })
+        savedProxySub = { ...subProxyData.value }
+        window.clash.saveProxySubscribe(savedProxySub)
+      }
       proxySubFormTitle.value = '编辑订阅'
     }
   })

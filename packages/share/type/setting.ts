@@ -10,6 +10,7 @@ export interface ClashSettingSubscribe {
   url: string
   period: number // unit is minutes
   type: 'plain' | 'base64' | 'sip008' | 'clash'
+  updateTime?: number
 }
 export interface ClashSettings {
   mode: RunMode

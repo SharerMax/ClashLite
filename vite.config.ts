@@ -24,7 +24,7 @@ export default defineConfig(({ mode }) => {
             entry: 'electron/main/index.ts',
             vite: {
               build: {
-                sourcemap: false,
+                sourcemap: 'inline',
                 outDir: 'dist/electron/main',
               },
               resolve: {
