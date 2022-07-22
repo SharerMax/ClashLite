@@ -2,6 +2,13 @@
   "extends": ["config:base","group:allNonMajor"],
   "enabledManagers": ["npm"],
   "labels": ["dependencies"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["pin"],
+      "labels": ["pin", "dependencies"],
+      "automerge": true
+    }
+  ],
   "timezone": "Asia/Shanghai",
   "schedule": [
     "before 6pm on Friday"
