@@ -3,7 +3,7 @@ import { internalIpV4 } from 'internal-ip'
 import Store from 'electron-store'
 import { domReady } from './utils'
 import { useLoading } from './loading'
-import type { ClashSettingSubscribe, ClashSettings, ClashStartInfo, RunMode } from '@/share/type'
+import type { ClashSettingSubscribe, ClashSettings, ClashStartInfo, Event, RunMode } from '@/share/type'
 
 const clashStore = new Store<ClashSettings>({
   name: 'clash_config',
@@ -13,13 +13,21 @@ function copyTextToClipboard(text: string) {
   clipboard.writeText(text)
 }
 
+function sendClashEventToMain(eventName: Event.MainEvent.ClashEventName, ...args: any) {
+  ipcRenderer.send(eventName, args)
+}
+
+function sendClashInvokeEventToMain(eventName: Event.MainEvent.ClashInvokeEventName, ...args: any) {
+  return ipcRenderer.invoke(eventName, args)
+}
+
 const clashExpose = {
-  start: () => (ipcRenderer.invoke('clash:start') as Promise<ClashStartInfo>).then((info) => {
+  start: () => (sendClashInvokeEventToMain('clash:start') as Promise<ClashStartInfo>).then((info) => {
     localStorage.setItem('ext-ctl', info.controllerUrl)
     localStorage.setItem('ctl-secret', info.apiSecret)
     return !!info.controllerUrl
   }),
-  stop: () => ipcRenderer.send('clash:stop'),
+  stop: () => sendClashEventToMain('clash:stop'),
   saveRunMode(mode: RunMode) {
     clashStore.set('mode', mode)
   },
@@ -27,7 +35,7 @@ const clashExpose = {
     return clashStore.get('mode', 'direct')
   },
   saveProxySubscribe(subscribe: ClashSettingSubscribe) {
-    console.log('save')
+    sendClashEventToMain('clash:proxySubscribeChange')
     clashStore.set('subscribe', subscribe)
   },
   getProxySubscribe() {

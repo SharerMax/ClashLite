@@ -4,17 +4,16 @@ import path from 'path'
 import type { ChildProcess } from 'child_process'
 import { spawn } from 'child_process'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
-import { app, ipcMain, net } from 'electron'
-import type { IpcMainEvent } from 'electron'
+import { app, net } from 'electron'
 import yaml from 'js-yaml'
 import getPort, { portNumbers } from 'get-port'
 import Store from 'electron-store'
 import schedule from 'node-schedule'
 import dayjs from 'dayjs'
 import type { BaseClashConfig, ClashConfig, ClashStartInfo, ProxyProviders } from '../../packages/share/type/clash'
+import { defineClashEventHandler } from './event-handle'
 import { parseProxySubContent } from '@/share/utils/parse'
 import type { ClashSettings } from '@/share/type'
-import { isSubScribeEqual } from '@/share/utils/setting'
 
 let clashProcess: ChildProcess | null = null
 let proxySubscribeDateBaseJob: null | schedule.Job = null
@@ -22,18 +21,6 @@ let proxySubscribeCronJob: null | schedule.Job = null
 const store = new Store<ClashSettings>({
   name: 'clash_config',
 })
-
-type EventName = 'start' | 'stop'
-
-export type ClashEventName = `clash:${EventName}`
-
-function on(api: EventName, listener: (event: IpcMainEvent, ...arg: any[]) => void) {
-  ipcMain.on(`clash:${api}`, listener)
-}
-
-function handle<T>(api: EventName, listener: (event: IpcMainEvent, ...arg: any[]) => T) {
-  ipcMain.handle(`clash:${api}`, listener)
-}
 
 function getBinDirPath() {
   if (app.isPackaged) {
@@ -234,16 +221,12 @@ function generateDefaultClashConfig() {
   // TODO: 异常处理
   writeFileSync(getClashDefaultConfigPath(), yamlContent, { encoding: 'utf-8' })
 }
-
+export function handleProxySubscribeChange() {
+  cancelAllProxySubscribeJob()
+  checkProxySubTask()
+}
 function initClashConfigStore() {
   Store.initRenderer()
-  // FIXME: handle proxy sub change
-  store.onDidChange('subscribe', (newSubscribe, oldSubscribe) => {
-    if (!isSubScribeEqual(newSubscribe, oldSubscribe)) {
-      cancelAllProxySubscribeJob()
-      checkProxySubTask()
-    }
-  })
 }
 
 export function init() {
@@ -252,8 +235,7 @@ export function init() {
     generateDefaultClashConfig()
   }
 
-  handle('start', startClash)
-  on('stop', stopClash)
+  defineClashEventHandler()
   initClashConfigStore()
   checkProxySubTask()
 }
