@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base"],
+  "extends": ["config:base","group:allNonMajor"],
   "enabledManagers": ["npm"],
   "labels": ["dependencies"],
   "timezone": "Asia/Shanghai",
