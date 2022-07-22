@@ -1,14 +1,27 @@
-node_modules
+# OS specific
 .DS_Store
-dist
-dist-ssr
+
+# for local config
 *.local
 .debug.env
 
+# deps
+node_modules
+
+# temp file
 tmp
 **/.tmp
-release
 
+# build file
+release
+dist
+dist-ssr
+
+# cache
 .eslintcache
 
+# external
 extra
+
+# log
+vite-plugin-electron.log
