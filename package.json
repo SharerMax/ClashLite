@@ -1,7 +1,7 @@
 {
   "name": "electron-clash-lite",
   "version": "1.0.0",
-  "packageManager": "pnpm@7.5.1",
+  "packageManager": "pnpm@7.6.0",
   "author": "SharerMax",
   "license": "MIT",
   "keywords": [
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "0.25.2",
-    "@playwright/test": "1.23.4",
+    "@playwright/test": "1.24.0",
     "@types/js-yaml": "4.0.5",
     "@types/node": "16.11.45",
     "@types/node-schedule": "^2.1.0",
@@ -41,11 +41,11 @@
     "axios": "0.27.2",
     "chart.js": "3.8.0",
     "dayjs": "^1.11.4",
-    "electron": "19.0.8",
+    "electron": "19.0.9",
     "electron-builder": "23.1.0",
     "electron-devtools-installer": "3.2.0",
     "electron-store": "8.0.2",
-    "eslint": "8.19.0",
+    "eslint": "8.20.0",
     "get-port": "6.1.2",
     "internal-ip": "7.0.0",
     "js-base64": "3.7.2",
@@ -56,17 +56,17 @@
     "punycode-esm": "1.0.5",
     "simple-git-hooks": "2.8.0",
     "typescript": "4.7.4",
-    "unocss": "0.44.3",
+    "unocss": "0.44.5",
     "url-parse": "1.5.10",
     "vfonts": "0.0.3",
     "vite": "3.0.2",
-    "vite-plugin-electron": "0.7.5",
+    "vite-plugin-electron": "0.8.1",
     "vite-plugin-resolve": "2.1.2",
-    "vitest": "0.18.0",
+    "vitest": "0.18.1",
     "vue": "3.2.37",
     "vue-chartjs": "4.1.1",
     "vue-router": "4.1.2",
-    "vue-tsc": "0.38.5"
+    "vue-tsc": "0.38.9"
   },
   "env": {
     "VITE_DEV_SERVER_HOST": "127.0.0.1",
