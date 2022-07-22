@@ -32,7 +32,7 @@ specifiers:
   url-parse: 1.5.10
   vfonts: 0.0.3
   vite: 3.0.2
-  vite-plugin-electron: 0.7.5
+  vite-plugin-electron: 0.8.1
   vite-plugin-resolve: 2.1.2
   vitest: 0.18.0
   vue: 3.2.37
@@ -72,7 +72,7 @@ devDependencies:
   url-parse: 1.5.10
   vfonts: 0.0.3
   vite: 3.0.2
-  vite-plugin-electron: 0.7.5
+  vite-plugin-electron: 0.8.1
   vite-plugin-resolve: 2.1.2
   vitest: 0.18.0
   vue: 3.2.37
@@ -5351,14 +5351,14 @@ packages:
     resolution: {integrity: sha512-nguyw8L6Un8eelg1vQ31vIU2ESxqid7EYmy8V+MDeMaHBqaRSkg3dTBToC1PR00D89UzS/SLkfYPnx0Wf23IQQ==}
     dev: true
 
-  /vite-plugin-electron-renderer/0.5.7:
-    resolution: {integrity: sha512-Rd5SYh48U1Ov/VVxpXQ3br4oeyOUEYtrvwH3DT0P+MOvhLa140to3zZsMZy3flOUg/9SW1wf3eFVzQwexY+QAA==}
+  /vite-plugin-electron-renderer/0.8.1:
+    resolution: {integrity: sha512-NrpthnaxBfuoToI2XGu4HVwzSgie9QpU4SPSDcQquIidZspSNUkNAgUQN5I9rQ38hAAWDX8/CQv2LTGEZ7uYsQ==}
     dev: true
 
-  /vite-plugin-electron/0.7.5:
-    resolution: {integrity: sha512-A1MFutQDy59d2e916jKL+IUxs3gE3LgOuCdUPjwSvI6TT2gdRvFhS6pwBb5tRC0YW0tRGnPTW87b0hnDgYr3kw==}
+  /vite-plugin-electron/0.8.1:
+    resolution: {integrity: sha512-so13n0ytqaeWxK7bCza8G/qMxJSKYSunyAv4sNlPV9ahxyKmZMNaflWZ5mKBhTp2p7j3VJ0SapTzUDrHN/TjJQ==}
     dependencies:
-      vite-plugin-electron-renderer: 0.5.7
+      vite-plugin-electron-renderer: 0.8.1
     dev: true
 
   /vite-plugin-resolve/2.1.2:
