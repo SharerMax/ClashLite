@@ -6,6 +6,10 @@ export type Network = 'tcp' | 'udp'
 
 export type RunMode = 'direct' | 'global' | 'rule'
 
+export type RouterRuleType = 'DIRECT' | 'Proxy'
+
+export type RuleSetBehaviorType = 'domain' | 'ipcidr' | 'classical'
+
 export interface BaseClashConfig {
   mode: RunMode
   port: number

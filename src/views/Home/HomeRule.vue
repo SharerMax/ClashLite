@@ -22,15 +22,20 @@
     </div>
 
     <div>
-      <n-list bordered>
-        <n-list-item bordered>
+      <n-empty v-if="!ruleSetList.length" description="无规则" class="mt-20">
+        <template #icon>
+          <n-icon :component="Unknown" />
+        </template>
+      </n-empty>
+      <n-list v-if="ruleSetList.length" bordered>
+        <n-list-item v-for="(ruleSet, index) in ruleSetList" :key="index" bordered>
           <template #prefix>
             <n-text type="primary">
-              ProxyList
+              {{ ruleSet.name }}
             </n-text>
           </template>
           <n-ellipsis>
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/proxy.txt
+            {{ ruleSet.url }}
           </n-ellipsis>
           <template #suffix>
             <n-tag
@@ -38,45 +43,7 @@
               size="small"
               type="success"
             >
-              PROXY
-            </n-tag>
-          </template>
-        </n-list-item>
-        <n-list-item bordered>
-          <template #prefix>
-            <n-text type="primary">
-              Google
-            </n-text>
-          </template>
-          <n-ellipsis>
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/google.txt
-          </n-ellipsis>
-          <template #suffix>
-            <n-tag
-              :bordered="false"
-              size="small"
-              type="success"
-            >
-              PROXY
-            </n-tag>
-          </template>
-        </n-list-item>
-        <n-list-item bordered>
-          <template #prefix>
-            <n-text type="primary">
-              CN:SITE
-            </n-text>
-          </template>
-          <n-ellipsis>
-            https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt
-          </n-ellipsis>
-          <template #suffix>
-            <n-tag
-              :bordered="false"
-              size="small"
-              type="info"
-            >
-              DIRECT
+              {{ ruleSet.behavior }}
             </n-tag>
           </template>
         </n-list-item>
@@ -93,7 +60,7 @@
     <n-form
       label-placement="left"
       label-width="auto"
-      :model="editRules"
+      :model="editedRules"
       :rules="editRuleFormRules"
       size="small"
     >
@@ -102,7 +69,7 @@
         path="name"
       >
         <n-input
-          v-model:value="editRules.name"
+          v-model:value="editedRules.name"
           placeholder="规则集名称"
         />
       </n-form-item>
@@ -111,7 +78,7 @@
         path="url"
       >
         <n-input
-          v-model:value="editRules.url"
+          v-model:value="editedRules.url"
           placeholder="订阅地址 URL"
         />
       </n-form-item>
@@ -120,7 +87,7 @@
         path="behavior"
       >
         <n-radio-group
-          v-model:value="editRules.behavior"
+          v-model:value="editedRules.behavior"
           size="small"
         >
           <n-radio-button
@@ -142,7 +109,7 @@
         path="type"
       >
         <n-radio-group
-          v-model:value="editRules.type"
+          v-model:value="editedRules.type"
           size="small"
         >
           <n-radio-button
@@ -179,23 +146,44 @@
 <script setup lang="ts">
 import type { FormRules } from 'naive-ui'
 import {
-  NButton, NEllipsis, NForm, NFormItem, NH2, NIcon, NInput, NLayout,
-  NList, NListItem, NModal, NRadioButton, NRadioGroup, NTag, NText,
+  NButton, NEllipsis, NEmpty, NForm, NFormItem, NH2, NIcon, NInput,
+  NLayout, NList, NListItem, NModal, NRadioButton, NRadioGroup, NTag,
+  NText,
 } from 'naive-ui'
-import { Add } from '@vicons/carbon'
+import { Add, Unknown } from '@vicons/carbon'
 import { ref } from 'vue'
+import type { ClashSettingRule } from '@/share/type'
 
+const ruleSetList = ref<ClashSettingRule[]>([])
+ruleSetList.value = window.clash.getRuleSet()
+
+type EditType = 'add' | 'edit'
+const editType: EditType = 'add'
+const maybeChangedRuleName = ''
 const showEditModal = ref(false)
-const editRules = ref({
-  name: null,
-  url: null,
+const editedRules = ref<ClashSettingRule>({
+  name: '',
+  url: '',
   type: 'DIRECT',
   behavior: 'domain',
 })
+
 function handleRuleAddButtonClick() {
   showEditModal.value = true
 }
+
 function handleRuleSaveButtonClick() {
+  if (editType === 'add') {
+    window.clash.addRuleSet({ ...editedRules.value })
+    ruleSetList.value.push({ ...editedRules.value })
+  }
+  else if (editType === 'edit') {
+    if (maybeChangedRuleName) {
+      window.clash.changeRuleSet(maybeChangedRuleName, { ...editedRules.value })
+      const replaceIndex = ruleSetList.value.findIndex(ruleSet => maybeChangedRuleName === ruleSet.name)
+      ruleSetList.value.splice(replaceIndex, 1, { ...editedRules.value })
+    }
+  }
   showEditModal.value = false
 }
 const editRuleFormRules: FormRules = {

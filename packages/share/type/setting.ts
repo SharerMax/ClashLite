@@ -1,4 +1,4 @@
-import type { RunMode } from './clash'
+import type { RouterRuleType, RuleSetBehaviorType, RunMode } from './clash'
 
 export interface AppSetting {
   autoStartClash: boolean
@@ -12,6 +12,14 @@ export interface ClashSettingSubscribe {
   type: 'plain' | 'base64' | 'sip008' | 'clash'
   updateTime?: number
 }
+
+export interface ClashSettingRule {
+  name: string
+  url: string
+  type: RouterRuleType
+  behavior: RuleSetBehaviorType
+}
+
 export interface ClashSettings {
   mode: RunMode
   listenProt: number
@@ -19,4 +27,5 @@ export interface ClashSettings {
   allowLan: boolean
   autoStart: boolean
   subscribe?: ClashSettingSubscribe
+  rules?: ClashSettingRule[]
 }

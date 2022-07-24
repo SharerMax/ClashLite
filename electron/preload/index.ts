@@ -3,7 +3,7 @@ import { internalIpV4 } from 'internal-ip'
 import Store from 'electron-store'
 import { domReady } from './utils'
 import { useLoading } from './loading'
-import type { ClashSettingSubscribe, ClashSettings, ClashStartInfo, Event, RunMode } from '@/share/type'
+import type { ClashSettingRule, ClashSettingSubscribe, ClashSettings, ClashStartInfo, Event, RunMode } from '@/share/type'
 
 const clashStore = new Store<ClashSettings>({
   name: 'clash_config',
@@ -40,6 +40,23 @@ const clashExpose = {
   },
   getProxySubscribe() {
     return clashStore.get('subscribe', { period: 10, url: '', type: 'plain' })
+  },
+  setRuleSet(ruleSet: ClashSettingRule[]) {
+    clashStore.set('rules', ruleSet)
+  },
+  getRuleSet() {
+    return clashStore.get('rules', [])
+  },
+  changeRuleSet(name: string, saveClashSetting: ClashSettingRule) {
+    const currentRuleSets = clashExpose.getRuleSet()
+    const newRuleSets = currentRuleSets.filter(ruleSet => ruleSet.name !== name).push(saveClashSetting)
+    clashStore.set('rules', newRuleSets)
+  },
+  addRuleSet(rule: ClashSettingRule) {
+    return clashStore.set('rules', [...clashExpose.getRuleSet(), rule])
+  },
+  removeRuleSet(name: string) {
+    return clashStore.set('rules', clashExpose.getRuleSet().filter(ruleSet => ruleSet.name !== name))
   },
 }
 
