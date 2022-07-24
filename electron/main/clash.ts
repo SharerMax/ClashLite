@@ -161,6 +161,8 @@ function updateProxySub() {
       }
       const proxyProviderFilePath = getProxyProviderFilePath()
       writeFileSync(proxyProviderFilePath, proxiesYaml)
+      subscribe.updateTime = Date.now()
+      store.set('subscribe', subscribe)
 
       const configFilePath = getClashDefaultConfigPath()
       const configYaml = (yaml.load(readFileSync(configFilePath, 'utf-8')) as any) as ClashConfig

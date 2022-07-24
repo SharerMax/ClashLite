@@ -1,3 +1,4 @@
+import type { AxiosResponse } from 'axios'
 import axiosInstance from '.'
 import type { Api, BaseClashConfig } from '@/share/type/clash'
 
@@ -21,7 +22,12 @@ export async function proxy(name: string) {
   return await axiosInstance.get<Api.ProxyInfo | Api.ProxyGroupInfo>(`/proxies/${name}`)
 }
 
-export async function selectProxy(name: string) {
+export async function selectProxy(name: string): Promise<AxiosResponse<void, any>>
+export async function selectProxy(groupName: string, proxyName: string): Promise<AxiosResponse<void, any>>
+export async function selectProxy(name: string, proxyName?: string) {
+  if (proxyName) {
+    return await axiosInstance.put<void>(`/proxies/${name}`, { name: proxyName })
+  }
   return await axiosInstance.put<void>(`/proxies/${name}`)
 }
 

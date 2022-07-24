@@ -15,17 +15,21 @@
       </n-button>
     </div>
     <n-list bordered>
-      <n-list-item>
-        <template #prefix>
-          <div class="w-16">
-            美国
+      <n-list-item
+        v-for="(proxy, index) in proxiesData"
+        :key="index"
+        :class="{ 'bg-green-900': proxy.name === selectedProxy?.name }"
+      >
+        <!-- <template #prefix>
+          <div class="w-24 lg:w-50 truncate">
+            {{ proxy.name }}
           </div>
-        </template>
-        <div class="flex flex-col">
-          <span>127.0.0.1:1080</span>
+        </template> -->
+        <div class="overflow-hidden cursor-pointer" @click="handleProxyClick(proxy)">
+          <n-ellipsis> {{ proxy.name }}</n-ellipsis>
           <div>
             <n-tag type="success" size="small">
-              vmess
+              {{ proxy.type }}
             </n-tag>
           </div>
         </div>
@@ -109,19 +113,36 @@
 <script setup lang="ts">
 import type { FormInst, FormRules } from 'naive-ui'
 import {
-  NButton, NForm, NFormItem, NH2, NIcon, NInput, NInputNumber, NList, NListItem, NModal,
-  NRadioButton, NRadioGroup, NTag,
+  NButton, NEllipsis, NForm, NFormItem, NH2, NIcon, NInput, NInputNumber, NList, NListItem,
+  NModal, NRadioButton, NRadioGroup, NTag,
 } from 'naive-ui'
 import { CloudDownload, Edit, View } from '@vicons/carbon'
 import { ref } from 'vue'
 import type { ClashSettingSubscribe } from '@/share/type'
 import { isSubScribeEqual } from '@/share/utils/setting'
+import { proxiesOfProvider, selectProxy } from '@/render/api/clash'
+import type { Proxies, ProxyGroupInfo, ProxyInfo } from '@/share/type/clash/api'
 
 const showEditProxySub = ref(false)
 function handleAddProxySubButtonClick() {
   showEditProxySub.value = true
 }
+interface ProxiesObj {
+  [k: string]: ProxyInfo | ProxyGroupInfo
+}
+const proxiesData = ref<(ProxyInfo | ProxyGroupInfo)[]>([])
 let savedProxySub = window.clash.getProxySubscribe()
+if (savedProxySub.url && savedProxySub.updateTime) {
+  proxiesOfProvider('subscribe-proxies').then((res) => {
+    proxiesData.value = res.data.proxies
+  })
+}
+const selectedProxy = ref<ProxyInfo | ProxyGroupInfo>()
+function handleProxyClick(proxy: ProxyInfo | ProxyGroupInfo) {
+  selectedProxy.value = proxy
+  selectProxy('Proxy', proxy.name).then(() => {})
+}
+
 // prevent side effect of proxy object
 const subProxyData = ref<ClashSettingSubscribe>({ ...savedProxySub })
 const proxySubFormTitle = ref(savedProxySub.url ? '编辑订阅' : '新增订阅')
@@ -166,5 +187,7 @@ const proxySubFormRules: FormRules = {
 </script>
 
 <style scoped>
-
+:deep(.n-list-item__main) {
+  overflow: hidden;
+}
 </style>
