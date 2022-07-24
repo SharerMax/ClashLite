@@ -1,3 +1,7 @@
+/**
+ * https://github.com/Dreamacro/clash-dashboard/blob/master/src/lib/request.ts
+ * https://github.com/Dreamacro/clash/wiki/external-controller-API-reference
+ */
 import type { AxiosResponse } from 'axios'
 import axiosInstance from '.'
 import type { Api, BaseClashConfig } from '@/share/type/clash'
@@ -26,9 +30,9 @@ export async function selectProxy(name: string): Promise<AxiosResponse<void, any
 export async function selectProxy(groupName: string, proxyName: string): Promise<AxiosResponse<void, any>>
 export async function selectProxy(name: string, proxyName?: string) {
   if (proxyName) {
-    return await axiosInstance.put<void>(`/proxies/${name}`, { name: proxyName })
+    return await axiosInstance.put<void>(`/proxies/${encodeURIComponent(name)}`, { name: proxyName })
   }
-  return await axiosInstance.put<void>(`/proxies/${name}`)
+  return await axiosInstance.put<void>(`/proxies/${encodeURIComponent(name)}`)
 }
 
 export async function proxyDelay(name: string) {
@@ -44,6 +48,18 @@ export async function proxyDelay(name: string) {
 
 export async function rules() {
   return await axiosInstance.get<Api.Rules>('/rules')
+}
+
+export async function ruleProviders() {
+  return await axiosInstance.get<Api.RuleProviders>('/providers/rules')
+}
+
+export async function ruleProvider(providerName: string) {
+  return await axiosInstance.get<Api.RuleProvider>(`/providers/rules/${encodeURIComponent(providerName)}`)
+}
+
+export async function updateRuleProvider(providerName: string) {
+  return await axiosInstance.put<void>(`/providers/rules/${encodeURIComponent(providerName)}`)
 }
 
 export async function connections() {
@@ -62,20 +78,20 @@ export async function version() {
   return await axiosInstance.get<Api.version>('/version')
 }
 
-export async function proxiesOfProviders() {
-  return await axiosInstance.get<Api.Providers>('/providers/proxies')
+export async function proxyProviders() {
+  return await axiosInstance.get<Api.ProxyProviders>('/providers/proxies')
 }
 
-export async function proxiesOfProvider(providerName: string) {
-  return await axiosInstance.get<Api.Provider>(`/providers/proxies/${providerName}`)
+export async function proxyProvider(providerName: string) {
+  return await axiosInstance.get<Api.ProxyProvider>(`/providers/proxies/${encodeURIComponent(providerName)}`)
 }
 
 export async function selectProxyProvider(providerName: string) {
-  return await axiosInstance.put<void>(`/providers/proxies/${providerName}`)
+  return await axiosInstance.put<void>(`/providers/proxies/${encodeURIComponent(providerName)}`)
 }
 
 export async function healthcheckProxyProvider(providerName: string) {
-  return await axiosInstance.get<void>(`/providers/proxies/${providerName}/healthcheck`)
+  return await axiosInstance.get<void>(`/providers/proxies/${encodeURIComponent(providerName)}/healthcheck`)
 }
 
 export default {
@@ -89,8 +105,8 @@ export default {
   closeAllConnections,
   closeConnection,
   version,
-  proxiesOfProviders,
-  proxiesOfProvider,
+  proxiesOfProviders: proxyProviders,
+  proxiesOfProvider: proxyProvider,
   selectProxyProvider,
   healthcheckProxyProvider,
 }

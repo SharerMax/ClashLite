@@ -58,6 +58,15 @@ export interface ProxyDelay {
   delay: number
 }
 
+export interface ProxyProvider {
+  name: string
+  proxies: Array<ProxyInfo | ProxyGroupInfo>
+}
+
+export interface ProxyProviders {
+  [K: string]: ProxyProvider
+}
+
 export interface Rule {
   type: string
   payload: string
@@ -68,11 +77,15 @@ export interface Rules {
   rules: Rule[]
 }
 
-export interface Provider {
+export interface RuleProvider {
   name: string
-  proxies: Array<ProxyInfo | ProxyGroupInfo>
+  type: 'Rule'
+  vehicleType: 'HTTP' | 'File'
+  behavior: string
+  ruleCount: number
+  updatedAt?: string
 }
 
-export interface Providers {
-  [K: string]: Provider
+export interface RuleProviders {
+  providers: Record<string, RuleProvider>
 }

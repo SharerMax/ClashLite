@@ -120,7 +120,7 @@ import { CloudDownload, Edit, View } from '@vicons/carbon'
 import { ref } from 'vue'
 import type { ClashSettingSubscribe } from '@/share/type'
 import { isSubScribeEqual } from '@/share/utils/setting'
-import { proxiesOfProvider, selectProxy } from '@/render/api/clash'
+import { proxyProvider, selectProxy } from '@/render/api/clash'
 import type { Proxies, ProxyGroupInfo, ProxyInfo } from '@/share/type/clash/api'
 
 const showEditProxySub = ref(false)
@@ -133,7 +133,7 @@ interface ProxiesObj {
 const proxiesData = ref<(ProxyInfo | ProxyGroupInfo)[]>([])
 let savedProxySub = window.clash.getProxySubscribe()
 if (savedProxySub.url && savedProxySub.updateTime) {
-  proxiesOfProvider('subscribe-proxies').then((res) => {
+  proxyProvider('subscribe-proxies').then((res) => {
     proxiesData.value = res.data.proxies
   })
 }
