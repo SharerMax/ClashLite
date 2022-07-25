@@ -244,5 +244,6 @@ export function init() {
 
 export default {
   startClash,
+  stopClash,
   init,
 }

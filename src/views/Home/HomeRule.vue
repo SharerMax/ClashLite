@@ -37,14 +37,24 @@
           <n-ellipsis>
             {{ ruleSet.url }}
           </n-ellipsis>
+          <n-tag
+            :bordered="false"
+            size="small"
+            type="success"
+          >
+            {{ ruleSet.behavior }}
+          </n-tag>
           <template #suffix>
-            <n-tag
-              :bordered="false"
+            <n-button
+              quaternary
               size="small"
-              type="success"
+              type="primary"
+              @click="handleRuleSetDelete(ruleSet)"
             >
-              {{ ruleSet.behavior }}
-            </n-tag>
+              <template #icon>
+                <n-icon :component="Delete" />
+              </template>
+            </n-button>
           </template>
         </n-list-item>
       </n-list>
@@ -150,7 +160,7 @@ import {
   NLayout, NList, NListItem, NModal, NRadioButton, NRadioGroup, NTag,
   NText,
 } from 'naive-ui'
-import { Add, Unknown } from '@vicons/carbon'
+import { Add, Delete, Unknown } from '@vicons/carbon'
 import { ref } from 'vue'
 import type { ClashSettingRule } from '@/share/type'
 
@@ -186,6 +196,13 @@ function handleRuleSaveButtonClick() {
   }
   showEditModal.value = false
 }
+
+function handleRuleSetDelete(value: ClashSettingRule) {
+  window.clash.removeRuleSet(value.name)
+  const removeIndex = ruleSetList.value.findIndex(ruleSet => maybeChangedRuleName === ruleSet.name)
+  ruleSetList.value.splice(removeIndex, 1)
+}
+
 const editRuleFormRules: FormRules = {
   name: [{
     required: true,

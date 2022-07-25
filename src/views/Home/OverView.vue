@@ -12,7 +12,12 @@
             <n-space vertical :size="12">
               <div>
                 <label class="w-24 inline-block">运行状态：</label>
-                <n-switch size="medium" :loading="clashProcessLoading" @update:value="handleClashRunChange">
+                <n-switch
+                  size="medium"
+                  :loading="clashProcessLoading"
+                  :value="clashRunning"
+                  @update:value="handleClashRunChange"
+                >
                   <template #checked>
                     运行中
                   </template>
@@ -133,6 +138,7 @@ async function handleClashRunChange(value: boolean) {
             content: '端口冲突，请检查本地代理端口是否被占用',
             positiveText: '知道了',
           })
+          handleClashRunChange(false)
         }
         else {
           handleRunModeChange(defaultRunMode)
@@ -141,6 +147,7 @@ async function handleClashRunChange(value: boolean) {
     }, 1500)
   }
   else {
+    clashRunning.value = false
     window.clash.stop()
   }
 }
