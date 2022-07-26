@@ -120,7 +120,7 @@ import { CloudDownload, Edit, View } from '@vicons/carbon'
 import { ref } from 'vue'
 import type { ClashSettingSubscribe } from '@/share/type'
 import { isSubScribeEqual } from '@/share/utils/setting'
-import { proxyProvider, selectProxy } from '@/render/api/clash'
+import { proxy, proxyProvider, selectProxy } from '@/render/api/clash'
 import type { Proxies, ProxyGroupInfo, ProxyInfo } from '@/share/type/clash/api'
 
 const showEditProxySub = ref(false)
@@ -130,17 +130,25 @@ function handleAddProxySubButtonClick() {
 interface ProxiesObj {
   [k: string]: ProxyInfo | ProxyGroupInfo
 }
+
+const selectedProxy = ref<ProxyInfo | ProxyGroupInfo>()
+function handleProxyClick(proxy: ProxyInfo | ProxyGroupInfo) {
+  selectedProxy.value = proxy
+  selectProxy('Proxy', proxy.name).then(() => {})
+}
+
 const proxiesData = ref<(ProxyInfo | ProxyGroupInfo)[]>([])
 let savedProxySub = window.clash.getProxySubscribe()
 if (savedProxySub.url && savedProxySub.updateTime) {
   proxyProvider('subscribe-proxies').then((res) => {
     proxiesData.value = res.data.proxies
+    return proxy('Proxy')
+  }).then((res) => {
+    const maybeProxyGroupInfo = 'now' in res.data ? res.data : null
+    if (maybeProxyGroupInfo) {
+      selectedProxy.value = proxiesData.value.find(proxy => proxy.name === maybeProxyGroupInfo.now)
+    }
   })
-}
-const selectedProxy = ref<ProxyInfo | ProxyGroupInfo>()
-function handleProxyClick(proxy: ProxyInfo | ProxyGroupInfo) {
-  selectedProxy.value = proxy
-  selectProxy('Proxy', proxy.name).then(() => {})
 }
 
 // prevent side effect of proxy object

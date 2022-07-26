@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron'
 import type { IpcMainEvent, IpcMainInvokeEvent } from 'electron'
-import { handleProxySubscribeChange, startClash, stopClash } from './clash'
+import { handleProxySubscribeChange, handleRuleSetChange, startClash, stopClash } from './clash'
 import type { Event } from '@/share/type/clash'
 
 function defineClashOnEventHandler(eventName: Event.MainEvent.ClashEventName, fn: (event: IpcMainEvent, ...args: any) => void) {
@@ -15,4 +15,5 @@ export function defineClashEventHandler() {
   defineClashInvokeEventHandler('clash:start', startClash)
   defineClashOnEventHandler('clash:stop', stopClash)
   defineClashOnEventHandler('clash:proxySubscribeChange', handleProxySubscribeChange)
+  defineClashOnEventHandler('clash:ruleSetChange', handleRuleSetChange)
 }

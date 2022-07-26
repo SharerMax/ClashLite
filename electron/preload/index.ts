@@ -43,6 +43,7 @@ const clashExpose = {
   },
   setRuleSet(ruleSet: ClashSettingRule[]) {
     clashStore.set('rules', ruleSet)
+    sendClashEventToMain('clash:ruleSetChange')
   },
   getRuleSet() {
     return clashStore.get('rules', [])
@@ -51,12 +52,15 @@ const clashExpose = {
     const currentRuleSets = clashExpose.getRuleSet()
     const newRuleSets = currentRuleSets.filter(ruleSet => ruleSet.name !== name).push(saveClashSetting)
     clashStore.set('rules', newRuleSets)
+    sendClashEventToMain('clash:ruleSetChange')
   },
   addRuleSet(rule: ClashSettingRule) {
-    return clashStore.set('rules', [...clashExpose.getRuleSet(), rule])
+    clashStore.set('rules', [...clashExpose.getRuleSet(), rule])
+    sendClashEventToMain('clash:ruleSetChange')
   },
   removeRuleSet(name: string) {
-    return clashStore.set('rules', clashExpose.getRuleSet().filter(ruleSet => ruleSet.name !== name))
+    clashStore.set('rules', clashExpose.getRuleSet().filter(ruleSet => ruleSet.name !== name))
+    sendClashEventToMain('clash:ruleSetChange')
   },
 }
 

@@ -13,7 +13,7 @@ import dayjs from 'dayjs'
 import type { BaseClashConfig, ClashConfig, ClashStartInfo, ProxyProviders } from '../../packages/share/type/clash'
 import { defineClashEventHandler } from './event-handle'
 import { parseProxySubContent } from '@/share/utils/parse'
-import type { ClashSettings } from '@/share/type'
+import type { ClashSettingRule, ClashSettings, RuleProviders } from '@/share/type'
 
 let clashProcess: ChildProcess | null = null
 let proxySubscribeDateBaseJob: null | schedule.Job = null
@@ -40,6 +40,10 @@ function getClashConfigDirPath() {
 
 function getClashDefaultConfigPath() {
   return path.join(getClashConfigDirPath(), 'config.yaml')
+}
+
+function getClashRuleProviderDirPath() {
+  return path.join(getClashConfigDirPath(), 'rules')
 }
 
 function getClashExecPath() {
@@ -121,7 +125,7 @@ function checkProxySubTask() {
   const subscribe = store.get('subscribe', null)
   if (subscribe) {
     const updateTime = subscribe.updateTime
-    if (!updateTime) {
+    if (updateTime) {
       const period = subscribe.period
       const now = Date.now()
       const willUpdateTime = now - period
@@ -132,7 +136,9 @@ function checkProxySubTask() {
         const willUpdateDate = dayjs().add(willUpdateTime, 'millisecond')
         startDateBaseProxySubscribeSchedule(willUpdateDate.toDate())
       }
-      //
+    }
+    else {
+      updateProxySub()
     }
   }
 }
@@ -227,6 +233,39 @@ export function handleProxySubscribeChange() {
   cancelAllProxySubscribeJob()
   checkProxySubTask()
 }
+
+export function handleRuleSetChange() {
+  const ruleSet = store.get('rules', [])
+  const configFilePath = getClashDefaultConfigPath()
+  const configYaml = (yaml.load(readFileSync(configFilePath, 'utf-8')) as any) as ClashConfig
+  const rules = []
+  for (const rule of ruleSet) {
+    rules.push(generateRuleSetRule(rule))
+  }
+  configYaml['rule-providers'] = generateRuleProviders(ruleSet)
+  configYaml.rules = rules
+  writeFileSync(configFilePath, yaml.dump(configYaml), 'utf-8')
+}
+
+function generateRuleProviders(rulesOfSetting: ClashSettingRule[]): RuleProviders {
+  const ruleProviders: RuleProviders = {}
+  const ruleDir = getClashRuleProviderDirPath()
+  for (const rule of rulesOfSetting) {
+    ruleProviders[rule.name] = {
+      type: 'http',
+      path: path.join(ruleDir, `${rule.name}.yaml`),
+      behavior: rule.behavior,
+      interval: 3600,
+      url: rule.url,
+    }
+  }
+  return ruleProviders
+}
+
+function generateRuleSetRule(ruleOfSetting: ClashSettingRule) {
+  return `RULE-SET,${ruleOfSetting.name},${ruleOfSetting.type}`
+}
+
 function initClashConfigStore() {
   Store.initRenderer()
 }

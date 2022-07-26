@@ -33,9 +33,9 @@ export interface ProxyGroup {
 }
 
 export interface ProxyProviders {
-  [k: string]: HttpProxyProvide | FileProxyProvide
+  [k: string]: HttpProxyProvider | FileProxyProvider
 }
-export interface HttpProxyProvide {
+export interface HttpProxyProvider {
   type: 'http'
   url: string
   interval: number
@@ -48,7 +48,7 @@ export interface HttpProxyProvide {
   }
 }
 
-export interface FileProxyProvide {
+export interface FileProxyProvider {
   type: 'file'
   path: string
   'health-check': {
@@ -58,11 +58,30 @@ export interface FileProxyProvide {
   }
 }
 
+export interface HttpRuleProvider {
+  type: 'http'
+  behavior: RuleSetBehaviorType
+  url: string
+  interval: number
+  path: string
+}
+
+export interface FileRuleProvider {
+  type: 'file'
+  behavior: RuleSetBehaviorType
+  path: string
+}
+
+export type RuleProvider = HttpRuleProvider | FileRuleProvider
+
+export type RuleProviders = Record<string, RuleProvider>
+
 export interface ClashConfig extends BaseClashConfig {
   proxies: ClashProxy[]
   'proxy-groups': ProxyGroup[]
   'proxy-providers': ProxyProviders
   'rules': string[]
+  'rule-providers': RuleProviders
 }
 
 export interface ClashStartInfo {
