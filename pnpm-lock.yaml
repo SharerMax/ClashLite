@@ -9,7 +9,7 @@ specifiers:
   '@types/url-parse': 1.4.8
   '@vicons/carbon': 0.12.0
   '@vitejs/plugin-vue': 3.0.1
-  '@vueuse/core': 8.9.4
+  '@vueuse/core': 9.0.0
   axios: 0.27.2
   chart.js: 3.8.2
   dayjs: 1.11.4
@@ -49,7 +49,7 @@ devDependencies:
   '@types/url-parse': 1.4.8
   '@vicons/carbon': 0.12.0
   '@vitejs/plugin-vue': 3.0.1_vite@3.0.3+vue@3.2.37
-  '@vueuse/core': 8.9.4_vue@3.2.37
+  '@vueuse/core': 9.0.0_vue@3.2.37
   axios: 0.27.2
   chart.js: 3.8.2
   dayjs: 1.11.4
@@ -596,8 +596,8 @@ packages:
     dev: true
     optional: true
 
-  /@types/web-bluetooth/0.0.14:
-    resolution: {integrity: sha512-5d2RhCard1nQUC3aHcq/gHzWYO6K0WJmAbjO7mQJgCQKtZpgXxv1rOM6O/dBDhDYYVutk1sciOgNSe+5YyfM8A==}
+  /@types/web-bluetooth/0.0.15:
+    resolution: {integrity: sha512-w7hEHXnPMEZ+4nGKl/KDRVpxkwYxYExuHOYXyzIzCDzEZ9ZCGMAewulr9IqJu2LR4N37fcnb1XVeuZ09qgOxhA==}
     dev: true
 
   /@types/yargs-parser/21.0.0:
@@ -1017,41 +1017,29 @@ packages:
     resolution: {integrity: sha512-4rSJemR2NQIo9Klm1vabqWjD8rs/ZaJSzMxkMNeJS6lHiUjjUeYFbooN19NgFjztubEKh3WlZUeOLVdbbUWHsw==}
     dev: true
 
-  /@vueuse/core/8.9.4_vue@3.2.37:
-    resolution: {integrity: sha512-B/Mdj9TK1peFyWaPof+Zf/mP9XuGAngaJZBwPaXBvU3aCTZlx3ltlrFFFyMV4iGBwsjSCeUCgZrtkEj9dS2Y3Q==}
-    peerDependencies:
-      '@vue/composition-api': ^1.1.0
-      vue: ^2.6.0 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      vue:
-        optional: true
+  /@vueuse/core/9.0.0_vue@3.2.37:
+    resolution: {integrity: sha512-hMMc2ajuVknkL7Z39JdP9gFFND2OgnDTSS5mmuinWGAE1Vxy1AwDvTHm3+juyk+GzJjYRAktnBIPy7Fq53iOnw==}
     dependencies:
-      '@types/web-bluetooth': 0.0.14
-      '@vueuse/metadata': 8.9.4
-      '@vueuse/shared': 8.9.4_vue@3.2.37
-      vue: 3.2.37
+      '@types/web-bluetooth': 0.0.15
+      '@vueuse/metadata': 9.0.0
+      '@vueuse/shared': 9.0.0_vue@3.2.37
       vue-demi: 0.13.1_vue@3.2.37
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
     dev: true
 
-  /@vueuse/metadata/8.9.4:
-    resolution: {integrity: sha512-IwSfzH80bnJMzqhaapqJl9JRIiyQU0zsRGEgnxN6jhq7992cPUJIRfV+JHRIZXjYqbwt07E1gTEp0R0zPJ1aqw==}
+  /@vueuse/metadata/9.0.0:
+    resolution: {integrity: sha512-79YVIsAP1bbWm5GdQuG7jDVF/9uuExzhkO0Sd4/TLuSfzH2uZOrHvGwy+ZNJHjbyRn3uf56rKINWLJdBuTLSqQ==}
     dev: true
 
-  /@vueuse/shared/8.9.4_vue@3.2.37:
-    resolution: {integrity: sha512-wt+T30c4K6dGRMVqPddexEVLa28YwxW5OFIPmzUHICjphfAuBFTTdDoyqREZNDOFJZ44ARH1WWQNCUK8koJ+Ag==}
-    peerDependencies:
-      '@vue/composition-api': ^1.1.0
-      vue: ^2.6.0 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      vue:
-        optional: true
+  /@vueuse/shared/9.0.0_vue@3.2.37:
+    resolution: {integrity: sha512-WRCyr/wIz5e/2gR/+qFucbCUcGMyJKkQZAzlECl3e71ebQQ9X/w3aBWT9FbnogJX+DNZ/t3Pj+TqPbC7TH1Yog==}
     dependencies:
-      vue: 3.2.37
       vue-demi: 0.13.1_vue@3.2.37
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
     dev: true
 
   /acorn-jsx/5.3.2_acorn@8.7.1:
