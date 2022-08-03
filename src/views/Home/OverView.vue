@@ -121,15 +121,14 @@ import type { TChartData } from 'vue-chartjs/dist/types'
 import TrafficChart from '../../components/TrafficChart.vue'
 import { baseConfig, patchBaseConfig } from '@/render/api/clash'
 import { checkClashHealth } from '@/render/utils/clash'
-
 const clashProcessLoading = ref(false)
-const clashRunning = ref(false)
+const clashRunning = ref(window.clash.clashIsRunning())
 const dialog = useDialog()
 const defaultRunMode = window.clash.getRunMode()
 async function handleClashRunChange(value: boolean) {
   if (value) {
     clashProcessLoading.value = true
-    clashRunning.value = !!await window.clash.start()
+    clashRunning.value = await window.clash.start()
     clashProcessLoading.value = false
     setTimeout(() => {
       baseConfig().then((res) => {
