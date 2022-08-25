@@ -1,7 +1,7 @@
 {
   "name": "electron-clash-lite",
   "version": "1.0.0",
-  "packageManager": "pnpm@7.9.4",
+  "packageManager": "pnpm@7.9.5",
   "author": "SharerMax",
   "license": "MIT",
   "keywords": [
@@ -41,7 +41,7 @@
     "axios": "0.27.2",
     "chart.js": "3.9.1",
     "dayjs": "1.11.5",
-    "electron": "19.0.13",
+    "electron": "19.0.14",
     "electron-builder": "23.3.3",
     "electron-devtools-installer": "3.2.0",
     "electron-store": "8.1.0",
