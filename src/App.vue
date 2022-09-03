@@ -1,12 +1,12 @@
 <template>
-  <n-config-provider :theme="theme">
-    <n-message-provider>
-      <n-dialog-provider>
+  <NConfigProvider :theme="theme">
+    <NMessageProvider>
+      <NDialogProvider>
         <router-view />
-      </n-dialog-provider>
-    </n-message-provider>
-    <n-global-style />
-  </n-config-provider>
+      </NDialogProvider>
+    </NMessageProvider>
+    <NGlobalStyle />
+  </NConfigProvider>
 </template>
 
 <script setup lang="ts">

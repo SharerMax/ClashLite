@@ -1,18 +1,18 @@
 <template>
   <div class="h-full">
-    <n-scrollbar trigger="hover">
-      <n-grid
+    <NScrollbar trigger="hover">
+      <NGrid
         cols="1 780:2"
         x-gap="10"
         y-gap="10"
         class="p-4 box-border"
       >
-        <n-grid-item>
-          <n-card embedded title="运行">
-            <n-space vertical :size="12">
+        <NGridItem>
+          <NCard embedded title="运行">
+            <NSpace vertical :size="12">
               <div>
                 <label class="w-24 inline-block">运行状态：</label>
-                <n-switch
+                <NSwitch
                   size="medium"
                   :loading="clashProcessLoading"
                   :value="clashRunning"
@@ -24,87 +24,87 @@
                   <template #unchecked>
                     已停止
                   </template>
-                </n-switch>
+                </NSwitch>
               </div>
               <div>
                 <label class="w-24 inline-block">运行模式：</label>
-                <n-radio-group
+                <NRadioGroup
                   :value="activatedRunMode"
                   size="small"
                   :disabled="!clashRunning"
                   @update:value="handleRunModeChange"
                 >
-                  <n-radio-button
+                  <NRadioButton
                     v-for="(model, index) in runModels"
                     :key="index"
                     :label="model.label"
                     :value="model.value"
                   />
-                </n-radio-group>
+                </NRadioGroup>
               </div>
               <div class="flex items-center">
                 <label class="w-24 inline-block">本地IP：</label>
-                <n-text class="mr-0.5 " type="primary" code>
+                <NText class="mr-0.5 " type="primary" code>
                   {{ localIP }}
-                </n-text>
-                <n-button
+                </NText>
+                <NButton
                   quaternary
                   size="small"
                   :focusable="false"
                   @click="handleClipboardCopy(localIP)"
                 >
                   <template #icon>
-                    <n-icon :component="Copy" />
+                    <NIcon :component="Copy" />
                   </template>
-                </n-button>
+                </NButton>
               </div>
               <div class="flex items-center">
                 <label class="w-24 inline-block">SOCKS代理：</label>
-                <n-text class="mr-0.5 " type="primary" code>
+                <NText class="mr-0.5 " type="primary" code>
                   socks5://{{ localIP }}:7890
-                </n-text>
-                <n-button
+                </NText>
+                <NButton
                   quaternary
                   size="small"
                   :focusable="false"
                   @click="handleClipboardCopy('socks5://{{localIP}}:7890')"
                 >
                   <template #icon>
-                    <n-icon :component="Copy" />
+                    <NIcon :component="Copy" />
                   </template>
-                </n-button>
+                </NButton>
               </div>
               <div class="flex items-center ">
                 <label class="w-24 inline-block">HTTP代理：</label>
-                <n-text class="mr-0.5 " type="primary" code>
+                <NText class="mr-0.5 " type="primary" code>
                   http://{{ localIP }}:7890
-                </n-text>
-                <n-button
+                </NText>
+                <NButton
                   quaternary
                   size="small"
                   :focusable="false"
                   @click="handleClipboardCopy('http://{{localIP}}:7890')"
                 >
                   <template #icon>
-                    <n-icon :component="Copy" />
+                    <NIcon :component="Copy" />
                   </template>
-                </n-button>
+                </NButton>
               </div>
-            </n-space>
-          </n-card>
-        </n-grid-item>
-        <n-grid-item>
-          <n-card embedded title="访问检测" class="h-full">
-            <n-empty description="Coming Soon" />
-          </n-card>
-        </n-grid-item>
-        <n-grid-item span="1 780:2">
+            </NSpace>
+          </NCard>
+        </NGridItem>
+        <NGridItem>
+          <NCard embedded title="访问检测" class="h-full">
+            <NEmpty description="Coming Soon" />
+          </NCard>
+        </NGridItem>
+        <NGridItem span="1 780:2">
           <!-- <Line :chart-data="chartData" /> -->
           <!-- <div class="h-150" /> -->
-          <traffic-chart :chart-data="chartData" />
-        </n-grid-item>
-      </n-grid>
-    </n-scrollbar>
+          <TrafficChart :chart-data="chartData" />
+        </NGridItem>
+      </NGrid>
+    </NScrollbar>
   </div>
 </template>
 

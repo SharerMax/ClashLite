@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col h-screen p-4 box-border">
     <div class="flex flex-none">
-      <n-h2>日志</n-h2>
-      <n-button
+      <NH2>日志</NH2>
+      <NButton
         class="ml-a"
         quaternary
         size="small"
@@ -10,22 +10,22 @@
         @click="handleClearLogButtonClick"
       >
         <template #icon>
-          <n-icon :component="Clean" />
+          <NIcon :component="Clean" />
         </template>
-      </n-button>
+      </NButton>
     </div>
     <div class="flex-1 overflow-hidden">
-      <n-card
+      <NCard
         class="h-full"
         content-style="height:100%;"
       >
-        <n-scrollbar class="h-full">
-          <n-log
+        <NScrollbar class="h-full">
+          <NLog
             :log="log"
             :rows="logRowNum"
           />
-        </n-scrollbar>
-      </n-card>
+        </NScrollbar>
+      </NCard>
     </div>
   </div>
 </template>

@@ -2,20 +2,20 @@
   <!-- TODO 调整布局，头不动 -->
   <div class="p-4">
     <div class="flex">
-      <n-h2>代理服务器</n-h2>
-      <n-button
+      <NH2>代理服务器</NH2>
+      <NButton
         class="mla"
         size="small"
         quaternary
         @click="handleAddProxySubButtonClick"
       >
         <template #icon>
-          <n-icon :component="CloudDownload" />
+          <NIcon :component="CloudDownload" />
         </template>
-      </n-button>
+      </NButton>
     </div>
-    <n-list bordered>
-      <n-list-item
+    <NList bordered>
+      <NListItem
         v-for="(proxy, index) in proxiesData"
         :key="index"
         :class="{ 'bg-green-900': proxy.name === selectedProxy?.name }"
@@ -26,31 +26,31 @@
           </div>
         </template> -->
         <div class="overflow-hidden cursor-pointer" @click="handleProxyClick(proxy)">
-          <n-ellipsis> {{ proxy.name }}</n-ellipsis>
+          <NEllipsis> {{ proxy.name }}</NEllipsis>
           <div>
-            <n-tag type="success" size="small">
+            <NTag type="success" size="small">
               {{ proxy.type }}
-            </n-tag>
+            </NTag>
           </div>
         </div>
         <template #suffix>
           <div class="flex">
-            <n-button quaternary size="small" disabled>
+            <NButton quaternary size="small" disabled>
               <template #icon>
-                <n-icon :component="Edit" />
+                <NIcon :component="Edit" />
               </template>
-            </n-button>
-            <n-button quaternary size="small">
+            </NButton>
+            <NButton quaternary size="small">
               <template #icon>
-                <n-icon :component="View" />
+                <NIcon :component="View" />
               </template>
-            </n-button>
+            </NButton>
           </div>
         </template>
-      </n-list-item>
-    </n-list>
+      </NListItem>
+    </NList>
   </div>
-  <n-modal
+  <NModal
     v-model:show="showEditProxySub"
     class="w-100"
     preset="card"
@@ -58,34 +58,34 @@
     :title="proxySubFormTitle"
     size="small"
   >
-    <n-form
+    <NForm
       ref="proxySubForm"
       label-placement="left"
       size="small"
       :rules="proxySubFormRules"
       :model="subProxyData"
     >
-      <n-form-item label="订阅" path="url">
-        <n-input v-model:value="subProxyData.url" placeholder="订阅地址" />
-      </n-form-item>
-      <n-form-item label="类型" path="type">
-        <n-radio-group v-model:value="subProxyData.type">
-          <n-radio-button value="plain">
+      <NFormItem label="订阅" path="url">
+        <NInput v-model:value="subProxyData.url" placeholder="订阅地址" />
+      </NFormItem>
+      <NFormItem label="类型" path="type">
+        <NRadioGroup v-model:value="subProxyData.type">
+          <NRadioButton value="plain">
             PLAIN
-          </n-radio-button>
-          <n-radio-button label="BASE64" value="base64">
+          </NRadioButton>
+          <NRadioButton label="BASE64" value="base64">
             BASE64
-          </n-radio-button>
-          <n-radio-button value="sip008">
+          </NRadioButton>
+          <NRadioButton value="sip008">
             SIP008
-          </n-radio-button>
-          <n-radio-button value="clash">
+          </NRadioButton>
+          <NRadioButton value="clash">
             CLASH
-          </n-radio-button>
-        </n-radio-group>
-      </n-form-item>
-      <n-form-item label="更新" path="period">
-        <n-input-number
+          </NRadioButton>
+        </NRadioGroup>
+      </NFormItem>
+      <NFormItem label="更新" path="period">
+        <NInputNumber
           v-model:value="subProxyData.period"
           placeholder="更新周期；[10, 10000]"
           :min="10"
@@ -94,20 +94,20 @@
           <template #suffix>
             分钟
           </template>
-        </n-input-number>
-      </n-form-item>
-    </n-form>
+        </NInputNumber>
+      </NFormItem>
+    </NForm>
     <template #action>
       <div class="flex">
-        <n-button class="ml-a" @click="handleProxySubCancelButtonClick">
+        <NButton class="ml-a" @click="handleProxySubCancelButtonClick">
           取消
-        </n-button>
-        <n-button class="ml-4" type="primary" @click="handleProxySubSaveButtonClick">
+        </NButton>
+        <NButton class="ml-4" type="primary" @click="handleProxySubSaveButtonClick">
           保存
-        </n-button>
+        </NButton>
       </div>
     </template>
-  </n-modal>
+  </NModal>
 </template>
 
 <script setup lang="ts">

@@ -1,25 +1,25 @@
 <template>
-  <n-layout
+  <NLayout
     has-sider
     class="h-screen"
   >
-    <n-layout-sider width="140">
+    <NLayoutSider width="140">
       <div class="text-center my-4">
         <img
           src="../../src/assets/electron.png"
           class="w-20 h-20"
         >
       </div>
-      <n-menu
+      <NMenu
         :options="menuOptions"
         :value="activatedMenu"
         @update:value="key => activatedMenu = key"
       />
-    </n-layout-sider>
-    <n-layout class="h-full">
+    </NLayoutSider>
+    <NLayout class="h-full">
       <router-view />
-    </n-layout>
-  </n-layout>
+    </NLayout>
+  </NLayout>
 </template>
 
 <script setup lang="ts">

@@ -1,156 +1,156 @@
 <template>
   <!-- TODO 调整布局，头不动 -->
 
-  <n-layout class="p-4">
+  <NLayout class="p-4">
     <div class="flex items-baseline">
-      <n-h2>
+      <NH2>
         规则配置
-      </n-h2>
+      </NH2>
       <div class="ml-a">
-        <n-button
+        <NButton
           quaternary
           size="small"
           type="primary"
           @click="handleRuleAddButtonClick"
         >
           <template #icon>
-            <n-icon :component="Add" />
+            <NIcon :component="Add" />
           </template>
           新增
-        </n-button>
+        </NButton>
       </div>
     </div>
 
     <div>
-      <n-empty v-if="!ruleSetList.length" description="无规则" class="mt-20">
+      <NEmpty v-if="!ruleSetList.length" description="无规则" class="mt-20">
         <template #icon>
-          <n-icon :component="Unknown" />
+          <NIcon :component="Unknown" />
         </template>
-      </n-empty>
-      <n-list v-if="ruleSetList.length" bordered>
-        <n-list-item v-for="(ruleSet, index) in ruleSetList" :key="index" bordered>
+      </NEmpty>
+      <NList v-if="ruleSetList.length" bordered>
+        <NListItem v-for="(ruleSet, index) in ruleSetList" :key="index" bordered>
           <template #prefix>
-            <n-text type="primary">
+            <NText type="primary">
               {{ ruleSet.name }}
-            </n-text>
+            </NText>
           </template>
-          <n-ellipsis>
+          <NEllipsis>
             {{ ruleSet.url }}
-          </n-ellipsis>
-          <n-tag
+          </NEllipsis>
+          <NTag
             :bordered="false"
             size="small"
             type="success"
           >
             {{ ruleSet.behavior }}
-          </n-tag>
+          </NTag>
           <template #suffix>
-            <n-button
+            <NButton
               quaternary
               size="small"
               type="primary"
               @click="handleRuleSetDelete(ruleSet)"
             >
               <template #icon>
-                <n-icon :component="Delete" />
+                <NIcon :component="Delete" />
               </template>
-            </n-button>
+            </NButton>
           </template>
-        </n-list-item>
-      </n-list>
+        </NListItem>
+      </NList>
     </div>
-  </n-layout>
-  <n-modal
+  </NLayout>
+  <NModal
     v-model:show="showEditModal"
     preset="card"
     :closable="true"
     class="w-100"
     title="新增规则集"
   >
-    <n-form
+    <NForm
       label-placement="left"
       label-width="auto"
       :model="editedRules"
       :rules="editRuleFormRules"
       size="small"
     >
-      <n-form-item
+      <NFormItem
         label="名称"
         path="name"
       >
-        <n-input
+        <NInput
           v-model:value="editedRules.name"
           placeholder="规则集名称"
         />
-      </n-form-item>
-      <n-form-item
+      </NFormItem>
+      <NFormItem
         label="订阅"
         path="url"
       >
-        <n-input
+        <NInput
           v-model:value="editedRules.url"
           placeholder="订阅地址 URL"
         />
-      </n-form-item>
-      <n-form-item
+      </NFormItem>
+      <NFormItem
         label="行为"
         path="behavior"
       >
-        <n-radio-group
+        <NRadioGroup
           v-model:value="editedRules.behavior"
           size="small"
         >
-          <n-radio-button
+          <NRadioButton
             label="域名"
             value="domain"
           />
-          <n-radio-button
+          <NRadioButton
             label="IPCIDR"
             value="ipcidr"
           />
-          <n-radio-button
+          <NRadioButton
             label="CLASSICAL"
             value="classical"
           />
-        </n-radio-group>
-      </n-form-item>
-      <n-form-item
+        </NRadioGroup>
+      </NFormItem>
+      <NFormItem
         label="路由"
         path="type"
       >
-        <n-radio-group
+        <NRadioGroup
           v-model:value="editedRules.type"
           size="small"
         >
-          <n-radio-button
+          <NRadioButton
             label="直连"
             value="DIRECT"
           />
-          <n-radio-button
+          <NRadioButton
             label="代理"
             value="PROXY"
           />
-        </n-radio-group>
-      </n-form-item>
-    </n-form>
+        </NRadioGroup>
+      </NFormItem>
+    </NForm>
     <template #action>
       <div class="flex">
-        <n-button
+        <NButton
           class="mla"
           @click="() => showEditModal = false"
         >
           取消
-        </n-button>
-        <n-button
+        </NButton>
+        <NButton
           class="ml-4"
           type="primary"
           @click="handleRuleSaveButtonClick"
         >
           保存
-        </n-button>
+        </NButton>
       </div>
     </template>
-  </n-modal>
+  </NModal>
 </template>
 
 <script setup lang="ts">

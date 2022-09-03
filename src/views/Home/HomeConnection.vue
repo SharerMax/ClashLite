@@ -1,73 +1,73 @@
 <template>
   <div class="p-4 flex flex-col box-border h-screen">
     <div class="flex-none flex">
-      <n-h2>连接</n-h2>
-      <n-button
+      <NH2>连接</NH2>
+      <NButton
         size="small"
         type="error"
         class="ml-a"
         quaternary
       >
         <template #icon>
-          <n-icon :component="Close" />
+          <NIcon :component="Close" />
         </template>
         断开所有
-      </n-button>
+      </NButton>
     </div>
     <div class="flex-1 overflow-hidden">
-      <n-scrollbar trigger="none">
-        <n-list bordered>
-          <n-list-item
+      <NScrollbar trigger="none">
+        <NList bordered>
+          <NListItem
             v-for="i in connections.connections"
             :key="i.id"
           >
             <div class="flex flex-col">
               <span>{{ i.metadata.host }}</span>
               <div class="space-x-2 mt-1">
-                <n-tag
+                <NTag
                   :bordered="false"
                   size="small"
                   type="primary"
                 >
                   {{ i.metadata.network }}
-                </n-tag>
-                <n-tag
+                </NTag>
+                <NTag
                   size="small"
                   :bordered="false"
                   type="warning"
                 >
                   {{ i.metadata.type }}
-                </n-tag>
-                <n-tag
+                </NTag>
+                <NTag
                   size="small"
                   :bordered="false"
                   type="info"
                 >
                   {{ i.rule }}
-                </n-tag>
-                <n-tag
+                </NTag>
+                <NTag
                   size="small"
                   :bordered="false"
                   type="error"
                 >
                   {{ i.rulePayload }}
-                </n-tag>
+                </NTag>
               </div>
             </div>
             <template #suffix>
-              <n-button
+              <NButton
                 size="small"
                 type="info"
                 quaternary
               >
                 <template #icon>
-                  <n-icon :component="Information" />
+                  <NIcon :component="Information" />
                 </template>
-              </n-button>
+              </NButton>
             </template>
-          </n-list-item>
-        </n-list>
-      </n-scrollbar>
+          </NListItem>
+        </NList>
+      </NScrollbar>
     </div>
   </div>
 </template>
