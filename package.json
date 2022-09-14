@@ -43,6 +43,8 @@
     "@vueuse/core": "9.2.0",
     "axios": "0.27.2",
     "chart.js": "3.9.1",
+    "chartjs-adapter-dayjs-3": "^1.2.3",
+    "chartjs-plugin-streaming": "^2.0.0",
     "dayjs": "1.11.5",
     "electron": "19.0.16",
     "electron-builder": "23.3.3",

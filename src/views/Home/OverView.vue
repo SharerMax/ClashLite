@@ -191,37 +191,41 @@ const generateLabels = () => {
   return labels
 }
 
-const uploadData = ref(Array(60).fill(0))
-const downloadData = ref(Array(60).fill(0))
-
+const uploadData: { x: number; y: number }[] = []
+const downloadData: { x: number; y: number }[] = []
 function getRandomInt(max: number) {
   return Math.abs(Math.floor(Math.random() * max))
 }
+const chartData = ref <TChartData<'line'>>({
+  datasets: [{
+    label: '上传',
+    data: [],
+  }, {
+    label: '下载',
+    data: [],
+    borderColor: 'red',
+  }],
+})
 let timer = -1
 onMounted(() => {
   timer = window.setInterval(() => {
-    const newUploadData = Array.from(uploadData.value)
-    newUploadData.shift()
-    newUploadData.push(getRandomInt(4096))
-    uploadData.value = newUploadData
-    const newDownloadData = Array.from(downloadData.value)
-    newDownloadData.shift()
-    newDownloadData.push(getRandomInt(4096))
-    downloadData.value = newDownloadData
+    if (uploadData.length > 60) {
+      uploadData.shift()
+    }
+    const currentTime = Date.now()
+    uploadData.push({ x: currentTime, y: getRandomInt(4096) })
+
+    if (downloadData.length > 60) {
+      downloadData.shift()
+    }
+    downloadData.push({ x: currentTime, y: getRandomInt(4096) })
+    chartData.value.datasets[0].data = uploadData
+    chartData.value.datasets[1].data = downloadData
   }, 1000)
 })
 onUnmounted(() => {
   window.clearInterval(timer)
 })
-const chartData = computed <TChartData<'line'>>(() => ({
-  datasets: [{
-    data: uploadData.value,
-  }, {
-    data: downloadData.value,
-    borderColor: 'red',
-  }],
-  labels: generateLabels(),
-}))
 
 const localIP = ref('127.0.0.1')
 onMounted(() => {

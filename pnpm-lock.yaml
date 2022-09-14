@@ -14,6 +14,8 @@ specifiers:
   '@vueuse/core': 9.2.0
   axios: 0.27.2
   chart.js: 3.9.1
+  chartjs-adapter-dayjs-3: ^1.2.3
+  chartjs-plugin-streaming: ^2.0.0
   dayjs: 1.11.5
   electron: 19.0.16
   electron-builder: 23.3.3
@@ -56,6 +58,8 @@ devDependencies:
   '@vueuse/core': 9.2.0_vue@3.2.39
   axios: 0.27.2
   chart.js: 3.9.1
+  chartjs-adapter-dayjs-3: 1.2.3_3dgk26qaxajlqttsxqg5yf2rvu
+  chartjs-plugin-streaming: 2.0.0_chart.js@3.9.1
   dayjs: 1.11.5
   electron: 19.0.16
   electron-builder: 23.3.3
@@ -1786,6 +1790,25 @@ packages:
 
   /chart.js/3.9.1:
     resolution: {integrity: sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w==}
+    dev: true
+
+  /chartjs-adapter-dayjs-3/1.2.3_3dgk26qaxajlqttsxqg5yf2rvu:
+    resolution: {integrity: sha512-H8m1c2cFi9zdiJ0IfY7txUSSZusnS671sUuE6dbmvcaHmSFTMNoWH5lJvNj+oM1hLRsiP5pSTiB7InAMDJP+rQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      chart.js: '>=2.8.0'
+      dayjs: ^1.9.7
+    dependencies:
+      chart.js: 3.9.1
+      dayjs: 1.11.5
+    dev: true
+
+  /chartjs-plugin-streaming/2.0.0_chart.js@3.9.1:
+    resolution: {integrity: sha512-oBwHRmovGbPDS1h8PhpttnlKjI6eiJO13v4h+xz+mfbHhIc+iNF9xuMobCIFMKFH7rlVWi5TJAOIxoXyGElYYg==}
+    peerDependencies:
+      chart.js: ^3.0.0
+    dependencies:
+      chart.js: 3.9.1
     dev: true
 
   /check-error/1.0.2:
