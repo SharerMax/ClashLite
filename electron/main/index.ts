@@ -61,7 +61,7 @@ async function createWindow() {
     // https://github.com/vitejs/vite/issues/3229; will be fix in vite 3.x
 
     // eslint-disable-next-line dot-notation
-    const url = `http://${process.env['VITE_DEV_SERVER_HOST']}:${process.env['VITE_DEV_SERVER_PORT']}`
+    const url = `http://${process.env['VITE_DEV_SERVER_HOSTNAME']}:${process.env['VITE_DEV_SERVER_PORT']}`
     console.log(`render server on: ${url}\n`)
     win.loadURL(url)
   }

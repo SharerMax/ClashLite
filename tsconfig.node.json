@@ -20,7 +20,8 @@
     "vite.config.ts",
     "vitest.config.ts",
     "uno.config.ts", 
-    "electron/main/**/*.ts"
+    "electron/main/**/*.ts",
+    "package.json"
   ],
   "exclude": [
     "node_modules",
