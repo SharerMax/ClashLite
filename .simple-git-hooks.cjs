@@ -1,3 +1,3 @@
 module.exports = {
-  "pre-commit": "npx nano-staged"
+  "pre-commit": "pnpm dlx nano-staged"
 };
