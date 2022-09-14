@@ -26,7 +26,8 @@
     "test:e2e": "npx playwright test",
     "test:e2e:headless": "npx playwright test --headed",
     "test:unit": "vitest",
-    "typecheck": "vue-tsc --noEmit"
+    "typecheck": "vue-tsc --noEmit",
+    "githook": "simple-git-hooks"
   },
   "devDependencies": {
     "@antfu/eslint-config": "0.26.3",

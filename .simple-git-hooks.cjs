@@ -1,4 +1,4 @@
 module.exports = {
-  "pre-commit": "pnpm dlx nano-staged",
-  "commit-msg": "pnpm dlx commitlint --edit ${1}"
+  "pre-commit": "pnpm exec nano-staged",
+  "commit-msg": "pnpm exec commitlint --edit ${1}"
 };
