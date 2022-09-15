@@ -99,9 +99,7 @@
           </NCard>
         </NGridItem>
         <NGridItem span="1 780:2">
-          <!-- <Line :chart-data="chartData" /> -->
-          <!-- <div class="h-150" /> -->
-          <TrafficChart :chart-data="chartData" />
+          <TrafficChart />
         </NGridItem>
       </NGrid>
     </NScrollbar>
@@ -117,8 +115,7 @@ import { Copy } from '@vicons/carbon'
 import {
   computed, onMounted, onUnmounted, ref,
 } from 'vue'
-import type { TChartData } from 'vue-chartjs/dist/types'
-import TrafficChart from '../../components/TrafficChart.vue'
+import TrafficChart from '@/render/components/TrafficChart.vue'
 import { baseConfig, patchBaseConfig } from '@/render/api/clash'
 import { checkClashHealth } from '@/render/utils/clash'
 const clashProcessLoading = ref(false)
@@ -196,16 +193,6 @@ const downloadData: { x: number; y: number }[] = []
 function getRandomInt(max: number) {
   return Math.abs(Math.floor(Math.random() * max))
 }
-const chartData = ref <TChartData<'line'>>({
-  datasets: [{
-    label: '上传',
-    data: [],
-  }, {
-    label: '下载',
-    data: [],
-    borderColor: 'red',
-  }],
-})
 let timer = -1
 onMounted(() => {
   timer = window.setInterval(() => {
@@ -219,8 +206,6 @@ onMounted(() => {
       downloadData.shift()
     }
     downloadData.push({ x: currentTime, y: getRandomInt(4096) })
-    chartData.value.datasets[0].data = uploadData
-    chartData.value.datasets[1].data = downloadData
   }, 1000)
 })
 onUnmounted(() => {

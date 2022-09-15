@@ -13,10 +13,8 @@ specifiers:
   '@vitejs/plugin-vue': 3.1.0
   '@vueuse/core': 9.2.0
   axios: 0.27.2
-  chart.js: 3.9.1
-  chartjs-adapter-dayjs-3: ^1.2.3
-  chartjs-plugin-streaming: ^2.0.0
   dayjs: 1.11.5
+  echarts: ^5.3.3
   electron: 19.0.16
   electron-builder: 23.3.3
   electron-devtools-installer: 3.2.0
@@ -40,7 +38,7 @@ specifiers:
   vite-plugin-resolve: 2.1.2
   vitest: 0.23.2
   vue: 3.2.39
-  vue-chartjs: 4.1.1
+  vue-echarts: ^6.2.3
   vue-router: 4.1.5
   vue-tsc: 0.40.13
 
@@ -57,10 +55,8 @@ devDependencies:
   '@vitejs/plugin-vue': 3.1.0_vite@3.1.0+vue@3.2.39
   '@vueuse/core': 9.2.0_vue@3.2.39
   axios: 0.27.2
-  chart.js: 3.9.1
-  chartjs-adapter-dayjs-3: 1.2.3_3dgk26qaxajlqttsxqg5yf2rvu
-  chartjs-plugin-streaming: 2.0.0_chart.js@3.9.1
   dayjs: 1.11.5
+  echarts: 5.3.3
   electron: 19.0.16
   electron-builder: 23.3.3
   electron-devtools-installer: 3.2.0
@@ -84,7 +80,7 @@ devDependencies:
   vite-plugin-resolve: 2.1.2
   vitest: 0.23.2
   vue: 3.2.39
-  vue-chartjs: 4.1.1_chart.js@3.9.1+vue@3.2.39
+  vue-echarts: 6.2.3_echarts@5.3.3+vue@3.2.39
   vue-router: 4.1.5_vue@3.2.39
   vue-tsc: 0.40.13_typescript@4.8.3
 
@@ -1788,29 +1784,6 @@ packages:
     resolution: {integrity: sha512-mKKUkUbhPpQlCOfIuZkvSEgktjPFIsZKRRbC6KWVEMvlzblj3i3asQv5ODsrwt0N3pHAEvjP8KTQPHkp0+6jOg==}
     dev: true
 
-  /chart.js/3.9.1:
-    resolution: {integrity: sha512-Ro2JbLmvg83gXF5F4sniaQ+lTbSv18E+TIf2cOeiH1Iqd2PGFOtem+DUufMZsCJwFE7ywPOpfXFBwRTGq7dh6w==}
-    dev: true
-
-  /chartjs-adapter-dayjs-3/1.2.3_3dgk26qaxajlqttsxqg5yf2rvu:
-    resolution: {integrity: sha512-H8m1c2cFi9zdiJ0IfY7txUSSZusnS671sUuE6dbmvcaHmSFTMNoWH5lJvNj+oM1hLRsiP5pSTiB7InAMDJP+rQ==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      chart.js: '>=2.8.0'
-      dayjs: ^1.9.7
-    dependencies:
-      chart.js: 3.9.1
-      dayjs: 1.11.5
-    dev: true
-
-  /chartjs-plugin-streaming/2.0.0_chart.js@3.9.1:
-    resolution: {integrity: sha512-oBwHRmovGbPDS1h8PhpttnlKjI6eiJO13v4h+xz+mfbHhIc+iNF9xuMobCIFMKFH7rlVWi5TJAOIxoXyGElYYg==}
-    peerDependencies:
-      chart.js: ^3.0.0
-    dependencies:
-      chart.js: 3.9.1
-    dev: true
-
   /check-error/1.0.2:
     resolution: {integrity: sha512-BrgHpW9NURQgzoNyjfq0Wu6VFO6D7IZEmJNdtgNqpzGG8RuNFHt2jQxWlAs4HMe119chBnv+34syEZtc6IhLtA==}
     dev: true
@@ -2391,6 +2364,13 @@ packages:
 
   /duplexer3/0.1.4:
     resolution: {integrity: sha512-CEj8FwwNA4cVH2uFCoHUrmojhYh1vmCdOaneKJXwkeY1i9jnlslVo9dx+hQ5Hl9GnH/Bwy/IjxAyOePyPKYnzA==}
+    dev: true
+
+  /echarts/5.3.3:
+    resolution: {integrity: sha512-BRw2serInRwO5SIwRviZ6Xgm5Lb7irgz+sLiFMmy/HOaf4SQ+7oYqxKzRHAKp4xHQ05AuHw1xvoQWJjDQq/FGw==}
+    dependencies:
+      tslib: 2.3.0
+      zrender: 5.3.2
     dev: true
 
   /ejs/3.1.8:
@@ -5129,6 +5109,10 @@ packages:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
     dev: true
 
+  /resize-detector/0.3.0:
+    resolution: {integrity: sha512-R/tCuvuOHQ8o2boRP6vgx8hXCCy87H1eY9V5imBYeVNyNVpuL9ciReSccLj2gDcax9+2weXy3bc8Vv+NRXeEvQ==}
+    dev: true
+
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
     engines: {node: '>=4'}
@@ -5662,6 +5646,10 @@ packages:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
 
+  /tslib/2.3.0:
+    resolution: {integrity: sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg==}
+    dev: true
+
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
     dev: true
@@ -6004,13 +5992,18 @@ packages:
       vue: 3.2.39
     dev: true
 
-  /vue-chartjs/4.1.1_chart.js@3.9.1+vue@3.2.39:
-    resolution: {integrity: sha512-rKIQ3jPrjhwxjKdNJppnYxRuBSrx4QeM3nNHsfIxEqjX6QS4Jq6e6vnZBxh2MDpURDC2uvuI2N0eIt1cWXbBVA==}
+  /vue-demi/0.13.11_vue@3.2.39:
+    resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==}
+    engines: {node: '>=12'}
+    hasBin: true
+    requiresBuild: true
     peerDependencies:
-      chart.js: ^3.7.0
+      '@vue/composition-api': ^1.0.0-rc.1
       vue: ^3.0.0-0 || ^2.6.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
     dependencies:
-      chart.js: 3.9.1
       vue: 3.2.39
     dev: true
 
@@ -6027,6 +6020,23 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.39
+    dev: true
+
+  /vue-echarts/6.2.3_echarts@5.3.3+vue@3.2.39:
+    resolution: {integrity: sha512-xHzUvgsgk/asJTcNa8iVVwoovZU3iEUHvmBa3bzbiP3Y6OMxM1YXsoWOKVmVVaUusGs4ob4pSwjwNy2FemAz9w==}
+    requiresBuild: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.5
+      echarts: ^5.1.2
+      vue: ^2.6.12 || ^3.1.1
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      echarts: 5.3.3
+      resize-detector: 0.3.0
+      vue: 3.2.39
+      vue-demi: 0.13.11_vue@3.2.39
     dev: true
 
   /vue-eslint-parser/9.0.3_eslint@8.23.1:
@@ -6237,4 +6247,10 @@ packages:
   /yocto-queue/0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+    dev: true
+
+  /zrender/5.3.2:
+    resolution: {integrity: sha512-8IiYdfwHj2rx0UeIGZGGU4WEVSDEdeVCaIg/fomejg1Xu6OifAL1GVzIPHg2D+MyUkbNgPWji90t0a8IDk+39w==}
+    dependencies:
+      tslib: 2.3.0
     dev: true
