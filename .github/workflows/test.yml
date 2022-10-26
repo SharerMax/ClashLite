@@ -30,12 +30,15 @@ jobs:
         registry-url: https://registry.npmjs.org/
         cache: 'pnpm'
 
+    - name: workspace build
+      run: pnpm --filter share install && pnpm --filter share build
+
     - name: Install
       run: pnpm install
 
     - name: TypeCheck
       run: pnpm run typecheck
-  
+
   test:
     runs-on: ubuntu-latest
     env:
