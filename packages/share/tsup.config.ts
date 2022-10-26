@@ -9,4 +9,5 @@ export const tsup: Options = {
   splitting: true,
   clean: true,
   shims: false,
+  target: 'node16',
 }
