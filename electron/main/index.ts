@@ -36,6 +36,7 @@ async function createWindow() {
       // https://www.electronjs.org/zh/docs/latest/tutorial/security#%E9%9A%94%E7%A6%BB%E4%B8%8D%E5%8F%97%E4%BF%A1%E4%BB%BB%E7%9A%84%E5%86%85%E5%AE%B9
       nodeIntegration: false,
       contextIsolation: true,
+      sandbox: false,
     },
     minWidth: 800,
     minHeight: 600,
@@ -60,8 +61,8 @@ async function createWindow() {
     // 🚧 Use ['ENV_NAME'] avoid vite:define plugin
     // https://github.com/vitejs/vite/issues/3229; will be fix in vite 3.x
 
-    // eslint-disable-next-line dot-notation
-    const url = `http://${process.env['VITE_DEV_SERVER_HOSTNAME']}:${process.env['VITE_DEV_SERVER_PORT']}`
+    console.log('process.env', process.env)
+    const url = `${process.env.VITE_DEV_SERVER_URL}`
     console.log(`render server on: ${url}\n`)
     win.loadURL(url)
   }

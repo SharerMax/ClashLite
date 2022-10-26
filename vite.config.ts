@@ -1,5 +1,5 @@
 import { rmSync } from 'fs'
-import { join } from 'path'
+// import { join } from 'path'
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -19,50 +19,84 @@ export default defineConfig(({ mode }) => {
       vue(),
       Unocss(),
       mode !== 'debug'
-        ? electron({
-          main: {
-            entry: 'electron/main/index.ts',
-            vite: {
-              build: {
-                sourcemap: 'inline',
-                outDir: 'dist/electron/main',
+        ? electron([{
+          // main: {
+          //   entry: 'electron/main/index.ts',
+          //   vite: {
+          //     build: {
+          //       sourcemap: 'inline',
+          //       outDir: 'dist/electron/main',
+          //     },
+          //     resolve: {
+          //       alias: {
+          //         '@/main': fileURLToPath(new URL('./electron/main', import.meta.url)),
+          //         '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
+          //       },
+          //     },
+          //   },
+          // },
+          // preload: {
+          //   input: {
+          //     // You can configure multiple preload here
+          //     index: join(__dirname, 'electron/preload/index.ts'),
+          //   },
+          //   vite: {
+          //     build: {
+          //       // For debug
+          //       sourcemap: 'inline',
+          //       outDir: 'dist/electron/preload',
+          //     },
+          //     resolve: {
+          //       alias: {
+          //         '@/preload': fileURLToPath(new URL('./electron/preload', import.meta.url)),
+          //         '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
+          //       },
+          //     },
+          //   },
+          // },
+
+          entry: 'electron/main/index.ts',
+          vite: {
+            resolve: {
+              alias: {
+                '@/preload': fileURLToPath(new URL('./electron/preload', import.meta.url)),
+                '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
+                '@/main': fileURLToPath(new URL('./electron/main', import.meta.url)),
+                '@/render': fileURLToPath(new URL('./src', import.meta.url)),
               },
-              resolve: {
-                alias: {
-                  '@/main': fileURLToPath(new URL('./electron/main', import.meta.url)),
-                  '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
-                },
-              },
+            },
+            build: {
+              sourcemap: 'inline',
+              outDir: 'dist/electron/main',
             },
           },
-          preload: {
-            input: {
-              // You can configure multiple preload here
-              index: join(__dirname, 'electron/preload/index.ts'),
+        }, {
+          entry: 'electron/preload/index.ts',
+          vite: {
+            resolve: {
+              alias: {
+                '@/preload': fileURLToPath(new URL('./electron/preload', import.meta.url)),
+                '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
+                '@/main': fileURLToPath(new URL('./electron/main', import.meta.url)),
+                '@/render': fileURLToPath(new URL('./src', import.meta.url)),
+              },
             },
-            vite: {
-              build: {
-                // For debug
-                sourcemap: 'inline',
-                outDir: 'dist/electron/preload',
-              },
-              resolve: {
-                alias: {
-                  '@/preload': fileURLToPath(new URL('./electron/preload', import.meta.url)),
-                  '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
-                },
-              },
+            build: {
+              sourcemap: 'inline',
+              outDir: 'dist/electron/preload',
             },
           },
-        })
+        }])
         : undefined,
       // Enable use Electron, Node.js API in Renderer-process
       // renderer(),
     ],
     resolve: {
       alias: {
-        '@/render': fileURLToPath(new URL('./src', import.meta.url)),
+        '@/preload': fileURLToPath(new URL('./electron/preload', import.meta.url)),
         '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
+        '@/main': fileURLToPath(new URL('./electron/main', import.meta.url)),
+        '@/render': fileURLToPath(new URL('./src', import.meta.url)),
       },
     },
     server: {
