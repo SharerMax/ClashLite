@@ -31,7 +31,7 @@ jobs:
         cache: 'pnpm'
 
     - name: workspace build
-      run: pnpm --filter share install && pnpm --filter share build
+      run: pnpm -r install && pnpm --filter share build
 
     - name: Install
       run: pnpm install
