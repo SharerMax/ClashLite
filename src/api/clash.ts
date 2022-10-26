@@ -3,8 +3,8 @@
  * https://github.com/Dreamacro/clash/wiki/external-controller-API-reference
  */
 import type { AxiosResponse } from 'axios'
+import type { Api, BaseClashConfig } from 'share/dist/type/clash'
 import axiosInstance from '.'
-import type { Api, BaseClashConfig } from '@/share/type/clash'
 
 export async function baseConfig() {
   return await axiosInstance.get<BaseClashConfig>('/configs')
