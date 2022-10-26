@@ -118,10 +118,10 @@ import {
 } from 'naive-ui'
 import { CloudDownload, Edit, View } from '@vicons/carbon'
 import { ref } from 'vue'
-import type { ClashSettingSubscribe } from '@/share/type'
-import { isSubScribeEqual } from '@/share/utils/setting'
+import type { ClashSettingSubscribe } from 'share/dist/type'
+import { isSubScribeEqual } from 'share/dist/utils/setting'
+import type { Proxies, ProxyGroupInfo, ProxyInfo } from 'share/dist/type/clash/api'
 import { proxy as fetchProxy, proxyProvider, selectProxy } from '@/render/api/clash'
-import type { Proxies, ProxyGroupInfo, ProxyInfo } from '@/share/type/clash/api'
 
 const showEditProxySub = ref(false)
 function handleAddProxySubButtonClick() {

@@ -1,9 +1,9 @@
 import { clipboard, contextBridge, ipcRenderer } from 'electron'
 import { internalIpV4 } from 'internal-ip'
 import Store from 'electron-store'
+import type { ClashSettingRule, ClashSettingSubscribe, ClashSettings, ClashStartInfo, Event, RunMode } from 'share/dist/type'
 import { domReady } from './utils'
 import { useLoading } from './loading'
-import type { ClashSettingRule, ClashSettingSubscribe, ClashSettings, ClashStartInfo, Event, RunMode } from '@/share/type'
 
 const clashStore = new Store<ClashSettings>({
   name: 'clash_config',
@@ -13,11 +13,11 @@ function copyTextToClipboard(text: string) {
   clipboard.writeText(text)
 }
 
-function sendClashEventToMain(eventName: Event.MainEvent.ClashEventName, ...args: any) {
+function sendClashEventToMain(eventName: Event.ClashEventName, ...args: any) {
   ipcRenderer.send(eventName, args)
 }
 
-function sendClashInvokeEventToMain(eventName: Event.MainEvent.ClashInvokeEventName, ...args: any) {
+function sendClashInvokeEventToMain(eventName: Event.ClashInvokeEventName, ...args: any) {
   return ipcRenderer.invoke(eventName, args)
 }
 

@@ -58,6 +58,7 @@
     "node-schedule": "2.1.0",
     "punycode-esm": "1.0.6",
     "simple-git-hooks": "2.8.1",
+    "share": "workspace:*",
     "typescript": "4.8.4",
     "unocss": "0.46.0",
     "url-parse": "1.5.10",

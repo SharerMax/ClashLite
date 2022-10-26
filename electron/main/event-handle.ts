@@ -1,13 +1,13 @@
 import { ipcMain } from 'electron'
 import type { IpcMainEvent, IpcMainInvokeEvent } from 'electron'
+import type { Event } from 'share/dist/type'
 import { handleProxySubscribeChange, handleRuleSetChange, startClash, stopClash } from './clash'
-import type { Event } from '@/share/type/clash'
 
-function defineClashOnEventHandler(eventName: Event.MainEvent.ClashEventName, fn: (event: IpcMainEvent, ...args: any) => void) {
+function defineClashOnEventHandler(eventName: Event.ClashEventName, fn: (event: IpcMainEvent, ...args: any) => void) {
   ipcMain.on(eventName, fn)
 }
 
-function defineClashInvokeEventHandler<T>(eventName: Event.MainEvent.ClashInvokeEventName, fn: (event: IpcMainInvokeEvent, ...args: any) => Promise<T>) {
+function defineClashInvokeEventHandler<T>(eventName: Event.ClashInvokeEventName, fn: (event: IpcMainInvokeEvent, ...args: any) => Promise<T>) {
   ipcMain.handle(eventName, fn)
 }
 // Clash event handle define

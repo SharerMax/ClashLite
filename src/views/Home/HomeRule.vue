@@ -162,7 +162,7 @@ import {
 } from 'naive-ui'
 import { Add, Delete, Unknown } from '@vicons/carbon'
 import { ref } from 'vue'
-import type { ClashSettingRule } from '@/share/type'
+import type { ClashSettingRule } from 'share/dist/type'
 
 const ruleSetList = ref<ClashSettingRule[]>([])
 ruleSetList.value = window.clash.getRuleSet()

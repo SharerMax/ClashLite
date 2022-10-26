@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
-import { parseHttpUri, parseShadowsocksLegacyUri, parseShadowsocksRUri, parseShadowsocksSIP002URI, parseSocksUri, parseTrojanUri, parseVmessUri } from '../../utils/parse'
-import type { OrdinaryTrojanProxy, OrdinaryVmessProxy, ShadowSocksRProxy, TrojanWebsocketProxy, VmessGrpcProxy, VmessH2Proxy, VmessHttpProxy, VmessWebsocketProxy } from '@/share/type'
+import { parseHttpUri, parseShadowsocksLegacyUri, parseShadowsocksRUri, parseShadowsocksSIP002URI, parseSocksUri, parseTrojanUri, parseVmessUri } from '../../src/utils/parse'
+import type { OrdinaryTrojanProxy, OrdinaryVmessProxy, ShadowSocksRProxy, TrojanWebsocketProxy, VmessGrpcProxy, VmessH2Proxy, VmessHttpProxy, VmessWebsocketProxy } from '../../src/type'
 
 describe('utils:parse', () => {
   test('parseShadowsocksSIP002UR', () => {

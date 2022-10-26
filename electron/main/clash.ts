@@ -10,10 +10,9 @@ import getPort, { portNumbers } from 'get-port'
 import Store from 'electron-store'
 import schedule from 'node-schedule'
 import dayjs from 'dayjs'
-import type { BaseClashConfig, ClashConfig, ClashStartInfo, ProxyProviders } from '../../packages/share/type/clash'
+import { parseProxySubContent } from 'share/dist/utils/parse'
+import type { BaseClashConfig, ClashConfig, ClashSettingRule, ClashSettings, ClashStartInfo, ProxyProviders, RuleProviders } from 'share/dist/type'
 import { defineClashEventHandler } from './event-handle'
-import { parseProxySubContent } from '@/share/utils/parse'
-import type { ClashSettingRule, ClashSettings, RuleProviders } from '@/share/type'
 
 let clashProcess: ChildProcess | null = null
 let proxySubscribeDateBaseJob: null | schedule.Job = null

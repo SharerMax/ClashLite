@@ -60,7 +60,6 @@ export default defineConfig(({ mode }) => {
             resolve: {
               alias: {
                 '@/preload': fileURLToPath(new URL('./electron/preload', import.meta.url)),
-                '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
                 '@/main': fileURLToPath(new URL('./electron/main', import.meta.url)),
                 '@/render': fileURLToPath(new URL('./src', import.meta.url)),
               },
@@ -76,7 +75,6 @@ export default defineConfig(({ mode }) => {
             resolve: {
               alias: {
                 '@/preload': fileURLToPath(new URL('./electron/preload', import.meta.url)),
-                '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
                 '@/main': fileURLToPath(new URL('./electron/main', import.meta.url)),
                 '@/render': fileURLToPath(new URL('./src', import.meta.url)),
               },
@@ -94,7 +92,6 @@ export default defineConfig(({ mode }) => {
     resolve: {
       alias: {
         '@/preload': fileURLToPath(new URL('./electron/preload', import.meta.url)),
-        '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
         '@/main': fileURLToPath(new URL('./electron/main', import.meta.url)),
         '@/render': fileURLToPath(new URL('./src', import.meta.url)),
       },
