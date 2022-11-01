@@ -14,7 +14,7 @@
   "main": "dist/electron/main/index.js",
   "productName": "ClashLite",
   "engines": {
-    "node": ">=16.14.0 <19"
+    "node": ">=18.11.0 <19"
   },
   "scripts": {
     "init": "git config core.hooksPath .git/hooks/ && rm -rf .git/hooks && npx simple-git-hooks",
