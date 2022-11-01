@@ -16,12 +16,9 @@ jobs:
       node-vesion: 18.x
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup pnpm
-      # You may pin to the exact commit or the version.
-      # uses: pnpm/action-setup@10693b3829bf86eb2572aef5f3571dcf5ca9287d
-      uses: pnpm/action-setup@v2.2.4
-#     - name: Use Node.js ${{ matrix.node-version }}
+    - name: Checkout
+      uses: actions/checkout@v3
+      
     - name: Use Node.js ${{ env.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -29,8 +26,13 @@ jobs:
         node-version: ${{ env.node-version }}
         registry-url: https://registry.npmjs.org/
         cache: 'pnpm'
+        
+    - name: Setup pnpm
+      # You may pin to the exact commit or the version.
+      # uses: pnpm/action-setup@10693b3829bf86eb2572aef5f3571dcf5ca9287d
+      uses: pnpm/action-setup@v2.2.4
 
-    - name: workspace build
+    - name: Workspace package build
       run: pnpm -r install && pnpm --filter share build
 
     - name: Install
@@ -49,12 +51,9 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup pnpm
-      # You may pin to the exact commit or the version.
-      # uses: pnpm/action-setup@10693b3829bf86eb2572aef5f3571dcf5ca9287d
-      uses: pnpm/action-setup@v2.2.4
-#     - name: Use Node.js ${{ matrix.node-version }}
+    - name: Checkout
+      uses: actions/checkout@v3
+      
     - name: Use Node.js ${{ env.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -62,6 +61,14 @@ jobs:
         node-version: ${{ env.node-version }}
         registry-url: https://registry.npmjs.org/
         cache: 'pnpm'
+        
+    - name: Setup pnpm
+      # You may pin to the exact commit or the version.
+      # uses: pnpm/action-setup@10693b3829bf86eb2572aef5f3571dcf5ca9287d
+      uses: pnpm/action-setup@v2.2.4
+
+    - name: Workspace package build
+      run: pnpm -r install && pnpm --filter share build
 
     - name: Install
       run: pnpm install
