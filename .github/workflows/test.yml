@@ -13,7 +13,7 @@ jobs:
   typecheck:
     runs-on: ubuntu-latest
     env:
-      node-vesion: 16.x
+      node-vesion: 18.x
 
     steps:
     - uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      node-vesion: 16.x
+      node-vesion: 18.x
 #     strategy:
 #       matrix:
 #         node-version: [16.x]
@@ -53,7 +53,7 @@ jobs:
     - name: Setup pnpm
       # You may pin to the exact commit or the version.
       # uses: pnpm/action-setup@10693b3829bf86eb2572aef5f3571dcf5ca9287d
-      uses: pnpm/action-setup@v2
+      uses: pnpm/action-setup@v2.2.4
 #     - name: Use Node.js ${{ matrix.node-version }}
     - name: Use Node.js ${{ env.node-version }}
       uses: actions/setup-node@v3
