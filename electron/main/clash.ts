@@ -204,6 +204,9 @@ function updateProxySub() {
       startCronBaseProxySubscribeSchedule(subscribe.period)
     })
   })
+  request.on('error', (error) => {
+    console.log(error.message)
+  })
   request.end()
 }
 
