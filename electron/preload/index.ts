@@ -23,17 +23,17 @@ function sendClashInvokeEventToMain(eventName: Event.ClashInvokeEventName, ...ar
 
 const clashExpose = {
   clashIsRunning: () => {
-    return !!localStorage.getItem('ext-ctl')
+    return !!sessionStorage.getItem('ext-ctl')
   },
   start: () => (sendClashInvokeEventToMain('clash:start') as Promise<ClashStartInfo>).then((info) => {
-    localStorage.setItem('ext-ctl', info.controllerUrl)
-    localStorage.setItem('ctl-secret', info.apiSecret)
+    sessionStorage.setItem('ext-ctl', info.controllerUrl)
+    sessionStorage.setItem('ctl-secret', info.apiSecret)
     const running = !!info.controllerUrl
     return running
   }),
   stop: () => {
     sendClashEventToMain('clash:stop')
-    localStorage.removeItem('ext-ctl')
+    sessionStorage.removeItem('ext-ctl')
   },
   saveRunMode(mode: RunMode) {
     clashStore.set('mode', mode)
