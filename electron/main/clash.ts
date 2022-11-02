@@ -125,10 +125,11 @@ function checkProxySubTask() {
   if (subscribe) {
     const updateTime = subscribe.updateTime
     if (updateTime) {
-      const period = subscribe.period
+      //  the period unit is 'minutes', convert to 'milliseconds'
+      const period = subscribe.period * 60 * 1000
       const now = Date.now()
-      const willUpdateTime = now - period
-      if (willUpdateTime >= period * 60 * 1000) {
+      const willUpdateTime = now - updateTime
+      if (willUpdateTime >= period) {
         updateProxySub()
       }
       else {
