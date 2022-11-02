@@ -123,28 +123,37 @@ const clashRunning = ref(window.clash.clashIsRunning())
 const dialog = useDialog()
 const defaultRunMode = window.clash.getRunMode()
 async function handleClashRunChange(value: boolean) {
-  if (value) {
-    clashProcessLoading.value = true
-    clashRunning.value = await window.clash.start()
-    clashProcessLoading.value = false
-    setTimeout(() => {
-      baseConfig().then((res) => {
-        if (!checkClashHealth(res.data)) {
-          dialog.error({
-            content: '端口冲突，请检查本地代理端口是否被占用',
-            positiveText: '知道了',
-          })
-          handleClashRunChange(false)
-        }
-        else {
-          handleRunModeChange(defaultRunMode)
-        }
-      })
-    }, 1500)
+  try {
+    if (value) {
+      clashProcessLoading.value = true
+      clashRunning.value = await window.clash.start()
+      clashProcessLoading.value = false
+      setTimeout(() => {
+        baseConfig().then((res) => {
+          if (!checkClashHealth(res.data)) {
+            dialog.error({
+              content: '端口冲突，请检查本地代理端口是否被占用',
+              positiveText: '知道了',
+            })
+            handleClashRunChange(false)
+          }
+          else {
+            handleRunModeChange(defaultRunMode)
+          }
+        })
+      }, 1500)
+    }
+    else {
+      clashRunning.value = false
+      window.clash.stop()
+    }
   }
-  else {
-    clashRunning.value = false
-    window.clash.stop()
+  catch (error) {
+    dialog.error({
+      content: `错误 [ ${error} ]`,
+      positiveText: '知道了',
+    })
+    clashProcessLoading.value = false
   }
 }
 
