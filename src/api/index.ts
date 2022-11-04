@@ -7,10 +7,10 @@ const instance = axios.create({
 })
 instance.interceptors.request.use((config) => {
   const newConfig = config
-  newConfig.baseURL = localStorage.getItem('ext-ctl') ?? ''
+  newConfig.baseURL = `http://${sessionStorage.getItem('ext-ctl')}` ?? ''
   newConfig.headers = {
     ...newConfig.headers,
-    Authorization: `Bearer ${localStorage.getItem('ctl-secret')}`,
+    Authorization: `Bearer ${sessionStorage.getItem('ctl-secret')}`,
   }
   return newConfig
 })

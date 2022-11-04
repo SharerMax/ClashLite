@@ -85,6 +85,6 @@ export interface ClashConfig extends BaseClashConfig {
 }
 
 export interface ClashStartInfo {
-  controllerUrl: string
+  controllerHost: string
   apiSecret: string
 }

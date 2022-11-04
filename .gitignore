@@ -25,3 +25,5 @@ extra
 
 # log
 vite-plugin-electron.log
+
+.turbo

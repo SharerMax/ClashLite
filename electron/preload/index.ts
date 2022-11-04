@@ -26,9 +26,9 @@ const clashExpose = {
     return !!sessionStorage.getItem('ext-ctl')
   },
   start: () => (sendClashInvokeEventToMain('clash:start') as Promise<ClashStartInfo>).then((info) => {
-    sessionStorage.setItem('ext-ctl', info.controllerUrl)
+    sessionStorage.setItem('ext-ctl', info.controllerHost)
     sessionStorage.setItem('ctl-secret', info.apiSecret)
-    const running = !!info.controllerUrl
+    const running = !!info.controllerHost
     return running
   }),
   stop: () => {

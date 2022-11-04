@@ -27,7 +27,9 @@
     "test:e2e:headless": "npx playwright test --headed",
     "test:unit": "vitest",
     "typecheck": "vue-tsc --noEmit",
-    "githook": "simple-git-hooks"
+    "githook": "simple-git-hooks",
+    "build:all": "turbo run build",
+    "dev:all": "turbo run dev"
   },
   "devDependencies": {
     "@antfu/eslint-config": "0.29.3",
@@ -57,8 +59,9 @@
     "nano-staged": "0.8.0",
     "node-schedule": "2.1.0",
     "punycode-esm": "1.0.6",
-    "simple-git-hooks": "2.8.1",
     "share": "workspace:*",
+    "simple-git-hooks": "2.8.1",
+    "turbo": "^1.6.3",
     "typescript": "4.8.4",
     "unocss": "0.46.3",
     "url-parse": "1.5.10",

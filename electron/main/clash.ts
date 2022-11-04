@@ -89,7 +89,7 @@ export async function startClash() {
     })
     clashProcess.once('spawn', () => {
       resolve({
-        controllerUrl: `http://${extCtl}`,
+        controllerHost: `${extCtl}`,
         apiSecret: '',
       })
     })
