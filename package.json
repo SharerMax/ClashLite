@@ -1,7 +1,7 @@
 {
   "name": "electron-clash-lite",
   "version": "1.0.0",
-  "packageManager": "pnpm@7.21.0",
+  "packageManager": "pnpm@8.1.0",
   "author": "SharerMax",
   "license": "MIT",
   "keywords": [
