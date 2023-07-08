@@ -112,12 +112,11 @@ import {
   NScrollbar, NSpace, NSwitch, NText, useDialog, useMessage,
 } from 'naive-ui'
 import { Copy } from '@vicons/carbon'
-import {
-  computed, onMounted, onUnmounted, ref,
-} from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import TrafficChart from '@/render/components/TrafficChart.vue'
 import { baseConfig, patchBaseConfig } from '@/render/api/clash'
 import { checkClashHealth } from '@/render/utils/clash'
+
 const clashProcessLoading = ref(false)
 const clashRunning = ref(window.clash.clashIsRunning())
 const dialog = useDialog()
@@ -188,7 +187,7 @@ function handleRunModeChange(mode: RunMode['value']) {
   })
 }
 
-const generateLabels = () => {
+function generateLabels() {
   const labels = Array(60).fill('0')
   for (let i = 0; i < 60; i++) {
     labels[i] = (i + 1).toString()

@@ -1,9 +1,14 @@
-import { rmSync } from 'fs'
+import { rmSync } from 'node:fs'
+
 // import { join } from 'path'
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+
+// eslint-disable-next-line import/default
 import electron from 'vite-plugin-electron'
+import VueDevTools from 'vite-plugin-vue-devtools'
+
 // import renderer from 'vite-plugin-electron/renderer'
 import Unocss from 'unocss/vite'
 import { env } from './package.json'
@@ -18,43 +23,9 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       Unocss(),
+      VueDevTools(),
       mode !== 'debug'
         ? electron([{
-          // main: {
-          //   entry: 'electron/main/index.ts',
-          //   vite: {
-          //     build: {
-          //       sourcemap: 'inline',
-          //       outDir: 'dist/electron/main',
-          //     },
-          //     resolve: {
-          //       alias: {
-          //         '@/main': fileURLToPath(new URL('./electron/main', import.meta.url)),
-          //         '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
-          //       },
-          //     },
-          //   },
-          // },
-          // preload: {
-          //   input: {
-          //     // You can configure multiple preload here
-          //     index: join(__dirname, 'electron/preload/index.ts'),
-          //   },
-          //   vite: {
-          //     build: {
-          //       // For debug
-          //       sourcemap: 'inline',
-          //       outDir: 'dist/electron/preload',
-          //     },
-          //     resolve: {
-          //       alias: {
-          //         '@/preload': fileURLToPath(new URL('./electron/preload', import.meta.url)),
-          //         '@/share': fileURLToPath(new URL('./packages/share', import.meta.url)),
-          //       },
-          //     },
-          //   },
-          // },
-
           entry: 'electron/main/index.ts',
           vite: {
             resolve: {

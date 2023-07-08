@@ -1,10 +1,10 @@
-import { release } from 'os'
-import { join } from 'path'
+import { release } from 'node:os'
+import { join } from 'node:path'
 import {
   BrowserWindow, app, shell,
 } from 'electron'
-import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
 import clash from '@/main/clash'
+
 // const APP_USER_MODEL_ID = 'com.saeratom.clashlite'
 
 // Disable GPU Acceleration for Windows 7
@@ -85,15 +85,6 @@ async function createWindow() {
 
 app.whenReady().then(() => {
   createWindow()
-  if (!app.isPackaged) {
-    // session.defaultSession.setProxy({
-    //   mode: 'fixed_servers',
-    //   proxyRules: 'socks5://127.0.0.1:7890',
-    // })
-    installExtension(VUEJS_DEVTOOLS.id)
-      .then(name => console.log(`Added Extension:  ${name}`))
-      .catch(err => console.log('An error occurred: ', err))
-  }
 })
 
 app.on('window-all-closed', () => {

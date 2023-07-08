@@ -1,12 +1,8 @@
 {
+  "extends": ["@tsconfig/node18/tsconfig.json", "@vue/tsconfig/tsconfig.json"],
   "compilerOptions": {
+    "types": ["node"],
     "composite": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "allowJs": true,
-    "esModuleInterop": true,
     "baseUrl": "./",
     "paths": {
       "@/main/*": ["electron/main/*"],
