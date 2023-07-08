@@ -1,10 +1,11 @@
-import { fileURLToPath } from 'url'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitest/config'
+
 export default defineConfig({
   test: {
-    root: fileURLToPath(import.meta.url),
+    root: './',
     include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
-    exclude: ['node_modules', 'dist', '.idea', '.git', '.cache', 'test', 'release'],
+    exclude: ['**/node_modules/**', '**/dist/**', '**/cypress/**', '**/.{idea,git,cache,output,temp}/**', 'test', 'release'],
   },
   resolve: {
     alias: {
