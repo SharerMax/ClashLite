@@ -3,23 +3,23 @@ import { parseHttpUri, parseShadowsocksLegacyUri, parseShadowsocksRUri, parseSha
 import type { OrdinaryTrojanProxy, OrdinaryVmessProxy, ShadowSocksRProxy, TrojanWebsocketProxy, VmessGrpcProxy, VmessH2Proxy, VmessHttpProxy, VmessWebsocketProxy } from '../../src/type'
 
 describe('utils:parse', () => {
-  test('parseShadowsocksSIP002UR', () => {
-    const result = parseShadowsocksSIP002URI('ss://cmM0LW1kNTpwYXNzd2Q@us.proxy.com:8888#Example2')
+  test('parseShadowsocksSIP002URI', () => {
+    const result = parseShadowsocksSIP002URI('ss://YWVzLTEyOC1nY206ODNYdlg0Vm8lKjNh@us.proxy.com:8888#Example2')
     expect(result).toEqual({
       type: 'ss',
       name: 'Example2',
       server: 'us.proxy.com',
-      cipher: 'rc4-md5',
-      password: 'passwd',
+      cipher: 'aes-128-gcm',
+      password: '83XvX4Vo%*3a',
       port: 8888,
     })
-    const withV2rayResult = parseShadowsocksSIP002URI('ss://MjAyMi1ibGFrZTMtYWVzLTI1Ni1nY206WWN0UFo2VTd4UFBjVSUyQmdwM3UlMkIwdHglMkZ0Uml6Sk45Szh5JTJCdUtsVzJxamxJJTNE@192.168.100.1:8888/?plugin=v2ray-plugin%3Btls%3Bhost%3Dcn.bing.com#Example3')
+    const withV2rayResult = parseShadowsocksSIP002URI('ss://cmM0LW1kNTpwYXNzd2Q@192.168.100.1:8888/?plugin=v2ray-plugin%3Btls%3Bhost%3Dcn.bing.com#Example3')
     expect(withV2rayResult).toEqual({
       'type': 'ss',
       'name': 'Example3',
       'server': '192.168.100.1',
-      'cipher': '2022-blake3-aes-256-gcm',
-      'password': 'YctPZ6U7xPPcU+gp3u+0tx/tRizJN9K8y+uKlW2qjlI=',
+      'cipher': 'rc4-md5',
+      'password': 'passwd',
       'port': 8888,
       'plugin': 'v2ray-plugin',
       'plugin-opt': {
@@ -43,6 +43,8 @@ describe('utils:parse', () => {
         host: '',
       },
     })
+    const withUnsupportedCipherResult = parseShadowsocksSIP002URI('ss://MjAyMi1ibGFrZTMtYWVzLTI1Ni1nY206WWN0UFo2VTd4UFBjVSUyQmdwM3UlMkIwdHglMkZ0Uml6Sk45Szh5JTJCdUtsVzJxamxJJTNE@us.proxy.com:8888/?plugin=obfs-local%3Bobfs%3Dhttp#Example2')
+    expect(withUnsupportedCipherResult).toBeNull()
   })
   test('parseShadowsocksLegacyUri', () => {
     const result = parseShadowsocksLegacyUri('ss://cmM0LW1kNTp0ZXN0LyFAIzpAMTkyLjE2OC4xMDAuMTo4ODg4#Example1')

@@ -24,15 +24,16 @@
       "name": "Debug Main Process",
       "type": "node",
       "request": "launch",
-      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
+      "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron",
       "windows": {
-        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
+        "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/electron.cmd"
       },
       "runtimeArgs": [
         "--remote-debugging-port=9229",
-        "${workspaceRoot}/dist/electron/main/index.js"
+        "${workspaceFolder}/dist/electron/main/index.js"
       ],
-      "envFile": "${workspaceFolder}/.vscode/.debug.env"
+      "envFile": "${workspaceFolder}/.vscode/.debug.env",
+      "outputCapture": "std"
     },
     {
       "name": "Debug Renderer Process",

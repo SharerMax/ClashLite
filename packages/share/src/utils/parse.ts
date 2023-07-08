@@ -3,6 +3,7 @@ import URL from 'url-parse'
 import { toUnicode } from 'punycode-esm'
 import type { ClashProxy, HttpProxy, ShadowSocks, ShadowSocksCipher, ShadowSocksRProxy, ShadowSocksWithObfs, ShadowSocksWithV2ray, ShadowsocksRObfs, ShadowsocksRProtocol, SocksProxy, TrojanProxy, VmessProxy } from '../type'
 import { parse as parseJson } from './json-helper'
+
 export type ProxySubType = 'plain' | 'base64' | 'sip008' | 'clash'
 
 export function parseProxySubContent(type: ProxySubType, content: string): ClashProxy[] | null {
@@ -21,10 +22,10 @@ function parsePlainProxyContent(content: string): ClashProxy[] | null {
     const clashProxyList: ClashProxy[] = []
     for (const uri of uriList) {
       const clashProxy = parseUri(uri.trim())
-      console.log('============')
-      console.log(`raw: ${uri}`)
+      // console.log('============')
+      // console.log(`raw: ${uri}`)
       console.log(`clash: ${JSON.stringify(clashProxy)}`)
-      console.log('============')
+      // console.log('============')
       if (clashProxy) {
         clashProxyList.push(clashProxy)
       }
@@ -74,7 +75,7 @@ export function parseUri(uri: string): ClashProxy | null {
 export function parseShadowsocksUri(uri: string): ShadowSocks | null {
   if (uri) {
     if (uri.includes('@')) {
-      return parseShadowsocksUri(uri)
+      return parseShadowsocksSIP002URI(uri)
     }
     else {
       return parseShadowsocksLegacyUri(uri)
@@ -112,6 +113,9 @@ export function parseShadowsocksLegacyUri(uri: string): ShadowSocks | null {
   const userInfo = decodeInfo.slice(0, serveSplitIndex)
   const serverInfo = decodeInfo.slice(serveSplitIndex + 1)
   const [cipher, password] = userInfo.split(':')
+  if (!isSupportedShadowsocksCipher(cipher)) {
+    return null
+  }
   const [server, port] = serverInfo.split(':')
   return {
     type: 'ss',
@@ -119,22 +123,26 @@ export function parseShadowsocksLegacyUri(uri: string): ShadowSocks | null {
     server,
     cipher: cipher as ShadowSocks['cipher'],
     password,
-    port: parseInt(port),
+    port: Number.parseInt(port),
   }
 }
 
 // https://github.com/shadowsocks/shadowsocks-org/wiki/SIP002-URI-Scheme
-// https://shadowsocks.org/guide/sip002.html
+// https://shadowsocks.org/doc/sip002.html
 
-export function parseShadowsocksSIP002URI(uri: string): ClashProxy | null {
+export function parseShadowsocksSIP002URI(uri: string): ShadowSocks | null {
   if (uri) {
     // ss://cmM0LW1kNTpwYXNzd2Q@us.proxy.com:8888/?plugin=obfs-local%3Bobfs%3Dhttp#Example2
     // const regex = /ss:\/\/(\S+)@(\S+):(\d+)(?:\/\?plugin=(\S+))?#(\S+)/
     // const [userInfo, host, port, pluginArgs, name] = uri.match(regex) ?? []
     const ssUrl = new URL(decodeURIComponent(uri))
-    const [cipher, password] = decodeBase64(ssUrl.username).split(':')
+    const decodedUserInfo = isBase64Valid(ssUrl.username) ? decodeBase64(ssUrl.username) : ssUrl.username
+    const [cipher, password] = decodedUserInfo.split(':')
+    if (!isSupportedShadowsocksCipher(cipher)) {
+      return null
+    }
     const host = ssUrl.hostname
-    const port = parseInt(ssUrl.port)
+    const port = Number.parseInt(ssUrl.port)
     const pluginInfo = new URLSearchParams(ssUrl.query).get('plugin') || ''
     const name = ssUrl.hash.slice(1)
     // console.log(cipher, password, host, port, pluginInfo, name)
@@ -144,7 +152,7 @@ export function parseShadowsocksSIP002URI(uri: string): ClashProxy | null {
       name,
       server: host,
       cipher: cipher as ShadowSocks['cipher'],
-      password: decodeURIComponent(password),
+      password,
       port,
     }
     if (pluginInfo) {
@@ -186,6 +194,19 @@ export function parseShadowsocksSIP002URI(uri: string): ClashProxy | null {
     return baseSSConfig
   }
   return null
+}
+
+// https://dreamacro.github.io/clash/configuration/configuration-reference.html
+const SUPPORTED_CIPHERS = [
+  'aes-128-gcm', 'aes-192-gcm', 'aes-256-gcm',
+  'aes-128-cfb', 'aes-192-cfb', 'aes-256-cfb',
+  'aes-128-ctr', 'aes-192-ctr', 'aes-256-ctr',
+  'rc4-md5', 'chacha20-ietf', 'xchacha20',
+  'chacha20-ietf-poly1305', 'xchacha20-ietf-poly1305',
+]
+
+export function isSupportedShadowsocksCipher(cipher: string): boolean {
+  return SUPPORTED_CIPHERS.includes(cipher)
 }
 
 export function parseHttpUri(uri: string): HttpProxy | null {

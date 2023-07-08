@@ -62,7 +62,7 @@ async function createWindow() {
     // https://github.com/vitejs/vite/issues/3229; will be fix in vite 3.x
 
     console.log('process.env', process.env)
-    const url = `${process.env.VITE_DEV_SERVER_URL}`
+    const url = `http://${process.env.VITE_DEV_SERVER_HOST}:${process.env.VITE_DEV_SERVER_PORT}`
     console.log(`render server on: ${url}\n`)
     win.loadURL(url)
   }

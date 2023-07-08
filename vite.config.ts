@@ -13,6 +13,7 @@ import VueDevTools from 'vite-plugin-vue-devtools'
 import Unocss from 'unocss/vite'
 import { env } from './package.json'
 
+Object.assign(process.env, { VITE_DEV_SERVER_HOST: env.VITE_DEV_SERVER_HOST, VITE_DEV_SERVER_PORT: env.VITE_DEV_SERVER_PORT })
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   if (mode !== 'debug') {

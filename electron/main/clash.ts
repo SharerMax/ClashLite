@@ -1,9 +1,9 @@
 // import { spawn } from 'node:child_process'
-import process from 'process'
-import path from 'path'
-import type { ChildProcess } from 'child_process'
-import { spawn } from 'child_process'
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs'
+import process from 'node:process'
+import path from 'node:path'
+import type { ChildProcess } from 'node:child_process'
+import { spawn } from 'node:child_process'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { app, net } from 'electron'
 import yaml from 'js-yaml'
 import getPort, { portNumbers } from 'get-port'
@@ -121,7 +121,7 @@ function cancelAllProxySubscribeJob() {
 }
 
 function checkProxySubTask() {
-  const subscribe = store.get('subscribe', null)
+  const subscribe = store.get('subscribe')
   if (subscribe) {
     const updateTime = subscribe.updateTime
     if (updateTime) {
@@ -144,7 +144,7 @@ function checkProxySubTask() {
 }
 
 function updateProxySub() {
-  const subscribe = store.get('subscribe', null)
+  const subscribe = store.get('subscribe')
   const subscribeUrl = subscribe?.url
   if (!subscribeUrl) {
     return
@@ -171,7 +171,8 @@ function updateProxySub() {
       store.set('subscribe', subscribe)
 
       const configFilePath = getClashDefaultConfigPath()
-      const configYaml = (yaml.load(readFileSync(configFilePath, 'utf-8')) as any) as ClashConfig
+      const configYaml = (yaml.load(readFileSync(configFilePath, 'utf-8')) as any)
+
       let needUpdateConfigFile = false
       if (configYaml && typeof configYaml === 'object') {
         if (!('proxy-providers' in configYaml)) {
