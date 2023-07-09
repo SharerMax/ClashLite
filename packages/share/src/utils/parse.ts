@@ -18,13 +18,13 @@ export function parseProxySubContent(type: ProxySubType, content: string): Clash
 function parsePlainProxyContent(content: string): ClashProxy[] | null {
   if (content) {
     const uriList = content.split(/\s/)
-    console.log(uriList)
+    // console.log(uriList)
     const clashProxyList: ClashProxy[] = []
     for (const uri of uriList) {
       const clashProxy = parseUri(uri.trim())
       // console.log('============')
       // console.log(`raw: ${uri}`)
-      console.log(`clash: ${JSON.stringify(clashProxy)}`)
+      // console.log(`clash: ${JSON.stringify(clashProxy)}`)
       // console.log('============')
       if (clashProxy) {
         clashProxyList.push(clashProxy)
@@ -54,7 +54,7 @@ function parseClashSubContent(_content: string): ClashProxy[] | null {
 
 export function parseUri(uri: string): ClashProxy | null {
   const protocol = new URL(uri).protocol
-  console.log(uri, protocol)
+  // console.log(uri, protocol)
   switch (protocol) {
     case 'ss:':
       return parseShadowsocksUri(uri)

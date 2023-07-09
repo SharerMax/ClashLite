@@ -120,7 +120,7 @@ import { CloudDownload, Edit, View } from '@vicons/carbon'
 import { ref } from 'vue'
 import type { ClashSettingSubscribe } from 'share/dist/type'
 import { isSubScribeEqual } from 'share/dist/utils/setting'
-import type { Proxies, ProxyGroupInfo, ProxyInfo } from 'share/dist/type/clash/api'
+import type { ProxyGroupInfo, ProxyInfo } from 'share/dist/type/clash/api'
 import { proxy as fetchProxy, proxyProvider, selectProxy } from '@/render/api/clash'
 
 const showEditProxySub = ref(false)
@@ -162,6 +162,9 @@ function handleProxySubSaveButtonClick() {
       if (!isSubScribeEqual(savedProxySub, subProxyData.value)) {
         // IPC transform pure js object
       // https://www.electronjs.org/docs/latest/breaking-changes#behavior-changed-sending-non-js-objects-over-ipc-now-throws-an-exception
+
+        console.log('sub change')
+
         savedProxySub = { ...subProxyData.value }
         window.clash.saveProxySubscribe(savedProxySub)
       }

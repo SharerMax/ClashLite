@@ -4,6 +4,7 @@ import path from 'node:path'
 import type { ChildProcess } from 'node:child_process'
 import { spawn } from 'node:child_process'
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { Buffer } from 'node:buffer'
 import { app, net } from 'electron'
 import yaml from 'js-yaml'
 import getPort, { portNumbers } from 'get-port'
@@ -79,6 +80,7 @@ export async function startClash() {
     console.log(extCtl)
     clashProcess = spawn(clashPath, ['-d', getClashConfigDirPath(), '-ext-ctl', extCtl], {
       stdio: 'inherit',
+      windowsHide: true,
     })
     clashProcess.on('error', (error) => {
       console.error(error)
@@ -150,10 +152,16 @@ function updateProxySub() {
     return
   }
   const request = net.request(subscribeUrl)
+  let chunkCount = 0
+  const buffers: Buffer[] = []
   request.on('response', (response) => {
     response.on('data', (chunk) => {
-      const decoder = new TextDecoder()
-      const content = decoder.decode(chunk)
+      console.log(`BODY: ${chunk}`)
+      console.log(`chunkCount: ${++chunkCount}`)
+      buffers.push(chunk)
+    })
+    response.on('end', () => {
+      const content = Buffer.concat(buffers).toString()
       const proxies = parseProxySubContent('base64', content)
       if (!proxies) {
         return
@@ -207,8 +215,9 @@ function updateProxySub() {
     })
   })
   request.on('error', (error) => {
-    console.log(error.message)
+    console.log('sub net error', error.message)
   })
+
   request.end()
 }
 
@@ -234,6 +243,7 @@ function generateDefaultClashConfig() {
   writeFileSync(getClashDefaultConfigPath(), yamlContent, { encoding: 'utf-8' })
 }
 export function handleProxySubscribeChange() {
+  console.debug('handel proxy subscribe change')
   cancelAllProxySubscribeJob()
   checkProxySubTask()
 }
